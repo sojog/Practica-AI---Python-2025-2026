@@ -1,0 +1,82 @@
+
+# High Level Flow - Business Card App (SaaS)
+
+Acesta este un flux propus pentru aplicatie, bazat pe cerintele tale.
+
+## 1. Administrare & Acces (Faza 1: Simplificat)
+*   **Login**: Utilizatorul (sau Adminul initial) se autentifica in aplicatie (/admin sau /login).
+    R: da, pentru inceput ne logam cu ajutorul createsuperuser din django
+
+*   **Dashboard**: Odata autentificat, utilizatorul vede lista de carduri de vizita create.
+    R: da, lista proprie de carduri. Sau daca nu este autentification este un landing page, si eventual vede o lista de carduri accesat...
+
+
+## 2. Creare & Editare Card (Dashboard)
+Utilizatorul poate crea un card nou sau edita unul existent.
+*   **Informatii Generale**:
+    *   Completare Nume, Titlu/Functie, Bio.
+    *   Upload Poza Profil.
+    *   **Campuri Custom**: Adaugare campuri arbitrare (ex: "Motto", "Locatie") - *Definit de utilizator*.
+
+    DA.
+
+*   **Link-uri (Link Manager)**:
+    *   Adaugare Link nou (URL + Titlu + Iconita optionala).
+    *   Sistemul genereaza automat un "Tracking URL" intern pentru acest link.
+
+
+    DA.
+
+*   **Design & Personalizare**:
+    *   Selectare Tema (Dark/Light/Custom).
+    *   Alegere culori fundal/butoane.
+    *   Alegere Font.
+
+    DA. As dori sa folosesc pentru UI doar clase din tailwind. 
+
+*   **Setari Card**:
+    *   Definire "Slug" (ex: `app.com/nume-utilizator`).
+    *   **Securitate**: Setare parola (optional) pentru accesul la profil.
+    *   **QR Code**: Vizualizare si descarcare QR Code generat automat pentru acest profil.
+
+    DA. 
+
+
+## 3. Vizualizare Publica (Frontend - Django Templates)
+*   **Accesare**: Un vizitator acceseaza `app.com/nume-utilizator`.
+*   **Verificare Securitate**:
+    *   Daca e public -> Afiseaza profilul.
+    *   Daca e protejat -> Afiseaza formular parola -> Validare -> Afiseaza profilul.
+*   **Afisare Profil**:
+    *   Se randeaza pagina cu design-ul ales.
+    *   Se afiseaza informatiile si lista de link-uri.
+*   **Tracking Vizualizari**: La incarcarea paginii, se incrementeaza contorul de vizualizari al profilului.
+
+## 4. Interactiunea cu Link-urile (Analytics)
+*   Vizitatorul da click pe un link (ex: "LinkedIn").
+*   Link-ul de pe buton este de fapt: `app.com/track/link-id-123`.
+*   **Server-side**:
+    1.  Identifica link-ul original.
+    2.  Incrementeaza contorul de click-uri pentru acel link.
+    3.  Face **HTTP 302 Redirect** catre URL-ul final (linkedin.com/in/user).
+
+## 5. Vizualizare Analytics (Dashboard)
+*   Utilizatorul vede in dashboard:
+    *   Total vizualizari profil.
+    *   Total click-uri per link.
+
+---
+
+### Intrebari de validare a fluxului:
+
+1.  **Campuri Custom**: Cand spui "utilizatorul sa isi poata alege propriile campuri", te referi la o lista predefinita din care alege (ex: Telefon, Adresa) sau libertate totala sa scrie "Mancare preferata": "Pizza"?
+
+    Sa aleaga din predefine, dar sa fie si posibilitatea de a adauga propriile campuri. 
+
+2.  **Redirect**: Esti de acord ca link-urile vizibile in browser (la hover) sa fie de forma `app.com/track/...` pentru a garanta tracking-ul? (Aceasta este metoda standard pentru analytics precis).
+
+    DA.
+
+3.  **Landing Page**: Pentru aceasta faza, ai nevoie si de o pagina de prezentare a aplicatiei (Home Page pentru vizitatori neautentificati) sau doar pagina de Login si Profilurile utilizatorilor?
+
+    DA. Pentru moment.

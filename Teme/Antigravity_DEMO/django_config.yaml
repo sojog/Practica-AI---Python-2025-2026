@@ -1,0 +1,52 @@
+
+# Schimba PROJECT_NAME cu numele proiectului
+BusinessCardProject:  
+
+        # Schimba APP_NAME1 cu numele aplicatiei
+        business_card_app:
+
+            # Landing Page
+            - view_name: home
+              url_path_name: home
+              template_name: home
+
+            # Dashboard (User Area)
+            - view_name: dashboard
+              url_path_name: dashboard
+              template_name: dashboard
+
+            # Card Management
+            - view_name: card_create
+              url_path_name: card_create
+              template_name: card_create
+
+            - view_name: card_edit
+              url_path_name: card_edit
+
+            - view_name: card_delete
+              url_path_name: card_delete
+
+            # Link Management
+            - view_name: link_create
+              url_path_name: link_create
+              template_name: link_create
+
+            - view_name: link_edit
+              url_path_name: link_edit
+
+            - view_name: link_delete
+              url_path_name: link_delete
+
+            # Analytics / Tracking
+            - view_name: track_link
+              url_path_name: track_link
+              template_name: track_link
+
+            # Public Profile (Slug should be last to avoid conflicts)
+            - view_name: profile_view
+              url_path_name: profile_view
+              template_name: profile
+
+            - view_name: ui_test
+              url_path_name: ui_test
+              template_name: ui_test

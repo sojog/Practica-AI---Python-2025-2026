@@ -1,0 +1,2 @@
+
+In folderul BusinessCardProject se afla proiectul Django, cu structura de folderuri si fisiere. Pana la crearea functionalitatii as dori sa iteram pe partea de UI. Vreau sa folosesc Tailwind si sa creezi componente pentru UI-ul aplicatiei. Aici includem butoane, header, footer, carduri, profile-uri etc tot ceea ce consideri necesar. As dori sa pot sa vizualizez acele componente pe path-ul ui_test, cu ui_test_view si ui_test.html.

@@ -1,0 +1,44 @@
+
+As vrea sa creez o aplicatie pentru business card-uri. Vreau sa fie un fel de linktree, daca stii proiectul, in care sa pot genera mai multe linkuri de LinkedIn, Github, Facebook, Youtube, eventual emailul. 
+
+As vrea sa imi pui o serie de intrebari astfel incat sa definesc functionalitatea aplicatiei.
+
+Din punct de vedere al backend-ului as vrea sa folosesc Python si Django.
+
+---
+### Intrebari pentru clarificarea functionalitatii:
+
+1. **Utilizatori si Autentificare**: Utilizatorii trebuie sa isi creeze cont pentru a-si face propriile carti de vizita? Sau va fi o aplicatie administrata de o singura persoana care creeaza carduri pentru altii?
+    R: Da, fiecare utilizator va avea propriul cont. As vrea ca pe viitor sa pot transforma serviciul intr-un serviciu de tip SaaS.
+
+2. **Personalizare**: Utilizatorii vor putea personaliza aspectul paginii lor (culori, avatar, teme, fonturi)?
+    R: Da, as vrea ca utilizatorii sa pot personaliza aspectul paginii lor.
+    
+
+3. **Informatii Profil**: Pe langa link-urile sociale (LinkedIn, Github etc.), ce alte informatii ar trebui sa apara pe card? (Nume, Titlu/Functie, Descriere scurta/Bio, Poza de profil?)
+    R: As vrea ca utilizatorii sa pot adauga nume, titlu/functie, descriere scurta/bio si poza de profil. Dar ar trebuie ca utilizatorul sa isi poate alege propriile campuri.
+
+
+4. **Frontend**: Ai mentionat Python si Django pentru backend. Pentru partea de interfata (frontend), preferi sa folosim Django Templates (randare pe server, mai simplu) sau un framework de JavaScript separat (cum ar fi React, Vue) care sa comunice cu Django prin API?
+    R: In prima parte a aplicatiei as vrea sa folosesc Django Templates. Voi schimba pe viitor.
+
+5. **Analitice**: Doresti sa monitorizam numarul de vizualizari sau click-uri pe link-uri?
+    R: Da, as vrea sa monitorizam numarul de vizualizari sau click-uri pe link-uri. As vrea ca linkul sa fie un fel de redirect. Sa zicem ca pui un link de linkedin, dar acela este intai accesat printr-un redirect astfel incat sa putem monitoriza numarul de vizualizari sau click-uri.
+
+6. **Functionalitati Extra**: Te intereseaza generarea de coduri QR pentru fiecare profil?
+    R: Da, as vrea sa generam coduri QR pentru fiecare profil.
+
+
+7. **Public/Privat**: Profilurile vor fi publice automat? Este nevoie de optiunea de a le face private sau protejate cu parola?
+    R: As vrea ca profilurile sa fie publice automat, dar sa existe posibilitatea de a le proteja cu parola. 
+
+
+
+IMPART APLICATIA:
+    1. STRUCTURA -> as putea o face cu django_helper
+    2. UI -> trebuie sa discutam separat
+    3. LOGARE -> as vrea sa fac separat, pentru moment folosec logare cu admin
+    4. DATABASE -> as putea sa o schimb ulterior de la SQLITE la POSTGRESQL
+        
+
+
