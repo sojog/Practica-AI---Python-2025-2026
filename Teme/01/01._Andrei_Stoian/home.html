@@ -14,6 +14,7 @@
   <body>
     <header>
       <div class="container">
+        <button id="lang-toggle" class="lang-toggle">EN | ES</button>
         <a href="home.html" class="logo">
           <img
             src="./Design/glorious-high-resolution-logo-transparent.png"
@@ -22,10 +23,14 @@
         </a>
         <nav>
           <ul id="nav-menu">
-            <li><a href="home.html" class="active">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li>
+              <a href="home.html" class="active" data-i18n="nav-home">Home</a>
+            </li>
+            <li>
+              <a href="services.html" data-i18n="nav-services">Services</a>
+            </li>
+            <li><a href="gallery.html" data-i18n="nav-gallery">Gallery</a></li>
+            <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
           </ul>
           <div class="mobile-menu-btn" id="mobile-menu-btn">&#9776;</div>
         </nav>
@@ -36,12 +41,14 @@
       <section class="hero">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-          <h1>Walk with Confidence</h1>
-          <p>
+          <h1 data-i18n="hero-title">Walk with Confidence</h1>
+          <p data-i18n="hero-desc">
             Master craftsmanship for your favorite shoes. Repair, restoration,
             and custom designs.
           </p>
-          <a href="services.html" class="btn">View Services</a>
+          <a href="services.html" class="btn" data-i18n="hero-btn"
+            >View Services</a
+          >
         </div>
       </section>
 
@@ -49,18 +56,18 @@
         <div class="container">
           <div class="about-grid">
             <div class="about-text">
-              <h2>The Art of Shoemaking</h2>
-              <p>
+              <h2 data-i18n="about-title">The Art of Shoemaking</h2>
+              <p data-i18n="about-desc-1">
                 At Glorious Shoemaker, we believe that every pair of shoes tells
                 a story. With over 20 years of experience, we combine
                 traditional techniques with modern care to bring your footwear
                 back to life.
               </p>
-              <p>
+              <p data-i18n="about-desc-2">
                 Whether it's a simple heel repair or a complete restoration of a
                 vintage pair, we treat every shoe with the respect it deserves.
               </p>
-              <br/>
+              <br />
               <a
                 href="contact.html"
                 class="btn btn-outline"
@@ -68,11 +75,11 @@
                   color: var(--color-primary);
                   border-color: var(--color-primary);
                 "
+                data-i18n="about-btn"
                 >Get in Touch</a
               >
             </div>
             <div class="about-image">
-              <!-- Placeholder for an image if available, or we can use a nice icon/graphic -->
               <div
                 class="image-placeholder"
                 style="
@@ -98,32 +105,34 @@
         style="background-color: var(--color-secondary)"
       >
         <div class="container">
-          <h2 class="text-center">Our Expertise</h2>
+          <h2 class="text-center" data-i18n="featured-title">Our Expertise</h2>
           <div class="grid-3">
             <div class="service-card">
-              <h3>Repair</h3>
-              <p>
+              <h3 data-i18n="service-repair">Repair</h3>
+              <p data-i18n="service-repair-desc">
                 Heels, soles, and stitching. We fix the wear and tear so you can
                 keep walking.
               </p>
             </div>
             <div class="service-card">
-              <h3>Restoration</h3>
-              <p>
+              <h3 data-i18n="service-restoration">Restoration</h3>
+              <p data-i18n="service-restoration-desc">
                 Deep cleaning, color restoration, and leather conditioning for a
                 like-new look.
               </p>
             </div>
             <div class="service-card">
-              <h3>Custom Design</h3>
-              <p>
+              <h3 data-i18n="service-custom">Custom Design</h3>
+              <p data-i18n="service-custom-desc">
                 Bespoke modifications and custom-made footwear tailored to your
                 style.
               </p>
             </div>
           </div>
           <div class="text-center" style="margin-top: var(--spacing-md)">
-            <a href="services.html" class="btn">All Services</a>
+            <a href="services.html" class="btn" data-i18n="all-services-btn"
+              >All Services</a
+            >
           </div>
         </div>
       </section>
@@ -134,33 +143,49 @@
         <div class="footer-content">
           <div class="footer-column">
             <h3>Glorious Shoemaker</h3>
-            <p>
+            <p data-i18n="footer-desc">
               Crafting excellence for your feet. Premium repair and custom
               designs.
             </p>
           </div>
           <div class="footer-column">
-            <h3>Quick Links</h3>
+            <h3 data-i18n="footer-quick-links">Quick Links</h3>
             <ul>
-              <li><a href="home.html">Home</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="home.html" data-i18n="nav-home">Home</a></li>
+              <li>
+                <a href="services.html" data-i18n="nav-services">Services</a>
+              </li>
+              <li>
+                <a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+              </li>
+              <li>
+                <a href="contact.html" data-i18n="nav-contact">Contact</a>
+              </li>
             </ul>
           </div>
           <div class="footer-column">
-            <h3>Contact Us</h3>
-            <a href="https://www.waze.com/en/live-map/directions/palatul-parlamentului-str.-izvor-2-4-bucuresti?place=w.17105340.170987867.333043">123 Cobbler Lane</a>
+            <h3 data-i18n="footer-contact-us">Contact Us</h3>
+            <a
+              href="https://www.waze.com/en/live-map/directions/palatul-parlamentului-str.-izvor-2-4-bucuresti?place=w.17105340.170987867.333043"
+              >123 Cobbler Lane</a
+            >
             <br />
-            <a href="https://www.waze.com/en/live-map/directions/palatul-parlamentului-str.-izvor-2-4-bucuresti?place=w.17105340.170987867.333043">Cityville, ST 12345</a>
+            <a
+              href="https://www.waze.com/en/live-map/directions/palatul-parlamentului-str.-izvor-2-4-bucuresti?place=w.17105340.170987867.333043"
+              >Cityville, ST 12345</a
+            >
             <br />
             <a href="tel:+40722222222">Phone: +40722222222</a>
             <br />
-            <a href="mailto:hello@gloriousshoemaker.com">Email: hello@gloriousshoemaker.com</a>
+            <a href="mailto:hello@gloriousshoemaker.com"
+              >Email: hello@gloriousshoemaker.com</a
+            >
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2025 Glorious Shoemaker. All rights reserved.</p>
+          <p data-i18n="footer-rights">
+            &copy; 2025 Glorious Shoemaker. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

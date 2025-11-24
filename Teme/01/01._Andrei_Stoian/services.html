@@ -14,6 +14,7 @@
   <body>
     <header>
       <div class="container">
+        <button id="lang-toggle" class="lang-toggle">EN | ES</button>
         <a href="home.html" class="logo">
           <img
             src="./Design/glorious-high-resolution-logo-transparent.png"
@@ -22,10 +23,14 @@
         </a>
         <nav>
           <ul id="nav-menu">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="services.html" class="active">Services</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="home.html" data-i18n="nav-home">Home</a></li>
+            <li>
+              <a href="services.html" class="active" data-i18n="nav-services"
+                >Services</a
+              >
+            </li>
+            <li><a href="gallery.html" data-i18n="nav-gallery">Gallery</a></li>
+            <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
           </ul>
           <div class="mobile-menu-btn" id="mobile-menu-btn">&#9776;</div>
         </nav>
@@ -38,8 +43,10 @@
         style="background-color: var(--color-secondary)"
       >
         <div class="container">
-          <h1>Our Services</h1>
-          <p>Comprehensive care for your footwear.</p>
+          <h1 data-i18n="services-title">Our Services</h1>
+          <p data-i18n="services-subtitle">
+            Comprehensive care for your footwear.
+          </p>
         </div>
       </section>
 
@@ -48,68 +55,80 @@
           <div class="grid-3">
             <div class="service-item">
               <div class="service-icon">🔨</div>
-              <h3>Heel Repair</h3>
-              <p>
+              <h3 data-i18n="srv-heel">Heel Repair</h3>
+              <p data-i18n="srv-heel-desc">
                 Worn down heels can affect your posture and comfort. We replace
                 heel tips and blocks to restore balance.
               </p>
               <div class="price-container">
-                <a href="contact.html" class="btn btn-sm">Ask for price</a>
+                <a href="contact.html" class="btn btn-sm" data-i18n="ask-price"
+                  >Ask for price</a
+                >
               </div>
             </div>
             <div class="service-item">
               <div class="service-icon">👞</div>
-              <h3>Sole Replacement</h3>
-              <p>
+              <h3 data-i18n="srv-sole">Sole Replacement</h3>
+              <p data-i18n="srv-sole-desc">
                 Full or half sole replacement using premium leather or rubber to
                 extend the life of your favorite shoes.
               </p>
               <div class="price-container">
-                <a href="contact.html" class="btn btn-sm">Ask for price</a>
+                <a href="contact.html" class="btn btn-sm" data-i18n="ask-price"
+                  >Ask for price</a
+                >
               </div>
             </div>
             <div class="service-item">
               <div class="service-icon">✨</div>
-              <h3>Deep Cleaning & Polish</h3>
-              <p>
+              <h3 data-i18n="srv-clean">Deep Cleaning & Polish</h3>
+              <p data-i18n="srv-clean-desc">
                 Professional cleaning and polishing to remove stains, scuffs,
                 and restore the leather's natural shine.
               </p>
               <div class="price-container">
-                <a href="contact.html" class="btn btn-sm">Ask for price</a>
+                <a href="contact.html" class="btn btn-sm" data-i18n="ask-price"
+                  >Ask for price</a
+                >
               </div>
             </div>
             <div class="service-item">
               <div class="service-icon">📏</div>
-              <h3>Stretching</h3>
-              <p>
+              <h3 data-i18n="srv-stretch">Stretching</h3>
+              <p data-i18n="srv-stretch-desc">
                 Shoes too tight? We can professionally stretch them for a
                 perfect, comfortable fit.
               </p>
               <div class="price-container">
-                <a href="contact.html" class="btn btn-sm">Ask for price</a>
+                <a href="contact.html" class="btn btn-sm" data-i18n="ask-price"
+                  >Ask for price</a
+                >
               </div>
             </div>
             <div class="service-item">
               <div class="service-icon">🎨</div>
-              <h3>Color Restoration</h3>
-              <p>
+              <h3 data-i18n="srv-color">Color Restoration</h3>
+              <p data-i18n="srv-color-desc">
                 Faded leather? We can match and restore the original color or
                 dye them a new shade.
               </p>
               <div class="price-container">
-                <a href="contact.html" class="btn btn-sm">Ask for price</a>
+                <a href="contact.html" class="btn btn-sm" data-i18n="ask-price"
+                  >Ask for price</a
+                >
               </div>
             </div>
             <div class="service-item">
               <div class="service-icon">🧵</div>
-              <h3>Custom Stitching</h3>
-              <p>
+              <h3 data-i18n="srv-stitch">Custom Stitching</h3>
+              <p data-i18n="srv-stitch-desc">
                 Repairing loose stitching or adding decorative stitches to
                 personalize your footwear.
               </p>
               <div class="price-container">
-                <a href="contact.html" class="btn btn-sm">Ask for price</a>
+                <a href="contact.html" class="btn btn-sm" data-i18n="ask-price"
+                  >Ask for price</a
+                >
               </div>
             </div>
           </div>
@@ -122,33 +141,49 @@
         <div class="footer-content">
           <div class="footer-column">
             <h3>Glorious Shoemaker</h3>
-            <p>
+            <p data-i18n="footer-desc">
               Crafting excellence for your feet. Premium repair and custom
               designs.
             </p>
           </div>
           <div class="footer-column">
-            <h3>Quick Links</h3>
+            <h3 data-i18n="footer-quick-links">Quick Links</h3>
             <ul>
-              <li><a href="home.html">Home</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="home.html" data-i18n="nav-home">Home</a></li>
+              <li>
+                <a href="services.html" data-i18n="nav-services">Services</a>
+              </li>
+              <li>
+                <a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+              </li>
+              <li>
+                <a href="contact.html" data-i18n="nav-contact">Contact</a>
+              </li>
             </ul>
           </div>
           <div class="footer-column">
-            <h3>Contact Us</h3>
-            <a href="https://www.waze.com/en/live-map/directions/palatul-parlamentului-str.-izvor-2-4-bucuresti?place=w.17105340.170987867.333043">123 Cobbler Lane</a>
+            <h3 data-i18n="footer-contact-us">Contact Us</h3>
+            <a
+              href="https://www.waze.com/en/live-map/directions/palatul-parlamentului-str.-izvor-2-4-bucuresti?place=w.17105340.170987867.333043"
+              >123 Cobbler Lane</a
+            >
             <br />
-            <a href="https://www.waze.com/en/live-map/directions/palatul-parlamentului-str.-izvor-2-4-bucuresti?place=w.17105340.170987867.333043">Cityville, ST 12345</a>
+            <a
+              href="https://www.waze.com/en/live-map/directions/palatul-parlamentului-str.-izvor-2-4-bucuresti?place=w.17105340.170987867.333043"
+              >Cityville, ST 12345</a
+            >
             <br />
             <a href="tel:+40722222222">Phone: +40722222222</a>
             <br />
-            <a href="mailto:hello@gloriousshoemaker.com">Email: hello@gloriousshoemaker.com</a>
+            <a href="mailto:hello@gloriousshoemaker.com"
+              >Email: hello@gloriousshoemaker.com</a
+            >
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2025 Glorious Shoemaker. All rights reserved.</p>
+          <p data-i18n="footer-rights">
+            &copy; 2025 Glorious Shoemaker. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
