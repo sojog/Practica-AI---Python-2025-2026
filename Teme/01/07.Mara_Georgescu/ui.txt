@@ -1,0 +1,26 @@
+In folderul QUIZZ se afla proiectul Django, cu structura de folderuri si fisiere. Pana la crearea functionalitatii as dori sa iteram pe partea de UI. Vreau sa folosesc Tailwind/Bootstrap si sa creezi componente pentru UI-ul aplicatiei. Aici includem butoane, header, footer, carduri, profile-uri etc tot ceea ce consideri necesar. As dori sa pot sa vizualizez acele componente pe path-ul ui_test, cu ui_test_view si ui_test.html.
+
+---
+### INTREBARI PENTRU UI (Te rog raspunde sub fiecare intrebare):
+
+1. **Framework CSS**:
+   Ai mentionat "Tailwind/Bootstrap". Care dintre ele este alegerea finala? (Recomand **Tailwind** pentru design modern si customizabil, sau **Bootstrap** pentru rapiditate si componente standard).
+   Tailwind
+
+2. **Tema Generala (Theme)**:
+   Preferi o tema **Dark Mode** (inchisa, moderna), **Light Mode** (clasica, curata), sau un design colorat (gradienti, glassmorphism - cum am inceput deja)?
+   Light Mode
+
+3. **Navigatie**:
+   Preferi un **Sidebar** (meniu lateral stanga - bun pentru dashboard-uri) sau **Top Navbar** (meniu sus - clasic pentru site-uri)?
+   Sidebar
+
+4. **Componente Specifice**:
+   In afara de butoane, carduri, header/footer, mai sunt alte elemente specifice pe care vrei sa le vezi in `ui_test`? (Ex: Alerte, Modale, Formulare stilizate, Progress bars pentru quiz?)
+   Alerte, Modale, Formulare stilizate, Progress bars pentru quiz
+
+5. **Layout Dashboard**:
+   Cum iti imaginezi dashboard-ul?
+   A) Carduri simple cu notițele ("Grid view").
+   B) Lista detaliata ("Table/List view").
+   varianta B

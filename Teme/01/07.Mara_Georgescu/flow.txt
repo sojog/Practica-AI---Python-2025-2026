@@ -1,0 +1,35 @@
+Salut! Îmi pare rău că m-am grăbit anterior. Hai să stabilim exact cum vrei să curgă aplicația, pas cu pas. Te rog să răspunzi la întrebările de mai jos pentru a clarifica flow-ul.
+
+---
+
+### 1. Flow-ul de Înregistrare / Logare (Authentication)
+*   **Întrebare**: Utilizatorul își face cont doar cu Username și Parolă, sau vrei și Email obligatoriu?
+    *   Username, parola si Email
+*   **Întrebare**: După logare, unde este redirecționat utilizatorul? (Direct la Dashboard cu notițele lui?)
+    *   Dashboard cu notițele lui si testele pe care le a efectuat pana acum.
+
+### 2. Flow-ul de Încărcare Notițe (Upload)
+*   **Întrebare**: Când utilizatorul încarcă un fișier (PDF/Poză/Doc), vrei să vadă textul extras pentru a-l putea verifica/edita înainte de a genera testul? Sau totul se întâmplă "în spate"?
+    *   Textul extras poate fi văzut si editat inainte de a genera testul.
+*   **Întrebare**: O notiță poate genera mai multe teste diferite în timp, sau doar unul singur?
+    *   Mai multe teste diferite in timp sau la cererea utilizatorului. 
+
+### 3. Flow-ul de Generare Test (Quiz Generation)
+*   **Întrebare**: Înainte de a genera testul, utilizatorul alege parametri? (Ex: Număr de întrebări, Dificultate, Tipul întrebărilor - Grilă/AdevăratFals) Sau sunt standard?
+    *   Poate alege intre standard si personalizat.
+*   **Întrebare**: Testul se generează instant (loading screen) sau utilizatorul primește o notificare când e gata? (Pentru început, instant e mai simplu).
+    *   Testul se genereaza instant.
+
+### 4. Flow-ul de Rezolvare Test (Taking Quiz)
+*   **Întrebare**: Cum vrei să fie afișate întrebările?
+    *   A) Toate pe o singură pagină (scroll).
+    *   B) Una câte una (wizard step-by-step).
+    *   varianta B)
+*   **Întrebare**: Când află utilizatorul dacă a răspuns corect?
+    *   A) Imediat după ce bifează răspunsul.
+    *   B) La finalul testului, când primește nota.
+    *   Utilizatorul poate alege tipul de test. Cu raspuns instant sau la finalul testului.
+
+### 5. Flow-ul de Recapitulare (Mistakes)
+*   **Întrebare**: "Testul Final de Recapitulare" este un buton special "Generează Recapitulare" care ia toate greșelile din istoric?
+    *   DA.

@@ -1,0 +1,36 @@
+As vrea sa creez o aplicatie de teste online. Studentii/elevii vor putea accesa platforma, creandu-si un cont, iar acolo sa isi incarce notitele si pe baza lor sa fie pregatite mai multe teste. Intrebarile raspunse gresit vor alcatui un test final de recapitulare cu accent pe greseli.
+
+As vrea sa imi pui o serie de intrebari astfel incat sa definesc functionalitatea aplicatiei.
+
+Din punct de vedere al backend-ului as vrea sa folosesc Python si Django.
+
+---
+INTREBARI PENTRU CLARIFICARE (Te rog raspunde sub fiecare intrebare):
+
+1. **Interfața (Frontend)**:
+   Preferi să folosim **Django Templates** (HTML/CSS randat direct de server - mai simplu) sau un frontend separat (React/Vue - mai complex)?
+
+   Django templates este perfect.
+
+2. **Generarea Testelor**:
+   Vom folosi un **AI (LLM)** (ex: OpenAI/Gemini API) pentru a genera întrebări inteligente din text, sau un algoritm simplu de extragere a cuvintelor? (AI-ul necesită un API Key).
+   AI-ul este perfect.
+
+3. **Formatul Notițelor**:
+   Ce fișiere vor putea fi încărcate? (Doar .txt, sau și .pdf, .docx, imagini?)
+   De toate.
+
+4. **Tipul Întrebărilor**:
+   Ce fel de întrebări dorești? (Grilă, Adevărat/Fals, Răspuns deschis?)
+   Aceasta va fi alegerea studentului/elevului cand incarca fisierele.
+
+5. **Testul de Recapitulare**:
+   Greșelile se acumulează într-o "bancă de greșeli" globală pentru un test mare de recapitulare, sau se oferă doar o recapitulare imediată după fiecare test?
+   Greselile vor fi repetate ata in testul imediat, cat si in testul final de recapitulare.
+
+
+IMPART APLICATIA:
+    1. STRUCTURA -> as putea o face cu django_helper
+    2. UI -> trebuie sa discutam separat
+    3. LOGARE -> o sa am nevoie
+    4. DATABASE -> as putea sa o schimb ulterior de la SQLITE la POSTGRESQL

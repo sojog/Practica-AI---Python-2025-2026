@@ -1,0 +1,12 @@
+"""
+URL configuration for QUIZZ project.
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
+    path('quiz/', include('quiz.urls')),
+    path('', include('ui_test.urls')), # Includes ui-test/ at the root
+]

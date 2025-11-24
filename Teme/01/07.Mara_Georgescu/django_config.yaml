@@ -1,0 +1,49 @@
+QUIZZ: 
+  users: 
+  - view_name: register 
+    url_path_name: register/ 
+    template_name: register 
+  
+  - view_name: login 
+    url_path_name: login/ 
+    template_name: login 
+    
+  - view_name: logout 
+    url_path_name: logout/ 
+    template_name: logout 
+    
+    
+  quiz: 
+  - view_name: dashboard 
+    url_path_name: dashboard/ 
+    template_name: dashboard 
+    
+  - view_name: upload_note 
+    url_path_name: upload/ 
+    template_name: upload_note 
+  
+  - view_name: edit_note_text 
+    url_path_name: note/<int:note_id>/edit/ 
+    template_name: edit_note_text 
+    
+  - view_name: generate_quiz 
+    url_path_name: note/<int:note_id>/generate/ 
+    template_name: generate_quiz_options 
+  
+  - view_name: take_quiz 
+    url_path_name: quiz/<int:quiz_id>/take/ 
+    template_name: take_quiz 
+  
+  - view_name: quiz_result 
+    url_path_name: quiz/<int:quiz_id>/result/ 
+    template_name: quiz_result 
+    
+  - view_name: recap_quiz 
+    url_path_name: recap/ 
+    template_name: recap_quiz 
+    
+    
+  ui_test: 
+    - view_name: ui_test_view 
+      url_path_name: ui-test/ 
+      template_name: ui_test
