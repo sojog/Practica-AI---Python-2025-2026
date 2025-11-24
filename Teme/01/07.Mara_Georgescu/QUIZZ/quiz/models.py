@@ -4,7 +4,9 @@ from django.conf import settings
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notes')
     title = models.CharField(max_length=255)
-    original_file = models.FileField(upload_to='notes/')
+    file_name = models.CharField(max_length=255)  # Original filename
+    file_content = models.BinaryField()  # Store file in database
+    file_type = models.CharField(max_length=100)  # MIME type
     extracted_text = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
