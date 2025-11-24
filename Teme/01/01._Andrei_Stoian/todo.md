@@ -79,4 +79,3 @@
 
 - Siteul afișează corect paginile esențiale, formularul trimite mesaj, butonul apel funcționează pe mobil, imaginile se încarcă optim.
 
-Dacă vrei, pot: 1) genera un wireframe HTML/CSS minimal, 2) crea template-ul `index.html` inițial, sau 3) pregăti textul final pentru fiecare pagină. Spune-mi ce preferi mai întâi.
