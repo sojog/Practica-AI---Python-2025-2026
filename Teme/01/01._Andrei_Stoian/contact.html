@@ -1,13 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact | Glorious</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="./Design/logo favicon.png" type="image/x-icon">
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="./Design/logo favicon.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a href="home.html" class="logo">
+          <img
+            src="./Design/glorious-high-resolution-logo-transparent.png"
+            alt="Glorious Shoemaker Logo"
+          />
+        </a>
+        <nav>
+          <ul id="nav-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+          </ul>
+          <div class="mobile-menu-btn" id="mobile-menu-btn">&#9776;</div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section
+        class="page-header section-padding text-center"
+        style="background-color: var(--color-secondary)"
+      >
+        <div class="container">
+          <h1>Get in Touch</h1>
+          <p>We'd love to hear from you.</p>
+        </div>
+      </section>
+
+      <section class="contact-section section-padding">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="contact-info">
+              <h2>Visit Us</h2>
+              <p>Come by our shop for a consultation or drop off your shoes.</p>
+
+              <div class="info-item">
+                <h3>Address</h3>
+                <p>123 Cobbler Lane<br />Cityville, ST 12345</p>
+              </div>
+
+              <div class="info-item">
+                <h3>Hours</h3>
+                <p>
+                  Mon - Fri: 9:00 AM - 6:00 PM<br />Sat: 10:00 AM - 4:00 PM<br />Sun:
+                  Closed
+                </p>
+              </div>
+
+              <div class="info-item">
+                <h3>Contact</h3>
+                <p>
+                  Phone: (555) 123-4567<br />Email: hello@gloriousshoemaker.com
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+              <h2>Send a Message</h2>
+              <form class="contact-form">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone (Optional)</label>
+                  <input type="tel" id="phone" name="phone" />
+                </div>
+                <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Glorious Shoemaker</h3>
+            <p>
+              Crafting excellence for your feet. Premium repair and custom
+              designs.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="home.html">Home</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p>123 Cobbler Lane</p>
+            <p>Cityville, ST 12345</p>
+            <p>Phone: (555) 123-4567</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Glorious Shoemaker. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
 </html>

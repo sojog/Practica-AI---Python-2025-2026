@@ -1,13 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home | Glorious</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="./Design/logo favicon.png" type="image/x-icon">
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="./Design/logo favicon.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a href="home.html" class="logo">
+          <img
+            src="./Design/glorious-high-resolution-logo-transparent.png"
+            alt="Glorious Shoemaker Logo"
+          />
+        </a>
+        <nav>
+          <ul id="nav-menu">
+            <li><a href="home.html" class="active">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <div class="mobile-menu-btn" id="mobile-menu-btn">&#9776;</div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <h1>Walk with Confidence</h1>
+          <p>
+            Master craftsmanship for your favorite shoes. Repair, restoration,
+            and custom designs.
+          </p>
+          <a href="services.html" class="btn">View Services</a>
+        </div>
+      </section>
+
+      <section class="about-preview section-padding">
+        <div class="container">
+          <div class="about-grid">
+            <div class="about-text">
+              <h2>The Art of Shoemaking</h2>
+              <p>
+                At Glorious Shoemaker, we believe that every pair of shoes tells
+                a story. With over 20 years of experience, we combine
+                traditional techniques with modern care to bring your footwear
+                back to life.
+              </p>
+              <p>
+                Whether it's a simple heel repair or a complete restoration of a
+                vintage pair, we treat every shoe with the respect it deserves.
+              </p>
+              <br/>
+              <a
+                href="contact.html"
+                class="btn btn-outline"
+                style="
+                  color: var(--color-primary);
+                  border-color: var(--color-primary);
+                "
+                >Get in Touch</a
+              >
+            </div>
+            <div class="about-image">
+              <!-- Placeholder for an image if available, or we can use a nice icon/graphic -->
+              <div
+                class="image-placeholder"
+                style="
+                  background-color: var(--color-secondary);
+                  height: 300px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border-radius: var(--border-radius);
+                "
+              >
+                <span style="font-size: 3rem; color: var(--color-primary)"
+                  >👞</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="featured-services section-padding"
+        style="background-color: var(--color-secondary)"
+      >
+        <div class="container">
+          <h2 class="text-center">Our Expertise</h2>
+          <div class="grid-3">
+            <div class="service-card">
+              <h3>Repair</h3>
+              <p>
+                Heels, soles, and stitching. We fix the wear and tear so you can
+                keep walking.
+              </p>
+            </div>
+            <div class="service-card">
+              <h3>Restoration</h3>
+              <p>
+                Deep cleaning, color restoration, and leather conditioning for a
+                like-new look.
+              </p>
+            </div>
+            <div class="service-card">
+              <h3>Custom Design</h3>
+              <p>
+                Bespoke modifications and custom-made footwear tailored to your
+                style.
+              </p>
+            </div>
+          </div>
+          <div class="text-center" style="margin-top: var(--spacing-md)">
+            <a href="services.html" class="btn">All Services</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Glorious Shoemaker</h3>
+            <p>
+              Crafting excellence for your feet. Premium repair and custom
+              designs.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="home.html">Home</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p>123 Cobbler Lane</p>
+            <p>Cityville, ST 12345</p>
+            <p>Phone: (555) 123-4567</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Glorious Shoemaker. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
 </html>
