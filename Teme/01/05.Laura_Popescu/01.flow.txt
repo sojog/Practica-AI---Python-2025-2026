@@ -1,0 +1,110 @@
+High Level Flow – DateGenie (Birthdate Manager + AI)
+
+Acesta este fluxul complet propus pentru aplicația DateGenie, pe baza cerințelor tale și a modului în care vrei să funcționeze.
+
+1. 🔐 Administrare & Acces (Faza 1 – Simplificat)
+
+Login / Register
+Utilizatorul se autentifică în aplicație prin:
+/login
+/register (opțional la început)
+sau direct via createsuperuser în faza incipientă (confirmat de tine).
+Dashboard
+După autentificare, utilizatorul ajunge în Dashboard, unde vede:
+lista persoanelor deja adăugate
+aniversările care urmează (de ex. în următoarele 7 zile)
+insight-uri rapide (vârstă, zodie, compatibilitate etc.)
+➡️ Dacă nu este autentificat, utilizatorul vede Landing Page + eventual exemple de funcționalități.
+
+
+2. 🎂 Gestionare Date de Naștere (BirthData App)
+
+Utilizatorul poate crea, edita și șterge persoane în DateGenie.
+Creare Persoană Nouă
+Câmpuri incluse:
+🔸 Informații generale
+Nume complet
+Data nașterii
+Ora nașterii (opțional)
+Locul nașterii (opțional)
+Relația (prieteni, familie, clienți etc.)
+🔸 Câmpuri Personalizate
+Exact cum ai cerut:
+Listă de câmpuri predefinite (ex.: hobby, profesie, preferințe cadouri)
+Posibilitatea de a crea câmpuri noi (ex.: „mâncare preferată”: „sushi”)
+🔸 Notițe
+Notițe personale despre utilizator (important pentru date CRM-like)
+Editare & Management
+Editare date persoană
+Ștergere persoană
+Vizualizare detalii complete + insight-uri AI
+
+3. 🤖 Analiză & AI Engine (AI App)
+
+Când un utilizator selectează un profil:
+Analiză AI pentru persoană
+Sistemul poate genera:
+descriere personalizată
+zodie + caracteristici
+numerologie
+sugestii de cadouri în funcție de personalitate
+compatibilitate cu alte persoane salvate
+evenimente marcante în următorul an (AI-powered horoscope)
+Modul AI include:
+analyze/<id> – analiză persoană
+compatibility/ – compară două persoane
+sugestii cadouri AI
+AI Summary (un sumar generat cu GPT)
+
+4. 🎨 Design & Templates (Django Templates + Tailwind)
+
+Toate paginile sunt rulate prin Django Templates și stilizate cu Tailwind (așa cum ai cerut).
+Elemente vizibile:
+carduri cu datele de naștere
+layout responsive
+componente precum badge-uri, cards, input-uri Tailwind
+secțiuni AI evidențiate
+
+5. 🌐 Vizualizare Publică (Public Profile Mode – Opțional)
+
+Exact ca în exemplul tău cu cardurile de vizită, dar adaptat:
+Utilizatorul poate crea un profil public pentru o persoană (ex: pentru clienți sau prieteni).
+Acces public:
+/p/<slug-persoană>
+Opțiuni securitate:
+Public
+Protejat cu parolă (exact ca în exemplu)
+Vizibil doar pentru utilizator
+Afișarea profilului:
+nume + data de naștere
+informații personalizate
+insight-uri minimaliste (fără date sensibile)
+design selectat (light/dark)
+
+6. 📊 Tracking & Analytics (Intern)
+
+Dacă profilul public este accesat:
+Tracking:
+incrementare număr vizualizări
+timp, proveniență (ip anonim), device (opțional)
+click-uri pe „Informează-mă când e ziua lui/ei!” (funcție opțională)
+Analytics în Dashboard:
+total vizite profil
+popularitate persoane
+top aniversări vizualizate
+
+7. 🔔 Notificări & Reminders
+
+Funcționalități:
+Notificare: „Mâine este aniversarea X”
+Trimite email (faza 2)
+Notificări în dashboard
+Calendar mode pentru vizualizarea aniversărilor
+
+8. 🏠 Landing Page (Neautentificat)
+
+Vizitatorii neautentificați văd:
+informații despre DateGenie
+exemple de insight-uri
+call to action pentru register/login
+eventual un demo live

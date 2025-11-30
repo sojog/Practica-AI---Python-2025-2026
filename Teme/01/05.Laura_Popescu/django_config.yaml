@@ -1,0 +1,60 @@
+# Schimba PROJECT_NAME cu numele proiectului
+DateGenie:  
+        users: 
+          - view_name: register 
+            url_path_name: register/ 
+            template_name: register 
+          
+          - view_name: login 
+            url_path_name: login/ 
+            template_name: login 
+            
+          - view_name: logout 
+            url_path_name: logout/ 
+            template_name: logout 
+    
+        birthdata:
+          - view_name: add_birthdate
+            url_path_name: add/
+            template_name: add_birthdate.html
+
+          - view_name: list_birthdates
+            url_path_name: list/
+            template_name: list_birthdates.html
+
+          - view_name: edit_birthdate
+            url_path_name: edit/<int:pk>/
+            template_name: edit_birthdate.html
+
+          - view_name: delete_birthdate
+            url_path_name: delete/<int:pk>/
+            template_name: delete_birthdate.html
+
+          - view_name: details_birthdate
+            url_path_name: detail/<int:pk>/
+            template_name: detail_birthdate.html
+
+        ai_engine:
+          - view_name: analyze_birthdate
+            url_path_name: analyze/<int:pk>/
+            template_name: analyze_birthdate.html
+
+          - view_name: compatibility
+            url_path_name: compatibility/
+            template_name: compatibility.html
+
+        dashboard:
+          - view_name: home
+            url_path_name: ""
+            template_name: home.html
+
+          - view_name: profile_dashboard
+            url_path_name: profile/
+            template_name: profile.html
+
+        api:
+          - view_name: get_birthdates
+            url_path_name: birthdates/
+          - view_name: get_analysis
+            url_path_name: analysis/
+
