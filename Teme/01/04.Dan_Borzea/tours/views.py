@@ -82,7 +82,10 @@ def tour_detail(request, slug):
     locations = tour.locations.all().prefetch_related('images')
     
     # Track vizualizare
-    session_id = request.session.session_key or request.session.create()
+    if not request.session.session_key:
+        request.session.create()
+    session_id = request.session.session_key
+    
     TourView.objects.create(
         tour=tour,
         user=request.user if request.user.is_authenticated else None,
@@ -170,7 +173,7 @@ def add_review(request, tour_id):
         else:
             messages.success(request, 'Review actualizat cu succes!')
         
-        return redirect('tour_detail', slug=tour.slug)
+        return redirect('tours:tour_detail', slug=tour.slug)
     
     return redirect('home')
 

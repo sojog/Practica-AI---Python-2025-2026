@@ -70,8 +70,10 @@
                 <p style="opacity: 0.9; margin-bottom: 1rem;">{{ tour.description }}</p>
 
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <span class="badge" style="background: rgba(255,255,255,0.2);">{{ tour.get_category_display }}</span>
-                    <span class="badge" style="background: rgba(255,255,255,0.2);">{{ tour.get_difficulty_display }}</span>
+                    <span class="badge" style="background: rgba(255,255,255,0.2);">{{ tour.get_category_display
+                        }}</span>
+                    <span class="badge" style="background: rgba(255,255,255,0.2);">{{ tour.get_difficulty_display
+                        }}</span>
                     <span class="badge" style="background: rgba(255,255,255,0.2);">⏱️ {{ tour.duration }} min</span>
                     {% if tour.is_premium %}
                     <span class="badge badge-warning">Premium - {{ tour.price }} RON</span>
@@ -130,7 +132,8 @@
                             <span class="location-number">{{ location.order }}</span>
                             <div style="flex: 1;">
                                 <h3 style="margin-bottom: 0.5rem;">{{ location.name }}</h3>
-                                <p class="text-muted" style="margin-bottom: 0.5rem;">{{ location.description|truncatewords:20 }}</p>
+                                <p class="text-muted" style="margin-bottom: 0.5rem;">{{
+                                    location.description|truncatewords:20 }}</p>
                                 <div style="display: flex; gap: 1rem; margin-top: 0.75rem;">
                                     <span class="text-muted">⏱️ {{ location.duration_minutes }} min</span>
                                     <span class="text-muted">📍 {{ location.latitude }}, {{ location.longitude }}</span>
@@ -161,67 +164,19 @@
                             {% csrf_token %}
                             <div class="form-group">
                                 <label class="form-label">Rating</label>
-                                <div id="star-rating" style="display: flex; gap: 0.5rem; font-size: 2rem;">
+                                <div style="display: flex; gap: 0.5rem; font-size: 2rem;">
                                     <input type="radio" name="rating" value="1" id="star1" required
                                         style="display: none;">
-                                    <label for="star1" class="star-label" data-value="1"
-                                        style="cursor: pointer; filter: grayscale(100%);">⭐</label>
+                                    <label for="star1" style="cursor: pointer;">⭐</label>
                                     <input type="radio" name="rating" value="2" id="star2" style="display: none;">
-                                    <label for="star2" class="star-label" data-value="2"
-                                        style="cursor: pointer; filter: grayscale(100%);">⭐</label>
+                                    <label for="star2" style="cursor: pointer;">⭐</label>
                                     <input type="radio" name="rating" value="3" id="star3" style="display: none;">
-                                    <label for="star3" class="star-label" data-value="3"
-                                        style="cursor: pointer; filter: grayscale(100%);">⭐</label>
+                                    <label for="star3" style="cursor: pointer;">⭐</label>
                                     <input type="radio" name="rating" value="4" id="star4" style="display: none;">
-                                    <label for="star4" class="star-label" data-value="4"
-                                        style="cursor: pointer; filter: grayscale(100%);">⭐</label>
+                                    <label for="star4" style="cursor: pointer;">⭐</label>
                                     <input type="radio" name="rating" value="5" id="star5" style="display: none;">
-                                    <label for="star5" class="star-label" data-value="5"
-                                        style="cursor: pointer; filter: grayscale(100%);">⭐</label>
+                                    <label for="star5" style="cursor: pointer;">⭐</label>
                                 </div>
-                                <script>
-                                    // Interactive star rating
-                                    const stars = document.querySelectorAll('.star-label');
-                                    const inputs = document.querySelectorAll('#star-rating input[type="radio"]');
-
-                                    function updateStars(rating) {
-                                        stars.forEach((star, index) => {
-                                            if (index < rating) {
-                                                star.style.filter = 'grayscale(0%)';
-                                                star.style.transform = 'scale(1.1)';
-                                            } else {
-                                                star.style.filter = 'grayscale(100%)';
-                                                star.style.transform = 'scale(1)';
-                                            }
-                                        });
-                                    }
-
-                                    stars.forEach((star, index) => {
-                                        star.addEventListener('click', () => {
-                                            updateStars(index + 1);
-                                        });
-
-                                        star.addEventListener('mouseenter', () => {
-                                            updateStars(index + 1);
-                                        });
-                                    });
-
-                                    document.getElementById('star-rating').addEventListener('mouseleave', () => {
-                                        const checkedInput = document.querySelector('#star-rating input[type="radio"]:checked');
-                                        if (checkedInput) {
-                                            updateStars(parseInt(checkedInput.value));
-                                        } else {
-                                            updateStars(0);
-                                        }
-                                    });
-
-                                    // Check if there's a pre-selected rating (for edit mode)
-                                    inputs.forEach(input => {
-                                        if (input.checked) {
-                                            updateStars(parseInt(input.value));
-                                        }
-                                    });
-                                </script>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Comentariu</label>
@@ -242,7 +197,8 @@
                 <div class="review-card">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <strong>{{ review.user.username }}</strong>
-                        <span class="rating">{% for i in "12345" %}{% if forloop.counter <= review.rating %}⭐{% endif %}{% endfor %}</span>
+                        <span class="rating">{% for i in "12345" %}{% if forloop.counter <= review.rating %}⭐{% endif
+                                %}{% endfor %}</span>
                     </div>
                     <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">
                         {{ review.created_at|date:"d M Y" }}
