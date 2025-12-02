@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Walking Tour Romania{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'home' %}" class="navbar-brand">🗺️ Walking Tour RO</a>
+            <ul class="navbar-menu">
+                <li><a href="{% url 'home' %}">Acasă</a></li>
+                <li><a href="{% url 'tours:tour_list' %}">Tururi</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'accounts:profile' %}">Profil</a></li>
+                    <li><a href="{% url 'accounts:logout' %}">Ieșire</a></li>
+                {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Autentificare</a></li>
+                    <li><a href="{% url 'accounts:register' %}" class="btn btn-primary btn-sm">Înregistrare</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="container" style="margin-top: 1rem;">
+            {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% else %}info{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>Walking Tour Romania</h4>
+                    <p style="color: #94a3b8;">Descoperă experiențe turistice unice prin tururi ghidate virtuale.</p>
+                </div>
+                <div>
+                    <h4>Link-uri Rapide</h4>
+                    <a href="{% url 'tours:tour_list' %}">Toate Tururile</a>
+                    <a href="{% url 'home' %}">Acasă</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'accounts:profile' %}">Profilul Meu</a>
+                    {% endif %}
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <a href="mailto:contact@walkingtour.ro">contact@walkingtour.ro</a>
+                    <p style="color: #94a3b8; margin-top: 1rem;">Urmărește-ne pe rețelele sociale!</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Walking Tour Romania. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="/static/js/main.js"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

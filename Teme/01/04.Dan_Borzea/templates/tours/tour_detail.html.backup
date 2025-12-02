@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tour.name }} - Detalii Tur{% endblock %}
+
+{% block extra_css %}
+<style>
+    .location-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .location-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+        margin-bottom: 1rem;
+        box-shadow: var(--shadow-sm);
+        transition: all var(--transition-base);
+    }
+
+    .location-item:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateX(5px);
+    }
+
+    .location-number {
+        background: var(--primary-color);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        margin-right: 1rem;
+    }
+
+    .review-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+        margin-bottom: 1rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .comment-card {
+        background: white;
+        padding: 1rem;
+        border-radius: var(--radius-md);
+        margin-bottom: 1rem;
+        border-left: 3px solid var(--primary-color);
+    }
+
+    .reply {
+        margin-left: 2rem;
+        margin-top: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Tour Header -->
+<section
+    style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; padding: 2rem 0;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: start;">
+            <div style="flex: 1;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">{{ tour.name }}</h1>
+                <p style="opacity: 0.9; margin-bottom: 1rem;">{{ tour.description }}</p>
+
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <span class="badge" style="background: rgba(255,255,255,0.2);">{{ tour.get_category_display
+                        }}</span>
+                    <span class="badge" style="background: rgba(255,255,255,0.2);">{{ tour.get_difficulty_display
+                        }}</span>
+                    <span class="badge" style="background: rgba(255,255,255,0.2);">⏱️ {{ tour.duration }} min</span>
+                    {% if tour.is_premium %}
+                    <span class="badge badge-warning">Premium - {{ tour.price }} RON</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem;">
+                {% if user.is_authenticated %}
+                <form action="{% url 'tours:toggle_favorite' tour.id %}" method="post" id="favoriteForm">
+                    {% csrf_token %}
+                    <button type="submit" class="btn" style="background: rgba(255,255,255,0.2); color: white;">
+                        {% if is_favorite %}❤️{% else %}🤍{% endif %} Favorite
+                    </button>
+                </form>
+                <a href="#download" class="btn" style="background: rgba(255,255,255,0.2); color: white;"
+                    onclick="downloadTour({{ tour.id }})">
+                    📥 Descarcă Offline
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div style="margin-top: 1rem; display: flex; gap: 2rem; align-items: center;">
+            <div class="rating" style="font-size: 1.5rem;">
+                {% if average_rating > 0 %}
+                ⭐ {{ average_rating|floatformat:1 }}
+                {% else %}
+                <span style="opacity: 0.7;">Fără rating</span>
+                {% endif %}
+            </div>
+            <span style="opacity: 0.8;">{{ total_reviews }} review-uri</span>
+            <span style="opacity: 0.8;">{{ locations.count }} locații</span>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<section style="padding: 2rem 0;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 400px; gap: 2rem;">
+            <!-- Left Column: Map & Locations -->
+            <div>
+                <!-- Interactive Map -->
+                <div style="margin-bottom: 2rem;">
+                    <h2>Ruta Turului 🗺️</h2>
+                    <div id="map"></div>
+                </div>
+
+                <!-- Locations List -->
+                <h2 style="margin-bottom: 1rem;">Locații în Tur ({{ locations.count }})</h2>
+                <ul class="location-list">
+                    {% for location in locations %}
+                    <li class="location-item">
+                        <div style="display: flex; align-items: start;">
+                            <span class="location-number">{{ location.order }}</span>
+                            <div style="flex: 1;">
+                                <h3 style="margin-bottom: 0.5rem;">{{ location.name }}</h3>
+                                <p class="text-muted" style="margin-bottom: 0.5rem;">{{
+                                    location.description|truncatewords:20 }}</p>
+                                <div style="display: flex; gap: 1rem; margin-top: 0.75rem;">
+                                    <span class="text-muted">⏱️ {{ location.duration_minutes }} min</span>
+                                    <span class="text-muted">📍 {{ location.latitude }}, {{ location.longitude }}</span>
+                                </div>
+                                {% if location.historical_info %}
+                                <a href="{% url 'tours:location_detail' location.id %}" class="btn btn-sm btn-outline"
+                                    style="margin-top: 0.75rem;">
+                                    Vezi Detalii →
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Right Column: Reviews & Comments -->
+            <div>
+                <!-- Add Review Form -->
+                {% if user.is_authenticated %}
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="card-body">
+                        <h3 style="margin-bottom: 1rem;">
+                            {% if user_review %}Actualizează Review-ul{% else %}Adaugă Review{% endif %}
+                        </h3>
+                        <form action="{% url 'tours:add_review' tour.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="form-label">Rating</label>
+                                <div style="display: flex; gap: 0.5rem; font-size: 2rem;">
+                                    <input type="radio" name="rating" value="1" id="star1" required
+                                        style="display: none;">
+                                    <label for="star1" style="cursor: pointer;">⭐</label>
+                                    <input type="radio" name="rating" value="2" id="star2" style="display: none;">
+                                    <label for="star2" style="cursor: pointer;">⭐</label>
+                                    <input type="radio" name="rating" value="3" id="star3" style="display: none;">
+                                    <label for="star3" style="cursor: pointer;">⭐</label>
+                                    <input type="radio" name="rating" value="4" id="star4" style="display: none;">
+                                    <label for="star4" style="cursor: pointer;">⭐</label>
+                                    <input type="radio" name="rating" value="5" id="star5" style="display: none;">
+                                    <label for="star5" style="cursor: pointer;">⭐</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Comentariu</label>
+                                <textarea name="comment" class="form-control"
+                                    rows="3">{% if user_review %}{{ user_review.comment }}{% endif %}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                {% if user_review %}Actualizează{% else %}Trimite{% endif %} Review
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Reviews -->
+                <h3 style="margin-bottom: 1rem;">Review-uri ({{ reviews.count }})</h3>
+                {% for review in reviews %}
+                <div class="review-card">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <strong>{{ review.user.username }}</strong>
+                        <span class="rating">{% for i in "12345" %}{% if forloop.counter <= review.rating %}⭐{% endif
+                                %}{% endfor %}</span>
+                    </div>
+                    <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">
+                        {{ review.created_at|date:"d M Y" }}
+                    </p>
+                    {% if review.comment %}
+                    <p>{{ review.comment }}</p>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <p class="text-muted">Fii primul care lasă un review!</p>
+                {% endfor %}
+
+                <!-- Comments Section -->
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Comentarii</h3>
+
+                {% if user.is_authenticated %}
+                <form action="{% url 'tours:add_comment' tour.id %}" method="post" class="card"
+                    style="margin-bottom: 1.5rem;">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        <textarea name="content" class="form-control" placeholder="Scrie un comentariu..." rows="3"
+                            required></textarea>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 0.75rem;">Trimite
+                            Comentariu</button>
+                    </div>
+                </form>
+                {% endif %}
+
+                {% for comment in comments %}
+                <div class="comment-card">
+                    <strong>{{ comment.user.username }}</strong>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.25rem 0;">
+                        {{ comment.created_at|date:"d M Y H:i" }}
+                    </p>
+                    <p style="margin-top: 0.5rem;">{{ comment.content }}</p>
+
+                    {% for reply in comment.replies.all %}
+                    <div class="reply comment-card">
+                        <strong>{{ reply.user.username }}</strong>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.25rem 0;">
+                            {{ reply.created_at|date:"d M Y H:i" }}
+                        </p>
+                        <p style="margin-top: 0.5rem;">{{ reply.content }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% empty %}
+                <p class="text-muted">Fii primul care lasă un comentariu!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize map with tour locations
+    const locationsData = {{ locations_json| safe }};
+
+    if (locationsData && locationsData.length > 0) {
+        // Create map centered on first location
+        const map = L.map('map').setView([locationsData[0].lat, locationsData[0].lng], 13);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add markers for each location
+        const markers = [];
+        locationsData.forEach((loc, index) => {
+            const marker = L.marker([loc.lat, loc.lng]).addTo(map);
+            marker.bindPopup(`<strong>${loc.order}. ${loc.name}</strong><br>${loc.description}`);
+            markers.push([loc.lat, loc.lng]);
+        });
+
+        // Draw route line
+        if (markers.length > 1) {
+            L.polyline(markers, {
+                color: '#2563eb',
+                weight: 4,
+                opacity: 0.7,
+                smoothFactor: 1
+            }).addTo(map);
+        }
+
+        // Fit map to show all markers
+        if (markers.length > 0) {
+            map.fitBounds(markers);
+        }
+    }
+
+    // Download tour function
+    function downloadTour(tourId) {
+        window.location.href = `/tours/download/${tourId}/`;
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block title %}Toate Tururile - Walking Tour Romania{% endblock %}
+
+{% block content %}
+<section style="padding: 2rem 0; background: white;">
+    <div class="container">
+        <h1 class="mb-2">Toate Tururile</h1>
+        <p class="text-muted">Explorează toate experiențele turistice disponibile</p>
+    </div>
+</section>
+
+<section style="padding: 2rem 0;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 250px 1fr; gap: 2rem;">
+            <!-- Filters Sidebar -->
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="margin-bottom: 1rem;">Filtrare</h3>
+
+                        <form method="get">
+                            <!-- Căutare -->
+                            <div class="form-group">
+                                <label class="form-label">Căutare</label>
+                                <input type="text" name="search" class="form-control" placeholder="Nume tur..."
+                                    value="{{ search_query }}">
+                            </div>
+
+                            <!-- Categorie -->
+                            <div class="form-group">
+                                <label class="form-label">Categorie</label>
+                                <select name="category" class="form-control">
+                                    <option value="">Toate</option>
+                                    {% for code, name in categories %}
+                                    <option value="{{ code }}" {% if current_category == code %}selected{% endif %}>{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- Dificultate -->
+                            <div class="form-group">
+                                <label class="form-label">Dificultate</label>
+                                <select name="difficulty" class="form-control">
+                                    <option value="">Toate</option>
+                                    {% for code, name in difficulties %}
+                                    <option value="{{ code }}" {% if current_difficulty == code %}selected{% endif %}>{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- Premium -->
+                            <div class="form-group">
+                                <label class="form-label">Tip</label>
+                                <select name="premium" class="form-control">
+                                    <option value="">Toate</option>
+                                    <option value="false">Gratuite</option>
+                                    <option value="true">Premium</option>
+                                </select>
+                            </div>
+
+                            <!-- Sortare -->
+                            <div class="form-group">
+                                <label class="form-label">Sortare</label>
+                                <select name="sort" class="form-control">
+                                    <option value="-created_at">Cele mai noi</option>
+                                    <option value="created_at">Cele mai vechi</option>
+                                    <option value="name">Nume (A-Z)</option>
+                                    <option value="-name">Nume (Z-A)</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Aplică Filtre</button>
+                            <a href="{% url 'tours:tour_list' %}" class="btn btn-outline"
+                                style="width: 100%; margin-top: 0.5rem;">Resetează</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tours Grid -->
+            <div>
+                {% if page_obj %}
+                <div style="margin-bottom: 1rem; color: var(--text-secondary);">
+                    Afișare {{ page_obj.start_index }}-{{ page_obj.end_index }} din {{ page_obj.paginator.count }}
+                    tururi
+                </div>
+
+                <div class="grid grid-3">
+                    {% for tour in page_obj %}
+                    <div class="card">
+                        {% if tour.cover_image %}
+                        <img src="{{ tour.cover_image.url }}" alt="{{ tour.name }}" class="card-img">
+                        {% else %}
+                        <div
+                            style="width: 100%; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                            {% if tour.category == 'istoric' %}🏛️
+                            {% elif tour.category == 'cultural' %}🎭
+                            {% elif tour.category == 'gastronomic' %}🍽️
+                            {% else %}🌃
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <div class="card-body">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                                <h3 class="card-title" style="margin: 0; font-size: 1.125rem;">{{ tour.name }}</h3>
+                                {% if tour.is_premium %}
+                                <span class="badge badge-warning">Premium</span>
+                                {% endif %}
+                            </div>
+
+                            <div style="margin-bottom: 0.75rem;">
+                                <span class="badge badge-primary">{{ tour.get_category_display }}</span>
+                                <span class="badge" style="background: #6b7280; color: white;">{{ tour.get_difficulty_display }}</span>
+                            </div>
+
+                            <p class="card-text">{{ tour.description|truncatewords:12 }}</p>
+
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <span class="rating">
+                                    {% if tour.average_rating > 0 %}
+                                    ⭐ {{ tour.average_rating|floatformat:1 }}
+                                    {% else %}
+                                    <span class="text-muted">Fără rating</span>
+                                    {% endif %}
+                                </span>
+                                <span class="text-muted">⏱️ {{ tour.duration }} min</span>
+                            </div>
+
+                            <a href="{% url 'tours:tour_detail' tour.slug %}" class="btn btn-primary"
+                                style="width: 100%;">
+                                Vezi Detalii →
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Pagination -->
+                {% if page_obj.has_other_pages %}
+                <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem;">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1" class="btn btn-outline">«</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline">‹</a>
+                    {% endif %}
+
+                    <span class="btn" style="background: var(--primary-color); color: white;">
+                        Pagina {{ page_obj.number }} din {{ page_obj.paginator.num_pages }}
+                    </span>
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline">›</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline">»</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                {% else %}
+                <div class="card">
+                    <div class="card-body text-center" style="padding: 3rem;">
+                        <h3>Nu am găsit tururi</h3>
+                        <p class="text-muted">Încearcă să modifici filtrele sau să cauți altceva.</p>
+                        <a href="{% url 'tours:tour_list' %}" class="btn btn-primary">Vezi Toate Tururile</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

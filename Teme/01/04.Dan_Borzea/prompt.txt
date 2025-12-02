@@ -1,0 +1,67 @@
+as vrea sa creez o aplicatie de genul free walking tour care sa ofere informatii despre locatii si experiente turistice, un fel de ghid turistic virtual.
+as vrea sa imi pui o serie de intrebari astfel incat sa definesc functionalitatea aplicatiei.
+din punctul de vedere al backend-ului as vrea sa folosesc Python si Django.
+
+================================================================================
+ÎNTREBĂRI PENTRU DEFINIREA FUNCȚIONALITĂȚII APLICAȚIEI
+================================================================================
+
+1. TIPURI DE UTILIZATORI ȘI AUTENTIFICARE
+   - Vor exista diferite tipuri de utilizatori (turiști, ghizi/creatori de tururi, administratori)?
+   R: Turiști, ghizi/creatori de tururi, administratori.
+   - Utilizatorii trebuie să creeze conturi și să se autentifice sau pot accesa conținutul anonim?
+   R: Pot sa acceseze conținutul si anonim.
+   - Dacă există creatori de tururi, aceștia ar trebui să poată crea și gestiona propriile tururi?
+   R: Da
+
+2. CARACTERISTICI PRINCIPALE - TURURI ȘI LOCAȚII
+   - Turile ar trebui să fie rute pre-definite cu mai multe locații (ca un traseu de mers pe jos) sau locații individuale independente?
+   R: Turile ar trebui să fie rute pre-definite cu mai multe locații (ca un traseu de mers pe jos).
+   - Ce informații ar trebui afișate pentru fiecare locație (nume, descriere, imagini, ghiduri audio, fapte istorice, program, prețuri)?
+   R: Nume, descriere, imagini, ghiduri audio, fapte istorice. Programul si preturile doar cand sunt tururi premium.
+   - Turile ar trebui să aibă categorii (istoric, cultural, gastronomic, viață de noapte, etc.)?
+   R: Istoric, cultural, gastronomic, viață de noapte.
+   - Dorești integrare GPS/hartă pentru a afișa rutele locațiilor și poziția utilizatorului?
+   R: Da
+
+3. CARACTERISTICI INTERACTIVE
+   - Utilizatorii ar trebui să poată evalua/recenza turile și locațiile?
+   R: Da
+   - Dorești o funcție de favorite/marcaje?
+   R: Da
+   - Ar trebui să existe funcții sociale (partajare tururi, comentarii)?
+   R: Da
+   - Dorești acces offline la conținutul tururilor (ghiduri descărcabile)?
+   R: Da
+
+4. GESTIONAREA CONȚINUTULUI
+   - Cine va crea conținutul tururilor - doar administratori sau pot contribui și utilizatorii?
+   R: Doar administratori
+   - Turile ar trebui să suporte multimedia (fotografii, videoclipuri, ghiduri audio)?
+   R: Da
+   - Ai nevoie de suport multi-limbă?
+   R: Deocamdata nu, doar in limba romana. Revizuirea in viitor.
+
+5. FRONTEND ȘI PLATFORMĂ
+   - Ce tehnologie frontend preferi (React, Vue, HTML/CSS/JS simplu)?
+   R: As vrea sa folosesc Django Templates. Voi schimba pe viitor
+   - Aceasta ar trebui să fie o aplicație web, aplicație mobilă sau ambele (web responsiv)?
+   R: Web responsiv
+   - Ai preferințe de design (minimalist, colorat, modern, etc.)?
+   R: Modern
+
+6. CARACTERISTICI ADIȚIONALE
+   - Ai nevoie de capacități de căutare și filtrare?
+   R: Da
+   - Ar trebui să existe notificări (tururi noi, atracții din apropiere)?
+   R: Deocamdata nu, revizuirea in viitor.
+   - Dorești analiză (tururi populare, comportament utilizatori)?
+   R: Da
+   - Caracteristici de monetizare (tururi premium, reclame)?
+   R: Tururi premium
+
+================================================================================
+RĂSPUNSURILE TALE:
+================================================================================
+
+Te rog răspunde la întrebările de mai sus aici:

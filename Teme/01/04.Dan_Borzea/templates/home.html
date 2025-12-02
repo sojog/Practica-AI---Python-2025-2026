@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}Acasă - Walking Tour Romania{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <h1 class="fade-in">Descoperă România pas cu pas 🚶</h1>
+        <p class="fade-in">Explorează locații istorice, culturale și gastronomice prin tururi ghidate virtuale GPS</p>
+
+        <div class="search-bar">
+            <form action="{% url 'tours:search' %}" method="get" style="display: flex; width: 100%; gap: 0.5rem;">
+                <input type="text" name="q" placeholder="Caută tururi..." required>
+                <button type="submit" class="btn btn-primary">Caută</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section style="padding: 3rem 0; background: white;">
+    <div class="container">
+        <div class="grid grid-3 text-center">
+            <div>
+                <h2 style="color: var(--primary-color); font-size: 3rem; margin-bottom: 0.5rem;">{{ total_tours }}</h2>
+                <p class="text-muted">Tururi Disponibile</p>
+            </div>
+            <div>
+                <h2 style="color: var(--secondary-color); font-size: 3rem; margin-bottom: 0.5rem;">{{ total_locations }}
+                </h2>
+                <p class="text-muted">Locații Interesante</p>
+            </div>
+            <div>
+                <h2 style="color: var(--accent-color); font-size: 3rem; margin-bottom: 0.5rem;">GPS</h2>
+                <p class="text-muted">Navigare Live</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Tours -->
+<section style="padding: 3rem 0;">
+    <div class="container">
+        <h2 class="text-center mb-3">Tururi Recomandate ✨</h2>
+        <p class="text-center text-muted mb-3">Cele mai populare experiențe turistice</p>
+
+        <div class="grid grid-3">
+            {% for tour in featured_tours %}
+            <div class="card fade-in">
+                {% if tour.cover_image %}
+                <img src="{{ tour.cover_image.url }}" alt="{{ tour.name }}" class="card-img">
+                {% else %}
+                <div
+                    style="width: 100%; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                    {% if tour.category == 'istoric' %}🏛️
+                    {% elif tour.category == 'cultural' %}🎭
+                    {% elif tour.category == 'gastronomic' %}🍽️
+                    {% else %}🌃
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <div class="card-body">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                        <h3 class="card-title" style="margin: 0;">{{ tour.name }}</h3>
+                        {% if tour.is_premium %}
+                        <span class="badge badge-warning">Premium</span>
+                        {% endif %}
+                    </div>
+
+                    <div style="margin-bottom: 0.75rem;">
+                        <span class="badge badge-primary">{{ tour.get_category_display }}</span>
+                        <span class="badge" style="background: #6b7280; color: white;">{{ tour.get_difficulty_display }}</span>
+                    </div>
+
+                    <p class="card-text">{{ tour.description|truncatewords:15 }}</p>
+
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <span class="rating">
+                            {% if tour.average_rating > 0 %}
+                            ⭐ {{ tour.average_rating|floatformat:1 }}
+                            {% else %}
+                            <span class="text-muted">Fără rating</span>
+                            {% endif %}
+                        </span>
+                        <span class="text-muted">⏱️ {{ tour.duration }} min</span>
+                    </div>
+
+                    <a href="{% url 'tours:tour_detail' tour.slug %}" class="btn btn-primary" style="width: 100%;">
+                        Vezi Detalii →
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                <p class="text-muted">Nu există tururi disponibile momentan.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if featured_tours %}
+        <div class="text-center mt-3">
+            <a href="{% url 'tours:tour_list' %}" class="btn btn-outline">Vezi Toate Tururile →</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section style="padding: 3rem 0; background: white;">
+    <div class="container">
+        <h2 class="text-center mb-3">Categorii de Tururi 🎯</h2>
+
+        <div class="grid grid-4">
+            {% for category_code, category_name in categories %}
+            <a href="{% url 'tours:tour_list' %}?category={{ category_code }}" class="card"
+                style="text-decoration: none;">
+                <div style="padding: 2rem; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">
+                        {% if category_code == 'istoric' %}🏛️
+                        {% elif category_code == 'cultural' %}🎭
+                        {% elif category_code == 'gastronomic' %}🍽️
+                        {% else %}🌃
+                        {% endif %}
+                    </div>
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">{{ category_name }}</h4>
+                    <p class="text-muted">Explorează →</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section
+    style="padding: 3rem 0; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white;">
+    <div class="container text-center">
+        <h2 style="color: white; margin-bottom: 1rem;">Gata să începi aventura? 🚀</h2>
+        <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem;">Creează un cont gratuit și descoperă tururile
+            din România</p>
+        {% if not user.is_authenticated %}
+        <a href="{% url 'accounts:register' %}" class="btn btn-secondary" style="font-size: 1.125rem;">Înregistrează-te
+            Gratuit</a>
+        {% else %}
+        <a href="{% url 'tours:tour_list' %}" class="btn btn-secondary" style="font-size: 1.125rem;">Explorează
+            Tururile</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

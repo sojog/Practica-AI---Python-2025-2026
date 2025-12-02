@@ -1,0 +1,75 @@
+
+As vrea sa creez o aplicatie pentru gestionarea datelor de nastere. 
+
+Structura la care m-am gandit e asa:
+
+DateGenie/
+│
+├── users/
+├── birthdata/
+├── ai_engine/
+├── dashboard/
+└── api/   
+
+As vrea sa imi pui o serie de intrebari astfel incat sa definesc functionalitatea aplicatiei.
+
+Din punct de vedere al backend-ului as vrea sa folosesc Python si Django.
+
+### Intrebari pentru clarificarea functionalitatii:
+
+Gestionarea utilizatorilor:
+
+Ce tipuri de utilizatori vor exista (admin, utilizatori obișnuiți etc.)?
+
+R: admin si useri obisnuiti
+
+Utilizatorii vor avea nevoie de autentificare și autorizare? Dacă da, ce metode vei folosi (email/parolă, OAuth etc.)?
+R: da, se vor autentifica. Folosim autentificare cu email si parola
+
+
+Datele de naștere:
+
+Ce informații vei stoca pentru fiecare dată de naștere (nume, dată, relație cu utilizatorul etc.)?
+R:  nume, sex, data de nastere, relatie cu userul, zodie calculata automat, varsta calculata automat, idei de cadouri pe care le poti edita si adauda in timpul anului oricand, hobbyuri, preferinte
+
+Vei avea nevoie de notificări pentru zilele de naștere? Dacă da, cum vor fi trimise (email, SMS, notificări push)?
+R: notificare pe mail. eventual si in calendar
+
+
+Funcționalitatea AI:
+
+Ce rol va avea motorul AI în aplicație? Va genera sugestii, va analiza datele sau altceva?
+R: va genera sugestii de cadouri bazat pe varsta, sex si grad de rudenie, preferinte etc
+
+Ce tipuri de algoritmi sau modele AI intenționezi să folosești?
+R: deocamdata nu stiu
+
+
+Dashboard:
+
+Ce informații vor fi afișate pe dashboard? Vei include statistici, grafice sau alte vizualizări?
+R: luna in curs si ce zile de nastere urmeaza
+
+Dashboard-ul va fi personalizat pentru fiecare utilizator?
+R: nu
+
+
+API:
+
+Ce funcționalități vor fi expuse prin API? Va fi folosit doar intern sau și de terți?
+R: deocamdata nu stiu, as vrea integrare cu calendar deocamdata
+
+Ce standarde vei folosi pentru API (REST, GraphQL etc.)?
+
+Alte întrebări generale:
+
+Aplicația va fi multi-linguală? Dacă da, ce limbi vei suporta?
+
+R: deocamdata doar engleza 
+
+Cum vei gestiona stocarea datelor? Vei folosi o bază de date specifică (PostgreSQL, MySQL etc.)?
+
+R: deocamdata MySQL dar pe viitor sa existe posibilitatea de transfer pe PostgreSQL
+
+Ai nevoie de integrare cu alte servicii externe (ex. servicii de trimitere email, calendare etc.)?
+R: da

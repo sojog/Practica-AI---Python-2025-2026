@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Înregistrare - Walking Tour Romania{% endblock %}
+
+{% block content %}
+<section style="padding: 3rem 0;">
+    <div class="container">
+        <div style="max-width: 500px; margin: 0 auto;">
+            <div class="card">
+                <div class="card-body" style="padding: 2rem;">
+                    <h1 class="text-center mb-2">Creează cont 🚀</h1>
+                    <p class="text-center text-muted mb-3">Începe să explorezi tururile din România</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label class="form-label">Nume utilizator</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Prenume</label>
+                                <input type="text" name="first_name" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Nume</label>
+                                <input type="text" name="last_name" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Rol</label>
+                            <select name="role" class="form-control">
+                                <option value="tourist">Turist</option>
+                                <option value="guide">Ghid</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Parolă</label>
+                            <input type="password" name="password1" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Confirmă parola</label>
+                            <input type="password" name="password2" class="form-control" required>
+                        </div>
+
+                        {% if form.errors %}
+                        <div class="alert alert-error">
+                            {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                            Creează Contul
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p class="text-muted">Ai deja cont? <a href="{% url 'accounts:login' %}">Autentifică-te aici</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
