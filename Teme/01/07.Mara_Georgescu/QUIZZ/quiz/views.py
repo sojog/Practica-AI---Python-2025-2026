@@ -99,12 +99,17 @@ def generate_quiz_view(request, note_id):
                 instant_feedback=instant_feedback
             )
             
+            # Get user's language preference
+            from django.utils import translation
+            user_language = translation.get_language() or 'en'
+            
             # Generate questions using AI (mock)
             questions_data = generate_quiz_with_ai(
                 note.extracted_text,
                 question_count,
                 question_type,
-                difficulty
+                difficulty,
+                user_language
             )
             
             # Create Question objects

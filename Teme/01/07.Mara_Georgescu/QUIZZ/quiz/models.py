@@ -21,6 +21,8 @@ class Quiz(models.Model):
     QUESTION_TYPE_CHOICES = [
         ('multiple_choice', 'Multiple Choice'),
         ('true_false', 'True/False'),
+        ('fill_in_blank', 'Fill in the Blank'),
+        ('short_answer', 'Short Answer'),
         ('mixed', 'Mixed'),
     ]
     
@@ -58,6 +60,8 @@ class Question(models.Model):
     QUESTION_TYPE_CHOICES = [
         ('multiple_choice', 'Multiple Choice'),
         ('true_false', 'True/False'),
+        ('fill_in_blank', 'Fill in the Blank'),
+        ('short_answer', 'Short Answer'),
     ]
     
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')

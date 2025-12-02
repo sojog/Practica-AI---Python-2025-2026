@@ -10,24 +10,107 @@ import random
 import json
 import re
 
-def generate_quiz_with_ai(text, question_count=10, question_type='mixed', difficulty='medium'):
+# Translation dictionaries for multilingual support
+TRANSLATIONS = {
+    'en': {
+        'what_is': 'What is',
+        'which': 'Which',
+        'how': 'How',
+        'the_text_discusses': 'The text discusses',
+        'according_to_text': 'according to the text',
+        'true': 'True',
+        'false': 'False',
+        'this_statement_is': 'This statement is',
+        'accurate': 'accurate',
+        'inaccurate': 'inaccurate',
+        'based_on_text': 'based on the text content',
+        'this_is': 'This is',
+        'true_lower': 'true',
+        'false_lower': 'false',
+        'according_to_material': 'according to the material',
+        'complete_definition': 'The complete definition is',
+        'complete_sentence': 'The complete sentence is',
+        'briefly_explain': 'Briefly explain the concept of',
+        'what_significance': 'What is the significance of',
+        'in_the_text': 'in the text',
+        'define_based_on': 'Define',
+        'based_on_reading': 'based on the reading',
+        'summarize_main_idea': 'Summarize the main idea of the following sentence',
+        'the_sentence_states': 'The sentence states',
+        'answers_will_vary': 'Answers will vary',
+        'primary_focus': 'What is the primary focus regarding',
+        'how_characterized': 'How is',
+        'characterized_in_text': 'characterized in the text',
+        'which_aspect': 'Which aspect of',
+        'is_emphasized': 'is emphasized',
+        'explained_as': 'It is explained as a fundamental concept',
+        'mentioned_as': 'It is mentioned as a supporting detail',
+        'presented_as': 'It is presented as an advanced topic',
+        'described_as': 'It is described as a practical application',
+        'the_text_states': 'The text states that',
+    },
+    'ro': {
+        'what_is': 'Ce este',
+        'which': 'Care',
+        'how': 'Cum',
+        'the_text_discusses': 'Textul discută despre',
+        'according_to_text': 'conform textului',
+        'true': 'Adevărat',
+        'false': 'Fals',
+        'this_statement_is': 'Această afirmație este',
+        'accurate': 'corectă',
+        'inaccurate': 'incorectă',
+        'based_on_text': 'pe baza conținutului textului',
+        'this_is': 'Aceasta este',
+        'true_lower': 'adevărat',
+        'false_lower': 'fals',
+        'according_to_material': 'conform materialului',
+        'complete_definition': 'Definiția completă este',
+        'complete_sentence': 'Propoziția completă este',
+        'briefly_explain': 'Explică pe scurt conceptul de',
+        'what_significance': 'Care este semnificația',
+        'in_the_text': 'în text',
+        'define_based_on': 'Definește',
+        'based_on_reading': 'pe baza lecturii',
+        'summarize_main_idea': 'Rezumă ideea principală a următoarei propoziții',
+        'the_sentence_states': 'Propoziția afirmă',
+        'answers_will_vary': 'Răspunsurile pot varia',
+        'primary_focus': 'Care este focusul principal privind',
+        'how_characterized': 'Cum este',
+        'characterized_in_text': 'caracterizat în text',
+        'which_aspect': 'Care aspect al',
+        'is_emphasized': 'este subliniat',
+        'explained_as': 'Este explicat ca un concept fundamental',
+        'mentioned_as': 'Este menționat ca un detaliu de susținere',
+        'presented_as': 'Este prezentat ca un subiect avansat',
+        'described_as': 'Este descris ca o aplicație practică',
+        'the_text_states': 'Textul afirmă că',
+    }
+}
+
+def t(key, language='en'):
+    """Get translated text for a given key"""
+    return TRANSLATIONS.get(language, TRANSLATIONS['en']).get(key, TRANSLATIONS['en'].get(key, key))
+
+def generate_quiz_with_ai(text, question_count=10, question_type='mixed', difficulty='medium', language='en'):
     """
     Generate quiz questions using AI (or intelligent mock if no API key).
     
     Args:
         text (str): The note text to generate questions from
         question_count (int): Number of questions to generate
-        question_type (str): 'multiple_choice', 'true_false', or 'mixed'
+        question_type (str): 'multiple_choice', 'true_false', 'fill_in_blank', 'short_answer', or 'mixed'
         difficulty (str): 'easy', 'medium', 'hard', or 'mixed'
+        language (str): 'en' for English, 'ro' for Romanian
     
     Returns:
         list: List of question dictionaries
     """
     # TODO: When API key is available, uncomment and use real AI
-    # return real_generate_quiz(text, question_count, question_type, difficulty)
+    # return real_generate_quiz(text, question_count, question_type, difficulty, language)
     
     # For now, use intelligent mock generation
-    return intelligent_mock_generate_quiz(text, question_count, question_type, difficulty)
+    return intelligent_mock_generate_quiz(text, question_count, question_type, difficulty, language)
 
 def extract_key_information(text):
     """
@@ -76,7 +159,7 @@ def extract_key_information(text):
         'text_length': len(text)
     }
 
-def intelligent_mock_generate_quiz(text, question_count=10, question_type='mixed', difficulty='medium'):
+def intelligent_mock_generate_quiz(text, question_count=10, question_type='mixed', difficulty='medium', language='en'):
     """
     Generate intelligent quiz questions by analyzing the text content.
     Creates questions based on actual information extracted from the text.
@@ -102,20 +185,27 @@ def intelligent_mock_generate_quiz(text, question_count=10, question_type='mixed
         question_types_pool = ['general'] * 10
     
     for i in range(question_count):
-        # Determine question format (MC or T/F)
+        # Determine question format
         if question_type == 'mixed':
-            q_format = random.choice(['multiple_choice', 'true_false'])
+            q_format = random.choice(['multiple_choice', 'true_false', 'fill_in_blank', 'short_answer'])
         else:
             q_format = question_type
         
         # Select question category
         q_category = random.choice(question_types_pool) if question_types_pool else 'general'
         
-        # Generate question based on category and format
+        # Generate question based on category and format (pass language to all functions)
         if q_format == 'multiple_choice':
-            question = generate_intelligent_mc(i + 1, info, q_category, difficulty)
+            question = generate_intelligent_mc(i + 1, info, q_category, difficulty, language)
+        elif q_format == 'true_false':
+            question = generate_intelligent_tf(i + 1, info, q_category, difficulty, language)
+        elif q_format == 'fill_in_blank':
+            question = generate_intelligent_fib(i + 1, info, q_category, difficulty, language)
+        elif q_format == 'short_answer':
+            question = generate_intelligent_sa(i + 1, info, q_category, difficulty, language)
         else:
-            question = generate_intelligent_tf(i + 1, info, q_category, difficulty)
+            # Default fallback
+            question = generate_intelligent_mc(i + 1, info, q_category, difficulty, language)
         
         questions.append(question)
     
@@ -349,6 +439,87 @@ def generate_intelligent_tf(number, info, category, difficulty):
         'explanation': f"This is {'true' if is_true else 'false'} according to the material.",
         'order': number
     }
+
+def generate_intelligent_fib(number, info, category, difficulty):
+    """Generate intelligent fill-in-the-blank question"""
+    
+    if category == 'definition' and info['definitions']:
+        definition = random.choice(info['definitions'])
+        # Try to find the subject
+        match = re.search(r'^([A-Z][a-zA-Z\s]+)\s+(is|are|means)', definition)
+        if match:
+            subject = match.group(1).strip()
+            # Create question by blanking out the subject
+            question_text = definition.replace(subject, "__________", 1)
+            correct = subject
+            
+            return {
+                'question_text': question_text,
+                'question_type': 'fill_in_blank',
+                'correct_answer': correct,
+                'options': [],
+                'explanation': f"The complete definition is: {definition}",
+                'order': number
+            }
+            
+    # Fallback to sentence completion
+    if info['sentences']:
+        sentence = random.choice(info['sentences'])
+        words = sentence.split()
+        if len(words) > 5:
+            # Pick a word to blank out (avoiding small words)
+            candidates = [w for w in words if len(w) > 4]
+            if candidates:
+                target_word = random.choice(candidates)
+                # Remove punctuation from target word for the answer
+                clean_answer = re.sub(r'[^\w\s]', '', target_word)
+                question_text = sentence.replace(target_word, "__________", 1)
+                
+                return {
+                    'question_text': question_text,
+                    'question_type': 'fill_in_blank',
+                    'correct_answer': clean_answer,
+                    'options': [],
+                    'explanation': f"The complete sentence is: {sentence}",
+                    'order': number
+                }
+    
+    # Ultimate fallback
+    return generate_intelligent_tf(number, info, category, difficulty)
+
+def generate_intelligent_sa(number, info, category, difficulty):
+    """Generate intelligent short answer question"""
+    
+    if category == 'concept' and info['concepts']:
+        concept = random.choice(info['concepts'])
+        templates = [
+            f"Briefly explain the concept of {concept}.",
+            f"What is the significance of {concept} in the text?",
+            f"Define {concept} based on the reading."
+        ]
+        
+        return {
+            'question_text': random.choice(templates),
+            'question_type': 'short_answer',
+            'correct_answer': f"Answers should define or explain {concept}",
+            'options': [],
+            'explanation': f"{concept} is a key topic. Your answer should demonstrate understanding of its role in the text.",
+            'order': number
+        }
+        
+    if info['sentences']:
+        sentence = random.choice(info['sentences'])
+        return {
+            'question_text': "Summarize the main idea of the following sentence: " + sentence,
+            'question_type': 'short_answer',
+            'correct_answer': "Answers will vary",
+            'options': [],
+            'explanation': f"The sentence states: {sentence}",
+            'order': number
+        }
+
+    # Ultimate fallback
+    return generate_intelligent_mc(number, info, category, difficulty)
 
 def real_generate_quiz(text, question_count, question_type, difficulty):
     """

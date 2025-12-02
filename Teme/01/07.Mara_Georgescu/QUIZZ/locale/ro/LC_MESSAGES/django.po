@@ -1,0 +1,94 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: QUIZZ\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-02 23:00+0200\n"
+"PO-Revision-Date: 2025-12-02 23:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+msgid "English"
+msgstr "Engleză"
+
+msgid "Romanian"
+msgstr "Română"
+
+msgid "Dashboard"
+msgstr "Panou de control"
+
+msgid "Upload Note"
+msgstr "Încarcă notiță"
+
+msgid "Logout"
+msgstr "Deconectare"
+
+msgid "Login"
+msgstr "Autentificare"
+
+msgid "Register"
+msgstr "Înregistrare"
+
+msgid "Welcome back"
+msgstr "Bine ai revenit"
+
+msgid "Generate Recap Test"
+msgstr "Generează test recapitulativ"
+
+msgid "My Notes"
+msgstr "Notițele mele"
+
+msgid "Edit"
+msgstr "Editează"
+
+msgid "Generate Quiz"
+msgstr "Generează test"
+
+msgid "No notes yet"
+msgstr "Nicio notiță încă"
+
+msgid "Upload your first note to get started!"
+msgstr "Încarcă prima notiță pentru a începe!"
+
+msgid "Recent Quizzes"
+msgstr "Teste recente"
+
+msgid "Note"
+msgstr "Notiță"
+
+msgid "Questions"
+msgstr "Întrebări"
+
+msgid "Score"
+msgstr "Scor"
+
+msgid "Date"
+msgstr "Dată"
+
+msgid "Actions"
+msgstr "Acțiuni"
+
+msgid "View Results"
+msgstr "Vezi rezultate"
+
+msgid "No quizzes yet. Generate your first quiz from a note!"
+msgstr "Niciun test încă. Generează primul test dintr-o notiță!"
+
+msgid "Review and edit the extracted text before generating your quiz"
+msgstr "Revizuiește și editează textul extras înainte de a genera testul"
+
+msgid "Extracted Text"
+msgstr "Text extras"
+
+msgid "You can edit the text above to correct any extraction errors or add additional information."
+msgstr "Poți edita textul de mai sus pentru a corecta erorile de extragere sau pentru a adăuga informații suplimentare."
+
+msgid "Save & Continue to Quiz Generation"
+msgstr "Salvează și continuă la generarea testului"
+
+msgid "Back to Dashboard"
+msgstr "Înapoi la panou"

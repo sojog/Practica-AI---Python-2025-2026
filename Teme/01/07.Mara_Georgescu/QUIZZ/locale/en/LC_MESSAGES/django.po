@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: QUIZZ\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-02 23:00+0200\n"
+"PO-Revision-Date: 2025-12-02 23:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "English"
+msgstr "English"
+
+msgid "Romanian"
+msgstr "Romanian"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Upload Note"
+msgstr "Upload Note"
+
+msgid "Logout"
+msgstr "Logout"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Register"
+msgstr "Register"
+
+msgid "Welcome back"
+msgstr "Welcome back"
+
+msgid "Generate Recap Test"
+msgstr "Generate Recap Test"
+
+msgid "My Notes"
+msgstr "My Notes"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Generate Quiz"
+msgstr "Generate Quiz"
+
+msgid "No notes yet"
+msgstr "No notes yet"
+
+msgid "Upload your first note to get started!"
+msgstr "Upload your first note to get started!"
+
+msgid "Recent Quizzes"
+msgstr "Recent Quizzes"
+
+msgid "Note"
+msgstr "Note"
+
+msgid "Questions"
+msgstr "Questions"
+
+msgid "Score"
+msgstr "Score"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "View Results"
+msgstr "View Results"
+
+msgid "No quizzes yet. Generate your first quiz from a note!"
+msgstr "No quizzes yet. Generate your first quiz from a note!"
