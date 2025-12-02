@@ -197,8 +197,8 @@
                 <div class="review-card">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                         <strong>{{ review.user.username }}</strong>
-                        <span class="rating">{% for i in "12345" %}{% if forloop.counter <= review.rating %}⭐{% endif
-                                %}{% endfor %}</span>
+                        <span class="rating">{% for i in "12345" %}{% if forloop.counter <= review.rating %}⭐{% endif %}{% endfor %}</span>
+                        <span class="rating">{% for i in "12345" %}{% if forloop.counter <= review.rating %}⭐{% endif %}{% endfor %}</span>
                     </div>
                     <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.5rem;">
                         {{ review.created_at|date:"d M Y" }}
