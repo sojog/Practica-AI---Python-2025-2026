@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QUIZZ\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-02 23:00+0200\n"
-"PO-Revision-Date: 2025-12-02 23:00+0200\n"
+"POT-Creation-Date: 2025-12-03 22:45+0200\n"
+"PO-Revision-Date: 2025-12-03 22:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ro\n"
@@ -67,7 +67,7 @@ msgid "Score"
 msgstr "Scor"
 
 msgid "Date"
-msgstr "Dată"
+msgstr "Data"
 
 msgid "Actions"
 msgstr "Acțiuni"
@@ -92,3 +92,125 @@ msgstr "Salvează și continuă la generarea testului"
 
 msgid "Back to Dashboard"
 msgstr "Înapoi la panou"
+
+# New translations for quiz generation
+msgid "From note:"
+msgstr "Din notiță:"
+
+msgid "Quiz Mode"
+msgstr "Mod test"
+
+msgid "Number of Questions"
+msgstr "Număr de întrebări"
+
+msgid "Choose between 5 and 50 questions"
+msgstr "Alege între 5 și 50 de întrebări"
+
+msgid "Question Type"
+msgstr "Tip întrebare"
+
+msgid "Difficulty Level"
+msgstr "Nivel de dificultate"
+
+msgid "Feedback Mode"
+msgstr "Mod feedback"
+
+msgid "Back to Edit"
+msgstr "Înapoi la editare"
+
+# Quiz taking interface
+msgid "Submit Answer"
+msgstr "Trimite răspuns"
+
+msgid "Next Question"
+msgstr "Următoarea întrebare"
+
+msgid "Correct!"
+msgstr "Corect!"
+
+msgid "Incorrect"
+msgstr "Incorect"
+
+msgid "Question:"
+msgstr "Întrebare:"
+
+msgid "Correct Answer:"
+msgstr "Răspuns corect:"
+
+msgid "Explanation:"
+msgstr "Explicație:"
+
+msgid "Type your answer here..."
+msgstr "Scrie răspunsul tău aici..."
+
+# Quiz results
+msgid "Quiz Results"
+msgstr "Rezultate test"
+
+msgid "Quiz Complete!"
+msgstr "Test finalizat!"
+
+msgid "Retake Quiz"
+msgstr "Reia testul"
+
+msgid "Detailed Review"
+msgstr "Revizuire detaliată"
+
+msgid "Correct"
+msgstr "Corect"
+
+msgid "Your answer"
+msgstr "Răspunsul tău"
+
+msgid "Your Answer:"
+msgstr "Răspunsul tău:"
+
+msgid "True"
+msgstr "Adevărat"
+
+msgid "False"
+msgstr "Fals"
+
+# Upload note
+msgid "Upload your study materials (PDF, DOCX, TXT, or Images)"
+msgstr "Încarcă materialele tale de studiu (PDF, DOCX, TXT sau imagini)"
+
+msgid "Note Title"
+msgstr "Titlu notiță"
+
+msgid "Upload File"
+msgstr "Încarcă fișier"
+
+msgid "Supported formats: PDF, DOCX, TXT, JPG, PNG, WEBP"
+msgstr "Formate suportate: PDF, DOCX, TXT, JPG, PNG, WEBP"
+
+msgid "Upload & Process"
+msgstr "Încarcă și procesează"
+
+msgid "Cancel"
+msgstr "Anulează"
+
+# Model choices
+msgid "Multiple Choice"
+msgstr "Alegere multiplă"
+
+msgid "True/False"
+msgstr "Adevărat/Fals"
+
+msgid "Fill in the Blank"
+msgstr "Completează spațiul liber"
+
+msgid "Short Answer"
+msgstr "Răspuns scurt"
+
+msgid "Mixed"
+msgstr "Mixt"
+
+msgid "Easy"
+msgstr "Ușor"
+
+msgid "Medium"
+msgstr "Mediu"
+
+msgid "Hard"
+msgstr "Dificil"

@@ -2,13 +2,13 @@
 
 {% load i18n %}
 
-{% block title %}Upload Note - QUIZZ{% endblock %}
+{% block title %}{% trans "Upload Note" %} - QUIZZ{% endblock %}
 
 {% block content %}
 <div class="max-w-3xl mx-auto">
     <div class="mb-6">
-        <h2 class="text-3xl font-bold text-gray-900">Upload Note</h2>
-        <p class="text-gray-600 mt-2">Upload your study materials (PDF, DOCX, TXT, or Images)</p>
+        <h2 class="text-3xl font-bold text-gray-900">{% trans "Upload Note" %}</h2>
+        <p class="text-gray-600 mt-2">{% trans "Upload your study materials (PDF, DOCX, TXT, or Images)" %}</p>
     </div>
 
     <div class="glass p-8 rounded-xl shadow-lg">
@@ -17,7 +17,7 @@
 
             <div>
                 <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
-                    Note Title
+                    {% trans "Note Title" %}
                 </label>
                 {{ form.title }}
                 {% if form.title.errors %}
@@ -27,7 +27,7 @@
 
             <div>
                 <label for="{{ form.file.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
-                    Upload File
+                    {% trans "Upload File" %}
                 </label>
                 <div
                     class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-primary transition-colors">
@@ -40,7 +40,7 @@
                         </svg>
                         <div class="text-sm text-gray-600">
                             {{ form.file }}
-                            <p class="mt-2">Supported formats: PDF, DOCX, TXT, JPG, PNG, WEBP</p>
+                            <p class="mt-2">{% trans "Supported formats: PDF, DOCX, TXT, JPG, PNG, WEBP" %}</p>
                         </div>
                     </div>
                 </div>
@@ -52,11 +52,11 @@
             <div class="flex gap-4">
                 <button type="submit"
                     class="flex-1 px-6 py-3 bg-primary text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium">
-                    Upload & Process
+                    {% trans "Upload & Process" %}
                 </button>
                 <a href="{% url 'dashboard' %}"
                     class="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium text-center">
-                    Cancel
+                    {% trans "Cancel" %}
                 </a>
             </div>
         </form>

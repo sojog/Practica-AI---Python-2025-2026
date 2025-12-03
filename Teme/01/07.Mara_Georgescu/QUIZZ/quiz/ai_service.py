@@ -222,7 +222,7 @@ def generate_intelligent_mc(number, info, category, difficulty, language='en'):
         if match:
             subject = match.group(1).strip()
             # Create question
-            question_text = f"What is {subject}?"
+            question_text = f"{t('what_is', language)} {subject}?"
             
             # Extract the actual definition
             parts = re.split(r'\s+(?:is|are|means)\s+', definition, maxsplit=1)
@@ -246,7 +246,7 @@ def generate_intelligent_mc(number, info, category, difficulty, language='en'):
                 'question_type': 'multiple_choice',
                 'correct_answer': correct,
                 'options': options,
-                'explanation': f"According to the text: {definition[:150]}...",
+                'explanation': f"{t('according_to_text', language)}: {definition[:150]}...",
                 'order': number
             }
     
@@ -255,10 +255,10 @@ def generate_intelligent_mc(number, info, category, difficulty, language='en'):
         concept = random.choice(info['concepts'])
         
         templates = [
-            f"Which statement best describes {concept}?",
-            f"What role does {concept} play in the text?",
-            f"According to the material, {concept} is primarily:",
-            f"The text discusses {concept} in the context of:"
+            f"{t('which', language)} statement best describes {concept}?",
+            f"{t('what_is', language)} the role of {concept} in the text?",
+            f"{t('according_to_material', language)}, {concept} is primarily:",
+            f"{t('the_text_discusses', language)} {concept} in the context of:"
         ]
         
         correct_options = [
@@ -325,16 +325,16 @@ def generate_intelligent_mc(number, info, category, difficulty, language='en'):
         concept = "the main topic"
     
     templates = [
-        f"What is the primary focus regarding {concept}?",
-        f"How is {concept} characterized in the text?",
-        f"Which aspect of {concept} is emphasized?"
+        f"{t('primary_focus', language)} {concept}?",
+        f"{t('how_characterized', language)} {concept} {t('characterized_in_text', language)}?",
+        f"{t('which_aspect', language)} {concept} {t('is_emphasized', language)}?"
     ]
     
     options = [
-        "It is explained as a fundamental concept",
-        "It is mentioned as a supporting detail",
-        "It is presented as an advanced topic",
-        "It is described as a practical application"
+        t('explained_as', language),
+        t('mentioned_as', language),
+        t('presented_as', language),
+        t('described_as', language)
     ]
     
     random.shuffle(options)
@@ -369,8 +369,8 @@ def generate_intelligent_tf(number, info, category, difficulty, language='en'):
             'question_text': statement,
             'question_type': 'true_false',
             'correct_answer': 'True' if is_true else 'False',
-            'options': ['True', 'False'],
-            'explanation': f"This statement is {'true' if is_true else 'false'} according to the text.",
+            'options': [t('true', language), t('false', language)],
+            'explanation': f"{t('this_statement_is', language)} {t('true_lower' if is_true else 'false_lower', language)} {t('according_to_text', language)}.",
             'order': number
         }
     
@@ -380,13 +380,13 @@ def generate_intelligent_tf(number, info, category, difficulty, language='en'):
         
         if is_true:
             templates = [
-                f"The text discusses {concept} as an important concept.",
+                f"{t('the_text_discusses', language)} {concept} as an important concept.",
                 f"{concept} is mentioned in the material.",
                 f"The text provides information about {concept}."
             ]
         else:
             templates = [
-                f"The text states that {concept} is irrelevant.",
+                f"{t('the_text_states', language)} {concept} is irrelevant.",
                 f"{concept} is explicitly contradicted in the material.",
                 f"The text dismisses {concept} as unimportant."
             ]
@@ -395,8 +395,8 @@ def generate_intelligent_tf(number, info, category, difficulty, language='en'):
             'question_text': random.choice(templates),
             'question_type': 'true_false',
             'correct_answer': 'True' if is_true else 'False',
-            'options': ['True', 'False'],
-            'explanation': f"This is {'true' if is_true else 'false'} - {concept} is {'indeed discussed' if is_true else 'not dismissed'} in the text.",
+            'options': [t('true', language), t('false', language)],
+            'explanation': f"{t('this_is', language)} {t('true_lower' if is_true else 'false_lower', language)} - {concept} is {'indeed discussed' if is_true else 'not dismissed'} {t('in_the_text', language)}.",
             'order': number
         }
     
@@ -408,7 +408,7 @@ def generate_intelligent_tf(number, info, category, difficulty, language='en'):
             statement = sentence
         else:
             # Negate the sentence
-            statement = "The text states that " + sentence.lower()
+            statement = f"{t('the_text_states', language)} " + sentence.lower()
             statement = statement.replace(" is ", " is not ")
             statement = statement.replace(" are ", " are not ")
             statement = statement.replace(" can ", " cannot ")
@@ -417,15 +417,15 @@ def generate_intelligent_tf(number, info, category, difficulty, language='en'):
             'question_text': statement,
             'question_type': 'true_false',
             'correct_answer': 'True' if is_true else 'False',
-            'options': ['True', 'False'],
-            'explanation': f"This statement is {'accurate' if is_true else 'inaccurate'} based on the text content.",
+            'options': [t('true', language), t('false', language)],
+            'explanation': f"{t('this_statement_is', language)} {t('accurate' if is_true else 'inaccurate', language)} {t('based_on_text', language)}.",
             'order': number
         }
     
     # Fallback
     if info['concepts']:
         concept = random.choice(info['concepts'])
-        statement = f"The text discusses {concept}."
+        statement = f"{t('the_text_discusses', language)} {concept}."
         is_true = True
     else:
         statement = "The text contains information about the topic."
@@ -435,8 +435,8 @@ def generate_intelligent_tf(number, info, category, difficulty, language='en'):
         'question_text': statement,
         'question_type': 'true_false',
         'correct_answer': 'True' if is_true else 'False',
-        'options': ['True', 'False'],
-        'explanation': f"This is {'true' if is_true else 'false'} according to the material.",
+        'options': [t('true', language), t('false', language)],
+        'explanation': f"{t('this_is', language)} {t('true_lower' if is_true else 'false_lower', language)} {t('according_to_material', language)}.",
         'order': number
     }
 
@@ -458,7 +458,7 @@ def generate_intelligent_fib(number, info, category, difficulty, language='en'):
                 'question_type': 'fill_in_blank',
                 'correct_answer': correct,
                 'options': [],
-                'explanation': f"The complete definition is: {definition}",
+                'explanation': f"{t('complete_definition', language)}: {definition}",
                 'order': number
             }
             
@@ -480,12 +480,12 @@ def generate_intelligent_fib(number, info, category, difficulty, language='en'):
                     'question_type': 'fill_in_blank',
                     'correct_answer': clean_answer,
                     'options': [],
-                    'explanation': f"The complete sentence is: {sentence}",
+                    'explanation': f"{t('complete_sentence', language)}: {sentence}",
                     'order': number
                 }
     
     # Ultimate fallback
-    return generate_intelligent_tf(number, info, category, difficulty)
+    return generate_intelligent_tf(number, info, category, difficulty, language)
 
 def generate_intelligent_sa(number, info, category, difficulty, language='en'):
     """Generate intelligent short answer question"""
@@ -493,9 +493,9 @@ def generate_intelligent_sa(number, info, category, difficulty, language='en'):
     if category == 'concept' and info['concepts']:
         concept = random.choice(info['concepts'])
         templates = [
-            f"Briefly explain the concept of {concept}.",
-            f"What is the significance of {concept} in the text?",
-            f"Define {concept} based on the reading."
+            f"{t('briefly_explain', language)} {concept}.",
+            f"{t('what_significance', language)} {concept} {t('in_the_text', language)}?",
+            f"{t('define_based_on', language)} {concept} {t('based_on_reading', language)}."
         ]
         
         return {
@@ -510,16 +510,16 @@ def generate_intelligent_sa(number, info, category, difficulty, language='en'):
     if info['sentences']:
         sentence = random.choice(info['sentences'])
         return {
-            'question_text': "Summarize the main idea of the following sentence: " + sentence,
+            'question_text': f"{t('summarize_main_idea', language)}: " + sentence,
             'question_type': 'short_answer',
-            'correct_answer': "Answers will vary",
+            'correct_answer': t('answers_will_vary', language),
             'options': [],
-            'explanation': f"The sentence states: {sentence}",
+            'explanation': f"{t('the_sentence_states', language)}: {sentence}",
             'order': number
         }
 
     # Ultimate fallback
-    return generate_intelligent_mc(number, info, category, difficulty)
+    return generate_intelligent_mc(number, info, category, difficulty, language)
 
 def real_generate_quiz(text, question_count, question_type, difficulty):
     """
