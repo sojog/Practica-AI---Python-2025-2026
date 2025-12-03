@@ -211,7 +211,7 @@ def intelligent_mock_generate_quiz(text, question_count=10, question_type='mixed
     
     return questions
 
-def generate_intelligent_mc(number, info, category, difficulty):
+def generate_intelligent_mc(number, info, category, difficulty, language='en'):
     """Generate intelligent multiple choice question based on extracted information"""
     
     if category == 'definition' and info['definitions']:
@@ -348,7 +348,7 @@ def generate_intelligent_mc(number, info, category, difficulty):
         'order': number
     }
 
-def generate_intelligent_tf(number, info, category, difficulty):
+def generate_intelligent_tf(number, info, category, difficulty, language='en'):
     """Generate intelligent true/false question based on extracted information"""
     
     is_true = random.choice([True, False])
@@ -440,7 +440,7 @@ def generate_intelligent_tf(number, info, category, difficulty):
         'order': number
     }
 
-def generate_intelligent_fib(number, info, category, difficulty):
+def generate_intelligent_fib(number, info, category, difficulty, language='en'):
     """Generate intelligent fill-in-the-blank question"""
     
     if category == 'definition' and info['definitions']:
@@ -487,7 +487,7 @@ def generate_intelligent_fib(number, info, category, difficulty):
     # Ultimate fallback
     return generate_intelligent_tf(number, info, category, difficulty)
 
-def generate_intelligent_sa(number, info, category, difficulty):
+def generate_intelligent_sa(number, info, category, difficulty, language='en'):
     """Generate intelligent short answer question"""
     
     if category == 'concept' and info['concepts']:

@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notes')
@@ -19,18 +20,18 @@ class Note(models.Model):
 
 class Quiz(models.Model):
     QUESTION_TYPE_CHOICES = [
-        ('multiple_choice', 'Multiple Choice'),
-        ('true_false', 'True/False'),
-        ('fill_in_blank', 'Fill in the Blank'),
-        ('short_answer', 'Short Answer'),
-        ('mixed', 'Mixed'),
+        ('multiple_choice', _('Multiple Choice')),
+        ('true_false', _('True/False')),
+        ('fill_in_blank', _('Fill in the Blank')),
+        ('short_answer', _('Short Answer')),
+        ('mixed', _('Mixed')),
     ]
     
     DIFFICULTY_CHOICES = [
-        ('easy', 'Easy'),
-        ('medium', 'Medium'),
-        ('hard', 'Hard'),
-        ('mixed', 'Mixed'),
+        ('easy', _('Easy')),
+        ('medium', _('Medium')),
+        ('hard', _('Hard')),
+        ('mixed', _('Mixed')),
     ]
     
     note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='quizzes')
@@ -58,10 +59,10 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     QUESTION_TYPE_CHOICES = [
-        ('multiple_choice', 'Multiple Choice'),
-        ('true_false', 'True/False'),
-        ('fill_in_blank', 'Fill in the Blank'),
-        ('short_answer', 'Short Answer'),
+        ('multiple_choice', _('Multiple Choice')),
+        ('true_false', _('True/False')),
+        ('fill_in_blank', _('Fill in the Blank')),
+        ('short_answer', _('Short Answer')),
     ]
     
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')

@@ -7,8 +7,8 @@
 {% block content %}
 <div class="max-w-3xl mx-auto">
     <div class="mb-6">
-        <h2 class="text-3xl font-bold text-gray-900">Generate Quiz</h2>
-        <p class="text-gray-600 mt-2">From note: <span class="font-medium">{{ note.title }}</span></p>
+        <h2 class="text-3xl font-bold text-gray-900">{% trans "Generate Quiz" %}</h2>
+        <p class="text-gray-600 mt-2">{% trans "From note:" %} <span class="font-medium">{{ note.title }}</span></p>
     </div>
 
     <div class="glass p-8 rounded-xl shadow-lg">
@@ -16,7 +16,7 @@
             {% csrf_token %}
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-3">Quiz Mode</label>
+                <label class="block text-sm font-medium text-gray-700 mb-3">{% trans "Quiz Mode" %}</label>
                 <div class="space-y-3">
                     {% for value, label in form.mode.field.choices %}
                     <div class="flex items-start">
@@ -34,24 +34,24 @@
             <div id="custom-options" class="space-y-6 hidden">
                 <div>
                     <label for="{{ form.question_count.id_for_label }}"
-                        class="block text-sm font-medium text-gray-700 mb-1">Number of Questions</label>
+                        class="block text-sm font-medium text-gray-700 mb-1">{% trans "Number of Questions" %}</label>
                     {{ form.question_count }}
-                    <p class="mt-1 text-sm text-gray-500">Choose between 5 and 50 questions</p>
+                    <p class="mt-1 text-sm text-gray-500">{% trans "Choose between 5 and 50 questions" %}</p>
                 </div>
                 <div>
                     <label for="{{ form.question_type.id_for_label }}"
-                        class="block text-sm font-medium text-gray-700 mb-1">Question Type</label>
+                        class="block text-sm font-medium text-gray-700 mb-1">{% trans "Question Type" %}</label>
                     {{ form.question_type }}
                 </div>
                 <div>
                     <label for="{{ form.difficulty.id_for_label }}"
-                        class="block text-sm font-medium text-gray-700 mb-1">Difficulty Level</label>
+                        class="block text-sm font-medium text-gray-700 mb-1">{% trans "Difficulty Level" %}</label>
                     {{ form.difficulty }}
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-3">Feedback Mode</label>
+                <label class="block text-sm font-medium text-gray-700 mb-3">{% trans "Feedback Mode" %}</label>
                 <div class="space-y-3">
                     {% for value, label in form.instant_feedback.field.choices %}
                     <div class="flex items-start">
@@ -73,11 +73,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
-                    Generate Quiz
+                    {% trans "Generate Quiz" %}
                 </button>
                 <a href="{% url 'edit_note_text' note.id %}"
-                    class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium text-center">Back
-                    to Edit</a>
+                    class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium text-center">{%
+                    trans "Back to Edit" %}</a>
             </div>
         </form>
     </div>
