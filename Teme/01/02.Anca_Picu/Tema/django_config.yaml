@@ -1,0 +1,26 @@
+PsychologistSite:
+  pages:
+    - view_name: home_view
+      url_path_name: ""
+      template_name: home
+    - view_name: about_view
+      url_path_name: "despre"
+      template_name: about
+    - view_name: contact_view
+      url_path_name: "contact"
+      template_name: contact
+
+  services:
+    - view_name: services_view
+      url_path_name: "servicii"
+      template_name: services
+
+  testimonials:
+    - view_name: testimonials_view
+      url_path_name: "testimoniale"
+      template_name: testimonials
+
+  blog:
+    - view_name: blog_view
+      url_path_name: "blog"
+      template_name: blog
