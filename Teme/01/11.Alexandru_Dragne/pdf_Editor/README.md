@@ -13,7 +13,6 @@ O aplicație Django care permite editarea textului în fișiere PDF, **păstrân
 ## ❌ Ce NU Face
 
 - Nu poate edita PDF-uri scanate fără layer de text OCR (doar imagini)
-- Nu este un editor PDF complet (nu face split, merge, rotate, etc.)
 - Nu garantează 100% păstrarea layout-ului în cazuri extreme (fonturi foarte speciale, text rotit complex)
 
 ## 📋 Cerințe
