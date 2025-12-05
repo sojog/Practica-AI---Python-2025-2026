@@ -1,0 +1,1 @@
+{"model":"gemma3:270m","created_at":"2025-12-05T18:26:36.316109Z","message":{"role":"assistant","content":""},"done":true,"done_reason":"load"}

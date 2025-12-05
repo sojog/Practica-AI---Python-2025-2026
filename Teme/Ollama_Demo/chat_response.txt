@@ -1,0 +1,513 @@
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.083689Z","response":"Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.094269Z","response":" este","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.100774Z","response":" un","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.10752Z","response":" **","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.114753Z","response":"framework","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.122231Z","response":" web","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.129259Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.135919Z","response":" programación","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.143161Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.151161Z","response":" din","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.160446Z","response":" Python","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.166363Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.174175Z","response":" Este","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.181923Z","response":" framework","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.189318Z","response":" ofer","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.197375Z","response":"ă","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.205183Z","response":" un","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.213716Z","response":" set","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.224202Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.232465Z","response":" **","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.241726Z","response":"mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.251304Z","response":"ul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.261154Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.27094Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.281035Z","response":" (","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.292229Z","response":"modules","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.30338Z","response":")","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.309281Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.31696Z","response":" sunt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.323683Z","response":" conce","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.330845Z","response":"pute","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.337275Z","response":" pentru","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.343674Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.349732Z","response":" facilita","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.355531Z","response":" dezvolt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.361925Z","response":"area","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.367627Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.372824Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.377878Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.383106Z","response":" web","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.388739Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.394126Z","response":" Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.39929Z","response":" utilize","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.405778Z","response":"ază","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.410638Z","response":" **","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.415803Z","response":"Python","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.420912Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.425931Z","response":" pentru","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.431108Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.436504Z","response":" reprez","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.441526Z","response":"enta","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.446695Z","response":" și","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.452371Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.458106Z","response":" gestion","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.463938Z","response":"a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.469444Z","response":" modul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.474598Z","response":"urile","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.479859Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.485025Z","response":"\n\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.490658Z","response":"I","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.496744Z","response":"ată","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.501171Z","response":" o","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.506238Z","response":" explica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.511304Z","response":"ție","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.51639Z","response":" det","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.521502Z","response":"ali","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.526493Z","response":"ată","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.531478Z","response":":","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.536866Z","response":"\n\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.542089Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.547256Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.552412Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.557777Z","response":"Concept","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.56285Z","response":"ul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.568042Z","response":" principal","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.57306Z","response":":**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.578342Z","response":" Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.583508Z","response":" are","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.588636Z","response":" un","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.593849Z","response":" concept","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.598984Z","response":" central","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.604086Z","response":" al","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.609247Z","response":" framework","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.614405Z","response":"-","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.619894Z","response":"ului","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.627096Z","response":" Python","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.631067Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.636221Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.641287Z","response":" este","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.646456Z","response":" cel","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.651708Z","response":" mai","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.656952Z","response":" bun","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.662007Z","response":" mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.667785Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.672638Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.677643Z","response":" reprez","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.682752Z","response":"enta","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.687954Z","response":" și","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.693378Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.69908Z","response":" gestion","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.704259Z","response":"a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.70957Z","response":" modul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.714899Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.720252Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.725358Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.730578Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.735757Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.740888Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.745934Z","response":"Mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.751214Z","response":"ul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.757677Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.762878Z","response":":**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.768425Z","response":" Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.773559Z","response":" include","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.779013Z","response":" un","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.784117Z","response":" set","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.789378Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.794714Z","response":" mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.801153Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.806192Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.811402Z","response":" fiecare","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.81667Z","response":" cu","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.821915Z","response":" o","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.827014Z","response":" func","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.832031Z","response":"ție","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.83705Z","response":" specific","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.842559Z","response":"ă","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.847632Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.852837Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.857856Z","response":" sunt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.86323Z","response":" conce","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.868377Z","response":"pute","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.873484Z","response":" pentru","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.878674Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.884246Z","response":" ajuta","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.889633Z","response":" la","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.895343Z","response":" dezvolt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.900897Z","response":"area","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.906106Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.911193Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.916331Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.921614Z","response":" web","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.927964Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.932449Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.937495Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.942605Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.947796Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.952929Z","response":"Tip","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.958047Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.963168Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.968276Z","response":" Mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.973307Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.978326Z","response":":**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.983432Z","response":" Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.988433Z","response":" include","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.993583Z","response":" diverse","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:38.99917Z","response":" tip","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.004161Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.009412Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.016064Z","response":" mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.021797Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.026799Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.032238Z","response":" cum","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.037321Z","response":" ar","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.042319Z","response":" fi","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.047434Z","response":":","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.052598Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.057771Z","response":"    ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.063045Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.068358Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.073752Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.079208Z","response":"Mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.084956Z","response":"ul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.090612Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.095923Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.10131Z","response":" Apl","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.106665Z","response":"ica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.112397Z","response":"ție","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.11814Z","response":":**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.124054Z","response":" Sunt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.130848Z","response":" mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.1372Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.143015Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.148974Z","response":" sunt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.155826Z","response":" spec","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.162243Z","response":"ifice","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.169042Z","response":" pentru","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.175674Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.182545Z","response":" crea","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.188425Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.194415Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.200115Z","response":" web","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.205659Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.211389Z","response":" cum","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.216722Z","response":" ar","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.223054Z","response":" fi","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.228934Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.235606Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.242301Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.24879Z","response":" e","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.255008Z","response":"-","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.260842Z","response":"commerce","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.266965Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.273664Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.280151Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.286217Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.291776Z","response":" e","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.297144Z","response":"-","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.302361Z","response":"mail","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.307784Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.313872Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.319804Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.325314Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.33051Z","response":" calendar","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.335653Z","response":"izare","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.34221Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.347668Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.353484Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.359553Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.365846Z","response":" gestion","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.37259Z","response":"are","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.379692Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.387434Z","response":" date","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.395295Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.403046Z","response":" etc","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.41201Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.422867Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.434058Z","response":"    ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.445514Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.456475Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.467061Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.476503Z","response":"Mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.484952Z","response":"ul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.49306Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.500243Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.50771Z","response":" Integra","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.514333Z","response":"re","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.520546Z","response":":**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.52731Z","response":" Sunt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.532208Z","response":" mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.537515Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.543191Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.548321Z","response":" sunt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.553505Z","response":" spec","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.558779Z","response":"ifice","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.56401Z","response":" pentru","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.56921Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.57454Z","response":" integra","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.580408Z","response":" diferite","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.585873Z","response":" componente","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.591715Z","response":" (","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.598032Z","response":"mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.604358Z","response":"ul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.611335Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.620843Z","response":")","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.626633Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.633166Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.639792Z","response":"ție","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.647507Z","response":" în","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.654903Z","response":" o","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.661827Z","response":" sing","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.668001Z","response":"ură","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.673788Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.680064Z","response":"ție","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.685755Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.691757Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.69796Z","response":"    ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.704361Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.710107Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.715718Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.722324Z","response":"Mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.728873Z","response":"ul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.734801Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.740376Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.746338Z","response":" Gener","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.751549Z","response":"are","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.756933Z","response":":**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.762307Z","response":" Sunt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.767493Z","response":" mod","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.77262Z","response":"uri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.778077Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.784202Z","response":" sunt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.790036Z","response":" spec","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.795398Z","response":"ifice","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.800524Z","response":" pentru","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.805737Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.81115Z","response":" genera","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.816303Z","response":" date","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.821865Z","response":" (","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.827218Z","response":"ex","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.83248Z","response":":","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.837606Z","response":"  ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.842828Z","response":"generate","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.847997Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.853459Z","response":" list","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.859264Z","response":" of","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.864362Z","response":" products","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.869331Z","response":").","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.874648Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.880824Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.886919Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.892435Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.899629Z","response":"Func","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.903965Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.909093Z","response":":**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.914455Z","response":" Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.919717Z","response":" ofer","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.924867Z","response":"ă","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.930219Z","response":" func","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.935515Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.94072Z","response":" foarte","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.945817Z","response":" putern","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.950934Z","response":"ice","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.956928Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.962725Z","response":" permit","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.969028Z","response":" utiliz","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.975147Z","response":"ator","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.981787Z","response":"ilor","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.987792Z","response":" să","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.99342Z","response":" fol","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:39.998946Z","response":"ose","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.004295Z","response":"ască","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.009613Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.015354Z","response":"ția","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.020585Z","response":" fără","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.026185Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.031428Z","response":" fi","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.036599Z","response":" nevoie","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.042064Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.047928Z","response":" o","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.053301Z","response":" teh","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.059023Z","response":"nic","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.065334Z","response":"ă","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.071429Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.078037Z","response":" program","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.085099Z","response":"are","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.092103Z","response":" manual","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.098329Z","response":"ă","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.104506Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.110345Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.116013Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.121592Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.126983Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.132066Z","response":"Func","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.137391Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.142696Z","response":" (","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.148038Z","response":"Functions","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.153597Z","response":"):","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.158669Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.16411Z","response":"  ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.170105Z","response":"Perm","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.175226Z","response":"ite","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.180369Z","response":" utiliz","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.185796Z","response":"ator","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.191033Z","response":"ilor","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.196264Z","response":" să","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.201572Z","response":" fol","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.206936Z","response":"ose","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.212125Z","response":"ască","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.217102Z","response":" func","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.222425Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.227867Z","response":" pentru","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.233732Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.240217Z","response":" manip","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.246624Z","response":"ula","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.253098Z","response":" și","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.259442Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.265065Z","response":" inter","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.270458Z","response":"ac","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.275554Z","response":"ț","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.280648Z","response":"iona","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.286318Z","response":" cu","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.291449Z","response":" modul","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.296749Z","response":"urile","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.302055Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.307216Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.312413Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.317391Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.322992Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.327951Z","response":"API","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.333057Z","response":" (","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.338182Z","response":"Application","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.343578Z","response":" Programming","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.348884Z","response":" Interface","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.354577Z","response":"):","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.359665Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.364871Z","response":" Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.369902Z","response":" ofer","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.374914Z","response":"ă","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.380281Z","response":" o","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.386653Z","response":" API","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.391239Z","response":" putern","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.39687Z","response":"ică","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.402656Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.4077Z","response":" permite","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.412863Z","response":" utiliz","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.418783Z","response":"ator","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.424229Z","response":"ilor","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.429226Z","response":" să","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.434767Z","response":" inter","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.44014Z","response":"ac","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.44532Z","response":"ț","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.450383Z","response":"ione","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.455602Z","response":"ze","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.461939Z","response":" cu","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.467169Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.472348Z","response":"ția","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.477348Z","response":" lor","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.48243Z","response":" fără","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.487549Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.492941Z","response":" fi","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.498003Z","response":" nevoie","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.503321Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.508657Z","response":" ajutor","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.513866Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.518868Z","response":" program","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.523977Z","response":"are","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.529003Z","response":" manual","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.535688Z","response":"ă","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.540276Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.545395Z","response":"\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.55074Z","response":"*","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.555881Z","response":"   ","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.561189Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.566171Z","response":"Util","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.571451Z","response":"izare","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.576515Z","response":":**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.581751Z","response":" Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.586932Z","response":" este","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.591962Z","response":" folosit","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.597769Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.603485Z","response":" utiliz","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.608703Z","response":"atori","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.614002Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.620902Z","response":" toate","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.624347Z","response":" nivel","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.629649Z","response":"urile","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.635155Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.640268Z","response":" program","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.645433Z","response":"are","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.650635Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.656045Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.661942Z","response":" la","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.667076Z","response":" dezvolt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.672205Z","response":"atori","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.677338Z","response":" junior","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.682371Z","response":" până","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.68744Z","response":" la","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.692471Z","response":" profes","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.698275Z","response":"ioni","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.704098Z","response":"ști","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.709457Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.715443Z","response":" program","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.721201Z","response":"are","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.727311Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.73332Z","response":"\n\n","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.739126Z","response":"**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.74458Z","response":"În","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.750116Z","response":" concl","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.756295Z","response":"uzie","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.762525Z","response":",","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.768621Z","response":" Django","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.774906Z","response":" este","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.781103Z","response":" un","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.787679Z","response":" framework","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.794891Z","response":" web","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.802109Z","response":" putern","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.808195Z","response":"ic","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.81443Z","response":" și","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.820623Z","response":" flex","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.826088Z","response":"ibil","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.832482Z","response":" care","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.837845Z","response":" permite","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.843893Z","response":" dezvolt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.84922Z","response":"area","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.854813Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.860263Z","response":" aplica","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.86776Z","response":"ții","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.874316Z","response":" web","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.881085Z","response":" fără","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.88776Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.893651Z","response":" fi","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.901097Z","response":" nevoie","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.908361Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.916624Z","response":" un","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.924906Z","response":" program","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.934736Z","response":"ator","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.944353Z","response":" manual","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.953603Z","response":".","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.963416Z","response":" Este","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.973881Z","response":" conce","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.983622Z","response":"put","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:40.992871Z","response":" pentru","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.003414Z","response":" a","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.01406Z","response":" of","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.023758Z","response":"eri","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.033421Z","response":" o","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.041626Z","response":" exper","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.049738Z","response":"ien","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.057076Z","response":"ță","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.064503Z","response":" de","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.07165Z","response":" dezvolt","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.078685Z","response":"are","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.085269Z","response":" mai","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.09095Z","response":" bună","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.096653Z","response":" și","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.101828Z","response":" mai","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.107126Z","response":" uș","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.112268Z","response":"o","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.117816Z","response":"art","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.122949Z","response":"ată","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.128085Z","response":".**","done":false}
+{"model":"gemma3:270m","created_at":"2025-12-05T18:20:41.133463Z","response":"","done":true,"done_reason":"stop","context":[105,2364,107,20647,1614,236772,1327,528,2284,3604,139483,2534,4462,50282,528,17856,106,107,105,4368,107,97809,4462,723,5213,6617,4108,569,101622,1018,7038,17856,236761,18924,10318,87635,237106,723,1076,569,5213,1901,575,7149,1018,568,17338,236768,2065,24167,15692,96686,16208,496,156541,144584,7376,569,68940,39909,4108,236761,50282,25584,43019,5213,32651,1018,16208,496,63297,8769,10638,496,38933,236746,91338,53183,236761,107,107,236777,28640,512,66402,40384,1290,3555,28640,236787,107,107,236829,138,5213,32258,575,7647,53121,50282,659,723,3495,6082,610,10318,236772,14834,17856,236764,2065,4462,11257,9122,17213,1120,569,496,63297,8769,10638,496,38933,236746,91338,7149,236761,107,236829,138,5213,2656,575,7149,53121,50282,3204,723,1076,569,1120,7149,236764,125081,2757,512,6051,40384,3530,237106,236764,2065,24167,15692,96686,16208,496,209152,759,144584,7376,569,68940,39909,4108,236761,107,236829,138,5213,40855,7149,569,4053,7149,53121,50282,3204,12801,6508,7149,569,1120,7149,236764,11429,863,7999,236787,107,138,138,236829,138,5213,2656,575,7149,569,137601,1614,40384,53121,143298,1120,7149,2065,24167,1368,45655,16208,496,73720,68940,39909,4108,236764,11429,863,7999,68940,39909,569,545,236772,25351,236764,68940,39909,569,545,236772,2618,236764,68940,39909,569,14626,132642,236764,68940,39909,569,38933,733,569,3433,236764,4044,236761,107,138,138,236829,138,5213,2656,575,7149,569,222569,500,53121,143298,1120,7149,2065,24167,1368,45655,16208,496,92337,193929,85598,568,1901,575,7149,236768,569,68940,40384,7840,512,2418,92138,68940,40384,236761,107,138,138,236829,138,5213,2656,575,7149,569,4300,733,53121,143298,1120,7149,2065,24167,1368,45655,16208,496,52514,3433,568,716,236787,138,19057,496,1694,529,3211,769,107,236829,138,5213,19332,39909,53121,50282,87635,237106,6051,39909,62162,214954,762,2065,9841,14199,1277,18113,13338,6536,888,105896,68940,50631,132666,496,7999,165233,569,512,45524,10023,237106,569,1948,733,12040,237106,236761,107,236829,138,5213,19332,39909,568,44962,1473,1018,138,18463,785,14199,1277,18113,13338,6536,888,105896,6051,39909,16208,496,15108,2903,10638,496,939,552,237698,27538,2757,91338,53183,236761,107,236829,138,5213,10252,568,6776,51062,40309,1473,1018,50282,87635,237106,512,9299,214954,57136,2065,26230,14199,1277,18113,13338,939,552,237698,3010,1934,2757,68940,50631,56458,132666,496,7999,165233,569,186454,569,1948,733,12040,237106,236761,107,236829,138,5213,20337,132642,53121,50282,4462,212950,569,14199,26053,569,82101,23189,53183,569,1948,733,236764,569,759,144584,26053,21640,83162,759,15392,7891,53864,569,1948,733,236761,107,107,1018,74862,40538,229879,236764,50282,4462,723,10318,4108,214954,525,10638,5138,14655,2065,26230,144584,7376,569,68940,39909,4108,132666,496,7999,165233,569,723,1948,1277,12040,236761,18924,15692,1000,16208,496,529,12145,512,1497,1843,43403,569,144584,733,9122,214428,10638,9122,162793,236748,661,28640,99382],"total_duration":3168447209,"load_duration":97680959,"prompt_eval_count":22,"prompt_eval_duration":17279333,"eval_count":513,"eval_duration":2876579642}
