@@ -1,0 +1,23 @@
+as vrea sa creez o a doua aplcatie de tip .exe, sa se numeasca PPTXGen care sa genereze .pptx cu ajutorul unui AI. Aplicatia se deschide si utilizatorul trebuie sa aiba o caseta de text unde sa introduca ceea ce vrea sa fie in pptx, numarul de slide uri si ce model gratuit de AI sa foloseasca.
+### Intrebari de clarificare (te rog raspunde sub fiecare):
+
+1. **AI & Modele:** Ce modele AI gratuite preferi? (ex: Google Gemini API Free Tier, HuggingFace, sau modele locale via Ollama?). Cum gestionam API Keys (le introduce utilizatorul)?
+R:Gemini, vom folosii:
+from google import genai
+
+client = genai.Client()
+
+response = client.models.generate_content(
+    model="gemini-3-pro-preview",
+    contents="Explain how AI works in a few words",
+)
+
+print(response.text), unde modelul va fi ales de user dintr o lista de modele, iar contentul va fi introdus de user din caseta de text din aplicatie. Raspunsul va fi introdus in aplicatie si in impartit in slide uri astfel incat sa nu depaseasca layoutul standard pe care il foloseste Power Point.
+2. **Conflict cu planul anterior:** Acest flow AI inlocuieste complet 'Wizard-ul' manual din flow.txt si prompts.txt, sau este o aplicatie separata/mod suplimentar?
+R: Este o aplicatie separata numita PPTXGen.
+3. **Continut Generat:** AI-ul va genera doar textul (titluri, bullets) sau trebuie sa incerce sa sugereze si imagini/layout-uri specifice?
+r:Deocamdata va genera doar text.
+4. **Formatare:** Cum ar trebui sa arate slide-urile generate? Folosim un template standard alb-negru sau vrei sa implementam teme colorate?
+Pentru inceput vom folosi un template standard alb-negru.
+5. **Output:** Utilizatorul poate edita rezultatul in aplicatie inainte de salvare, sau se genereaza direct fisierul .pptx?
+R:Generam o interfata de preview unde userul poate vedea slideurile generate si poate edita textul si moofica nr  de slideuri.

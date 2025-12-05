@@ -1,0 +1,25 @@
+Vreau sa creez o aplicatie care poate creea si modifica automat fisiere pptx.
+As vrea sa mi pui intrebari astfel incat sa iasa cat mai bine si cat mai complexa.
+Ca limbaj as vrea sa folosesc python si library-ul pptx.
+
+### Intrebari de clarificare (te rog raspunde sub fiecare):
+
+1. **Sursa datelor:** De unde vin informatiile? (Excel, JSON, baza de date, sau generate de un AI?)
+   Raspuns: informatiile vin de la un desktop GUI unde userul este intrebat ce titlu vrea sa puna la prezenatare
+   ce design sa foloseasca si ce continut vrea sa adauge la prezenatare(daca vrea poze, tabele, diagrame si alte elemnete).
+
+2. **Tipul aplicatiei:** Vrei un script CLI, un API web (ex: FastAPI/Flask), sau o interfata grafica desktop?
+   Raspuns: dektop GUI cu tkinter sau alte librarii pentru generare de interfete compatibil cu macOS si Win32
+
+3. **Mod de lucru:** Vom folosi un template `.pptx` existent in care inlocuim variabile (placeholders), sau construim slide-urile de la zero programatic?
+   Raspuns: Utilizatorul va fi intrebat daca vrea sa modifice un template existent sau daca vrea sa creeze un template de la zero.
+
+4. **Continut:** Ce elemente trebuie sa includa? (Imagini, Tabele, Grafice/Charts, Forme)?
+   Raspuns: Utilizatorul va fi intrebat daca vrea sa adauge imagini, tabele, grafice, forme si alte elemente.
+
+5. **Complexitate:** Cand spui "complexa", te referi la integrarea cu AI pentru generarea textului/structurii, sau la capabilitati avansate de formatare si layout?
+   Raspuns: Nu va include AI, ci ma refeream la faptul ca utilizatorul va putea sa aleaga ce paleta de culori vrea sa foloseasca, ce aranjare in pagina, ce font uri, ce marimi,
+   ce tipuri de forme vrea sa foloseasca, ce tipuri de grafice vrea sa foloseasca, ce tipuri de imagini vrea sa foloseasca, ce tipuri de tabele vrea sa foloseasca.
+
+6. **Scop:** Care este scenariul principal de utilizare? (ex: generare rapoarte financiare, crearea de cursuri, prezentari de vanzari?)
+   Raspuns: Creare de cursuri sau prezentari
