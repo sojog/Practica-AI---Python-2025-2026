@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Guests for {{ event.bride_name }} & {{ event.groom_name }}</h2>
+    <div>
+        <a href="{% url 'guest_add' event.id %}" class="btn btn-primary">Add Guest</a>
+        <a href="{% url 'generate_invitation' event.id %}" class="btn btn-success ms-2">Next: Generate Invitation</a>
+    </div>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'event_list' %}">Events</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Manage Guests</li>
+    </ol>
+</nav>
+
+{% if guests %}
+<div class="list-group">
+    {% for guest in guests %}
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            <h5 class="mb-1">{{ guest.name }}</h5>
+            {% if guest.email %}<small class="text-muted">{{ guest.email }}</small>{% endif %}
+            {% if guest.phone %}<small class="text-muted"> | {{ guest.phone }}</small>{% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-warning">
+    No guests added yet.
+</div>
+{% endif %}
+{% endblock %}
