@@ -195,6 +195,61 @@
       </div>
     </footer>
 
+    <!-- AI Assistant -->
+    <button class="ai-fab" id="ai-fab" aria-label="Open AI Assistant">
+      <span class="ai-icon">🤖</span>
+    </button>
+
+    <div class="ai-modal" id="ai-modal">
+      <div class="ai-modal-overlay" id="ai-modal-overlay"></div>
+      <div class="ai-modal-content">
+        <div class="ai-header">
+          <div class="ai-header-title">
+            <span class="ai-avatar">🤖</span>
+            <div>
+              <h3>Glorious AI Assistant</h3>
+              <p class="ai-status">Online</p>
+            </div>
+          </div>
+          <button class="ai-close" id="ai-close" aria-label="Close">
+            &times;
+          </button>
+        </div>
+
+        <div class="ai-chat-container" id="ai-chat-container">
+          <div class="ai-message ai-message-bot">
+            <div class="ai-message-avatar">🤖</div>
+            <div class="ai-message-content">
+              <p>
+                Bună! Sunt asistentul tău personal de la Glorious Shoemaker. 👞
+              </p>
+              <p>
+                Te pot ajuta să găsești serviciul perfect pentru pantofii tăi.
+                Ce tip de serviciu cauți?
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-input-container">
+          <input
+            type="text"
+            id="ai-input"
+            class="ai-input"
+            placeholder="Scrie mesajul tău aici..."
+            autocomplete="off"
+          />
+          <button
+            class="ai-send-btn"
+            id="ai-send-btn"
+            aria-label="Send message"
+          >
+            <span>➤</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="main.js"></script>
   </body>
 </html>
