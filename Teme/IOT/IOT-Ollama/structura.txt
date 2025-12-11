@@ -1,0 +1,86 @@
+•	Modulul 1: Scurtă introducere în IoT
+o	Prezentare generală a conceptelor și terminologiei IoT
+o	Evoluția istorică și starea actuală a tehnologiei IoT
+o	Aplicații ale IoT în diverse industrii
+o	Ecosistemul IoT și părțile interesate
+o	Considerații și provocări privind proiectarea IoT
+
+•	Modulul 2: Modele de afaceri pentru IoT
+o	Analiza pieței și identificarea oportunităților pentru produsele/serviciile IoT
+o	Fluxuri de venituri și strategii de stabilire a prețurilor pentru soluțiile IoT
+o	Modele de afaceri IoT și proiectarea propunerilor de valoare
+o	Strategii de adoptare și difuzare a IoT
+
+•	Modulul 3: Arhitecturi, Smart Things și Edge Computing
+o	Arhitecturi și componente IoT (dispozitive, gateway-uri, platforme cloud etc.)
+o	Edge computing și rolul său în IoT
+o	Smart Things și integrarea lor în sistemele IoT
+o	Protocoale de comunicare IoT și arhitecturi de rețea
+o	Gestionarea și stocarea datelor IoT
+
+•	Modulul 4: Gateways, sisteme de mesagerie și servere IoT
+o	Porți IoT și funcțiile acestora
+o	Sisteme de mesagerie IoT (de exemplu, MQTT, CoAP etc.)
+o	Arhitecturi de servere IoT și componentele acestora
+o	Achiziționarea și prelucrarea datelor IoT
+o	Proiectarea și dezvoltarea API-urilor IoT
+
+•	Modulul 5: Rolul Big Data și al analizei în IoT
+o	Prezentare generală a Big Data și a rolului său în IoT
+o	Colectarea și prelucrarea datelor IoT
+o	Analiză și vizualizare a datelor IoT
+o	Întreținerea predictivă și detectarea anomaliilor în IoT
+o	Învățarea automată pentru aplicațiile IoT
+
+•	Modulul 6: Rolul cloud computing-ului în IoT
+o	Prezentare generală a cloud computing-ului și a rolului său în IoT
+o	Modele de implementare în cloud și modele de servicii pentru IoT
+o	Stocarea și gestionarea datelor IoT în cloud
+o	Securitatea și confidențialitatea în cloud în IoT
+o	Integrarea și interoperabilitatea în cloud IoT
+•	Modulul 7: Interoperabilitate și protocoale IoT
+o	Provocări și standarde de interoperabilitate în IoT
+o	Protocoale IoT (de exemplu, HTTP, WebSockets etc.)
+o	Testarea și validarea interoperabilității IoT
+o	Interoperabilitatea gateway-urilor IoT
+o	Standardele și certificarea IoT
+
+•	Modulul 8: Backend (Microservicii, învățare automată)
+o	Arhitecturi backend pentru soluții IoT
+o	Microservicii și rolul lor în IoT
+o	Gestionarea și orchestrarea fluxurilor de lucru IoT
+o	Algoritmi de învățare automată și aplicațiile lor în IoT
+o	Dezvoltarea și testarea backend-ului IoT
+
+•	Modulul 9: Securitate, puncte de atac
+o	Prezentare generală a amenințărilor și provocărilor de securitate IoT
+o	Arhitecturi și mecanisme de securitate IoT
+o	Autentificarea și controlul accesului în IoT
+o	Criptarea și gestionarea cheilor IoT
+o	Testarea și auditarea securității IoT
+
+•	Modulul 10: Platforme cloud
+o	Prezentare generală a platformelor cloud pentru IoT
+o	Criterii de selecție a platformelor cloud
+o	Dezvoltarea și implementarea platformei cloud pentru IoT
+o	Gestionarea și monitorizarea platformei cloud IoT
+o	Securitatea și confidențialitatea platformei cloud în IoT
+
+•	Modulul 11: Evitarea blocării furnizorului
+o	Prezentare generală a blocării furnizorului în IoT
+o	Strategii de prevenire a blocării furnizorului (vendor lock-in)
+o	Standarde deschise și interoperabilitate în IoT
+o	Criterii de selecție și evaluare a furnizorilor
+o	Negocierea și gestionarea contractelor
+
+•	Modulul 12: Învățare automată
+o	Prezentare generală a învățării automate și a aplicațiilor sale în IoT
+o	Algoritmi de învățare automată pentru analiza datelor IoT
+o	Preprocesarea datelor IoT și extragerea caracteristicilor pentru învățarea automată
+o	Modele de învățare automată IoT și implementare
+o	Evaluarea și optimizarea învățării automate în IoT
+
+•	Modulul 13: Studii de caz IoT și previziuni pentru viitor
+o	Povești de succes și studii de caz IoT
+o	Tendințe IoT și previziuni pentru viitor
+o	Tehnologii IoT emergente

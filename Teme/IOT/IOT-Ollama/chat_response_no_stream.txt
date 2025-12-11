@@ -1,0 +1,11 @@
+1. Ubicuu: Fără interfata sau interfata implicita
+2. Smart: Inteligent, autonom, capabil să învețe și să adapteze comportamentul.
+3. Agile: Flexibil, rapid în adaptarea la schimbări și implementarea actualizărilor.
+4. On demand: Disponibil pe cerere, oferind servicii sau resurse când sunt necesare.
+5. Blend into background: Integrat în mediul de viață cotidian fără a distra.
+6. Secure: Sigur, protejând datele și funcțiile esențiale împotriva amenințărilor digitale.
+7. Low maintenance: Ușor de întreținut sau cu necesitate minimă de serviciu și actualizare.
+8. Fast: Rapid în procesarea informației și în executarea acțiunilor solicitate.
+9. Upgradable: Posibilitatea de actualizare a software-ului și hardware-ului pentru îmbunătățirea performanței.
+10. Growing: Capacitate de dezvoltare continuă, încreștere a funcțiilor și abilităților.
+11. Adaptable: Capabil să se ajusteze la noi condiții sau tipuri de utilizare.
