@@ -1,0 +1,128 @@
+{
+  "creier|": {
+    "_ts": 1765557568.2857597,
+    "data": {
+      "colors": [
+        "#F0E68C",
+        "#B5C76A",
+        "#A3D4B0",
+        "#8BC9D8"
+      ],
+      "caption": "A fresh and vibrant palette inspired by the concept of 'creier', evoking feelings of growth and creativity.",
+      "raw": "{\n  \"colors\": [\"#F0E68C\", \"#B5C76A\", \"#A3D4B0\", \"#8BC9D8\"],\n  \"caption\": \"A fresh and vibrant palette inspired by the concept of 'creier', evoking feelings of growth and creativity.\"\n}",
+      "source": "openai"
+    }
+  },
+  "night|": {
+    "_ts": 1765557607.2712364,
+    "data": {
+      "colors": [
+        "#1A1A2E",
+        "#16213E",
+        "#0F3460",
+        "#E94560"
+      ],
+      "caption": "A serene night palette evoking calmness and depth.",
+      "raw": "{\n  \"colors\": [\"#1A1A2E\", \"#16213E\", \"#0F3460\", \"#E94560\"],\n  \"caption\": \"A serene night palette evoking calmness and depth.\"\n}",
+      "source": "openai"
+    }
+  },
+  "sare|": {
+    "_ts": 1765557945.896246,
+    "data": {
+      "colors": [
+        "#F8E1D4",
+        "#C2B2B7",
+        "#A76D8A",
+        "#6F4C7A"
+      ],
+      "caption": "A soft and elegant color palette inspired by saree fabrics.",
+      "raw": "{\n  \"colors\": [\"#F8E1D4\", \"#C2B2B7\", \"#A76D8A\", \"#6F4C7A\"],\n  \"caption\": \"A soft and elegant color palette inspired by saree fabrics.\"\n}",
+      "source": "openai"
+    }
+  },
+  "12|": {
+    "_ts": 1765558252.428881,
+    "data": {
+      "colors": [
+        "#FF5733",
+        "#33FF57",
+        "#3357FF",
+        "#F1C40F"
+      ],
+      "caption": "A vibrant and energetic color palette for a dynamic UI design.",
+      "raw": "{\n  \"colors\": [\"#FF5733\", \"#33FF57\", \"#3357FF\", \"#F1C40F\"],\n  \"caption\": \"A vibrant and energetic color palette for a dynamic UI design.\"\n}",
+      "source": "openai"
+    }
+  },
+  "alex|": {
+    "_ts": 1765558351.454276,
+    "data": {
+      "colors": [
+        "#3A8EBA",
+        "#F2A900",
+        "#E94E77",
+        "#4B9B6E"
+      ],
+      "caption": "A vibrant and modern color palette for a user interface.",
+      "raw": "{\n  \"colors\": [\"#3A8EBA\", \"#F2A900\", \"#E94E77\", \"#4B9B6E\"],\n  \"caption\": \"A vibrant and modern color palette for a user interface.\"\n}",
+      "source": "openai"
+    }
+  },
+  "rudeus|": {
+    "_ts": 1765627151.6740675,
+    "data": {
+      "colors": [
+        "#4B8B3B",
+        "#F2C94C",
+        "#E76E1A",
+        "#3E3E3E"
+      ],
+      "caption": "Rudeus Inspired Color Palette",
+      "raw": "{\n  \"colors\": [\"#4B8B3B\", \"#F2C94C\", \"#E76E1A\", \"#3E3E3E\"],\n  \"caption\": \"Rudeus Inspired Color Palette\"\n}",
+      "source": "openai"
+    }
+  },
+  "adam|": {
+    "_ts": 1765627186.6382787,
+    "data": {
+      "colors": [
+        "#FF6F61",
+        "#6B5B93",
+        "#88B04B",
+        "#F7CAC9"
+      ],
+      "caption": "A vibrant and modern color palette inspired by the name Adam.",
+      "raw": "{\n  \"colors\": [\"#FF6F61\", \"#6B5B93\", \"#88B04B\", \"#F7CAC9\"],\n  \"caption\": \"A vibrant and modern color palette inspired by the name Adam.\"\n}",
+      "source": "openai"
+    }
+  },
+  "siti|": {
+    "_ts": 1765627623.651503,
+    "data": {
+      "colors": [
+        "#4A90E2",
+        "#D5DBDB",
+        "#F39C12",
+        "#2ECC71"
+      ],
+      "caption": "A modern and vibrant color palette for a sleek UI design.",
+      "raw": "{\n  \"colors\": [\"#4A90E2\", \"#D5DBDB\", \"#F39C12\", \"#2ECC71\"],\n  \"caption\": \"A modern and vibrant color palette for a sleek UI design.\"\n}",
+      "source": "openai"
+    }
+  },
+  "mess|": {
+    "_ts": 1765627651.6643283,
+    "data": {
+      "colors": [
+        "#8B0000",
+        "#FFA500",
+        "#FFD700",
+        "#A52A2A"
+      ],
+      "caption": "A chaotic blend of deep reds and vibrant yellows representing a messy aesthetic.",
+      "raw": "{\n  \"colors\": [\"#8B0000\", \"#FFA500\", \"#FFD700\", \"#A52A2A\"],\n  \"caption\": \"A chaotic blend of deep reds and vibrant yellows representing a messy aesthetic.\"\n}",
+      "source": "openai"
+    }
+  }
+}

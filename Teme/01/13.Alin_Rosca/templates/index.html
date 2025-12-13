@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block icon %}
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='icons/index.png') }}">
+{% endblock %}
+
+{% block content %}
+<h2>Lecții</h2>
+
+<div class="lesson-list">
+  {% for slug, title in lessons %}
+    <a class="lesson-item aurora-button" href="{{ url_for('lesson', slug=slug) }}">
+      <strong>{{ title }}</strong>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}
