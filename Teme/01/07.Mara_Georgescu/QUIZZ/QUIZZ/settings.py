@@ -145,3 +145,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
+
+# AI Configuration
+GEMINI_API_KEY = 'AIzaSyCGH_tnsiX1Zt2Q4o9ddXx01SEW0EJnw5E'
+OLLAMA_MODEL = 'llama3' # Default model

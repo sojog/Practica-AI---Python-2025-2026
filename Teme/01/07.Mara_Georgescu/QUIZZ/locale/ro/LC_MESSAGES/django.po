@@ -206,6 +206,24 @@ msgstr "Răspuns scurt"
 msgid "Mixed"
 msgstr "Mixt"
 
+msgid "Standard (10 questions, mixed type, medium difficulty)"
+msgstr "Standard (10 întrebări, tip mixt, dificultate medie)"
+
+msgid "Custom (choose your own settings)"
+msgstr "Personalizat (alege propriile setări)"
+
+msgid "Instant Feedback (see correct answer after each question)"
+msgstr "Feedback instant (vezi răspunsul corect după fiecare întrebare)"
+
+msgid "Final Feedback (see results at the end)"
+msgstr "Feedback final (vezi rezultatele la sfârșit)"
+
+msgid "Enter a title for your note..."
+msgstr "Introdu un titlu pentru notiță..."
+
+msgid "Extracted text will appear here..."
+msgstr "Textul extras va apărea aici..."
+
 msgid "Easy"
 msgstr "Ușor"
 
