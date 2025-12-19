@@ -720,7 +720,7 @@ footer {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background: #4ade80;
+  background: #ff0000;
   border-radius: 50%;
   animation: blink 2s infinite;
 }

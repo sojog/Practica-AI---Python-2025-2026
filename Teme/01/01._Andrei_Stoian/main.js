@@ -367,8 +367,104 @@ document.addEventListener("DOMContentLoaded", () => {
     aiChatContainer.scrollTop = aiChatContainer.scrollHeight;
   }
 
-  // Send message (placeholder for now, will integrate with Ollama later)
-  function sendMessage() {
+  // Ollama API Configuration
+  const OLLAMA_API_URL = "http://localhost:11434/api/generate";
+  const OLLAMA_MODEL = "gemma3:270m";
+
+  // System prompt for the AI assistant
+  const SYSTEM_PROMPT = `Ești un asistent virtual pentru "Glorious Shoemaker", o CIZMĂRIE DE REPARAȚII (nu magazin de pantofi!).
+
+IMPORTANT: NU VINDEM PANTOFI! Suntem o cizmărie care REPARĂ și RESTAUREAZĂ pantofi existenți.
+
+Rolul tău:
+- Ajuți clienții să găsească serviciul de REPARAȚIE/RESTAURARE potrivit pentru pantofii lor EXISTENȚI
+- Întrebi ce problemă au pantofii lor (tocuri uzate, tălpi rupte, pete, culoare ștearsă, etc.)
+- Întrebi despre materialul pantofilor (piele, piele întoarsă/suede, pânză)
+- Recomanzi serviciul de reparație potrivit
+
+Serviciile noastre DE REPARAȚIE:
+1. REPARARE TOCURI: Înlocuire tocuri uzate, reparare tocuri rupte
+2. REPARARE TĂLPI: Înlocuire tălpi uzate (piele sau cauciuc)
+3. CUSĂTURI: Reparare cusături desfăcute, întărire cusături
+4. CURĂȚARE PROFUNDĂ: Îndepărtare pete, curățare profesională
+5. RESTAURARE CULOARE: Vopsire piele, restaurare culoare ștearsă
+6. CONDIȚIONARE PIELE: Hidratare și protecție piele uscată
+7. MODIFICĂRI CUSTOM: Ajustări, personalizări pe pantofi existenți
+
+Reguli STRICTE:
+- Răspunde DOAR în limba română
+- Fii concis (maxim 2-3 propoziții per răspuns)
+- NU sugera niciodată cumpărarea de pantofi noi
+- NU vorbești despre modele, mărci sau stiluri de pantofi
+- Concentrează-te DOAR pe repararea/restaurarea pantofilor EXISTENȚI
+- Întreabă mereu despre problema specifică a pantofilor
+- După ce înțelegi problema, recomandă serviciul specific și sugerează contactarea noastră
+
+Exemple de întrebări corecte:
+- "Ce problemă au pantofii tăi?"
+- "Din ce material sunt pantofii?"
+- "Tocurile sunt uzate sau rupte?"
+- "Ai pete pe pantofi sau culoarea este ștearsă?"
+
+Contacte: Telefon +40722222222, sau pagina de Contact.`;
+
+  // Call Ollama API
+  async function callOllama(userMessage, conversationHistory = []) {
+    try {
+      // Build the full prompt with conversation history
+      let fullPrompt = SYSTEM_PROMPT + "\n\n";
+
+      // Add conversation history
+      conversationHistory.forEach((msg) => {
+        if (msg.role === "user") {
+          fullPrompt += `Client: ${msg.content}\n`;
+        } else {
+          fullPrompt += `Asistent: ${msg.content}\n`;
+        }
+      });
+
+      // Add current user message
+      fullPrompt += `Client: ${userMessage}\nAsistent:`;
+
+      const response = await fetch(OLLAMA_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: OLLAMA_MODEL,
+          prompt: fullPrompt,
+          stream: false,
+          options: {
+            temperature: 0.7,
+            top_p: 0.9,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.response.trim();
+    } catch (error) {
+      console.error("Ollama API Error:", error);
+
+      // User-friendly error messages
+      if (error.message.includes("Failed to fetch")) {
+        return "Îmi pare rău, dar serviciul nostru AI nu funcționează momentan. Între timp, ne poți contacta direct la +40722222222!";
+      }
+
+      return "Îmi pare rău, am întâmpinat o problemă tehnică. Te rog încearcă din nou sau contactează-ne direct la +40722222222!";
+    }
+  }
+
+  // Conversation history to maintain context
+  let conversationHistory = [];
+
+  // Send message with Ollama integration
+  async function sendMessage() {
     const message = aiInput.value.trim();
     if (!message) return;
 
@@ -376,53 +472,29 @@ document.addEventListener("DOMContentLoaded", () => {
     addUserMessage(message);
     aiInput.value = "";
 
+    // Add to conversation history
+    conversationHistory.push({
+      role: "user",
+      content: message,
+    });
+
     // Show typing indicator
     showTypingIndicator();
 
-    // Simulate AI response (will be replaced with Ollama integration)
-    setTimeout(() => {
-      removeTypingIndicator();
+    // Call Ollama API
+    const response = await callOllama(message, conversationHistory);
 
-      // Simple mock response based on keywords
-      let response =
-        "Îmi pare rău, nu am înțeles. Poți să-mi spui ce tip de serviciu cauți? (Reparare, Restaurare, sau Design Personalizat)";
+    // Remove typing indicator
+    removeTypingIndicator();
 
-      const lowerMessage = message.toLowerCase();
-      if (
-        lowerMessage.includes("reparare") ||
-        lowerMessage.includes("repara")
-      ) {
-        response =
-          "Perfect! Pentru reparare, avem servicii de înlocuire tocuri, înlocuire tălpi și cusături. Ce material sunt pantofii tăi? (piele, piele întoarsă, pânză)";
-      } else if (
-        lowerMessage.includes("restaurare") ||
-        lowerMessage.includes("curățare")
-      ) {
-        response =
-          "Excelent! Serviciile noastre de restaurare includ curățare profundă, restaurare culoare și condiționare piele. Ce material sunt pantofii tăi?";
-      } else if (
-        lowerMessage.includes("piele") &&
-        !lowerMessage.includes("întoarsă")
-      ) {
-        response =
-          "Minunat! Pentru pantofi din piele, recomand serviciul nostru de 'Deep Leather Conditioning' care include curățare profundă și condiționare. Vrei să vezi mai multe detalii sau să ne contactezi?";
-      } else if (
-        lowerMessage.includes("piele întoarsă") ||
-        lowerMessage.includes("suede")
-      ) {
-        response =
-          "Perfect! Pentru piele întoarsă/suede, avem un serviciu specializat de curățare care îndepărtează petele fără a deteriora materialul delicat. Vrei să programezi o consultație?";
-      } else if (
-        lowerMessage.includes("da") ||
-        lowerMessage.includes("contact") ||
-        lowerMessage.includes("detalii")
-      ) {
-        response =
-          "Minunat! Poți să ne contactezi la +40722222222 sau să vizitezi pagina noastră de <a href='contact.html' style='color: var(--color-primary); text-decoration: underline;'>Contact</a>. Suntem aici pentru tine!";
-      }
+    // Add bot response
+    addBotMessage(response);
 
-      addBotMessage(response);
-    }, 1500);
+    // Add to conversation history
+    conversationHistory.push({
+      role: "assistant",
+      content: response,
+    });
   }
 
   // Send button click
