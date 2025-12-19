@@ -275,4 +275,167 @@ document.addEventListener("DOMContentLoaded", () => {
   fadeElements.forEach((el) => {
     observer.observe(el);
   });
+
+  // ============================================
+  // AI ASSISTANT LOGIC
+  // ============================================
+
+  const aiFab = document.getElementById("ai-fab");
+  const aiModal = document.getElementById("ai-modal");
+  const aiClose = document.getElementById("ai-close");
+  const aiOverlay = document.getElementById("ai-modal-overlay");
+  const aiInput = document.getElementById("ai-input");
+  const aiSendBtn = document.getElementById("ai-send-btn");
+  const aiChatContainer = document.getElementById("ai-chat-container");
+
+  // Open modal
+  if (aiFab) {
+    aiFab.addEventListener("click", () => {
+      aiModal.classList.add("active");
+      aiInput.focus();
+    });
+  }
+
+  // Close modal
+  function closeAiModal() {
+    aiModal.classList.remove("active");
+  }
+
+  if (aiClose) {
+    aiClose.addEventListener("click", closeAiModal);
+  }
+
+  if (aiOverlay) {
+    aiOverlay.addEventListener("click", closeAiModal);
+  }
+
+  // Add user message to chat
+  function addUserMessage(text) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "ai-message ai-message-user";
+    messageDiv.innerHTML = `
+      <div class="ai-message-avatar">👤</div>
+      <div class="ai-message-content">
+        <p>${text}</p>
+      </div>
+    `;
+    aiChatContainer.appendChild(messageDiv);
+    scrollToBottom();
+  }
+
+  // Add bot message to chat
+  function addBotMessage(text) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "ai-message ai-message-bot";
+    messageDiv.innerHTML = `
+      <div class="ai-message-avatar">🤖</div>
+      <div class="ai-message-content">
+        <p>${text}</p>
+      </div>
+    `;
+    aiChatContainer.appendChild(messageDiv);
+    scrollToBottom();
+  }
+
+  // Show typing indicator
+  function showTypingIndicator() {
+    const typingDiv = document.createElement("div");
+    typingDiv.className = "ai-typing";
+    typingDiv.id = "typing-indicator";
+    typingDiv.innerHTML = `
+      <div class="ai-message-avatar">🤖</div>
+      <div class="ai-typing-dots">
+        <div class="ai-typing-dot"></div>
+        <div class="ai-typing-dot"></div>
+        <div class="ai-typing-dot"></div>
+      </div>
+    `;
+    aiChatContainer.appendChild(typingDiv);
+    scrollToBottom();
+  }
+
+  // Remove typing indicator
+  function removeTypingIndicator() {
+    const typingIndicator = document.getElementById("typing-indicator");
+    if (typingIndicator) {
+      typingIndicator.remove();
+    }
+  }
+
+  // Scroll to bottom of chat
+  function scrollToBottom() {
+    aiChatContainer.scrollTop = aiChatContainer.scrollHeight;
+  }
+
+  // Send message (placeholder for now, will integrate with Ollama later)
+  function sendMessage() {
+    const message = aiInput.value.trim();
+    if (!message) return;
+
+    // Add user message
+    addUserMessage(message);
+    aiInput.value = "";
+
+    // Show typing indicator
+    showTypingIndicator();
+
+    // Simulate AI response (will be replaced with Ollama integration)
+    setTimeout(() => {
+      removeTypingIndicator();
+
+      // Simple mock response based on keywords
+      let response =
+        "Îmi pare rău, nu am înțeles. Poți să-mi spui ce tip de serviciu cauți? (Reparare, Restaurare, sau Design Personalizat)";
+
+      const lowerMessage = message.toLowerCase();
+      if (
+        lowerMessage.includes("reparare") ||
+        lowerMessage.includes("repara")
+      ) {
+        response =
+          "Perfect! Pentru reparare, avem servicii de înlocuire tocuri, înlocuire tălpi și cusături. Ce material sunt pantofii tăi? (piele, piele întoarsă, pânză)";
+      } else if (
+        lowerMessage.includes("restaurare") ||
+        lowerMessage.includes("curățare")
+      ) {
+        response =
+          "Excelent! Serviciile noastre de restaurare includ curățare profundă, restaurare culoare și condiționare piele. Ce material sunt pantofii tăi?";
+      } else if (
+        lowerMessage.includes("piele") &&
+        !lowerMessage.includes("întoarsă")
+      ) {
+        response =
+          "Minunat! Pentru pantofi din piele, recomand serviciul nostru de 'Deep Leather Conditioning' care include curățare profundă și condiționare. Vrei să vezi mai multe detalii sau să ne contactezi?";
+      } else if (
+        lowerMessage.includes("piele întoarsă") ||
+        lowerMessage.includes("suede")
+      ) {
+        response =
+          "Perfect! Pentru piele întoarsă/suede, avem un serviciu specializat de curățare care îndepărtează petele fără a deteriora materialul delicat. Vrei să programezi o consultație?";
+      } else if (
+        lowerMessage.includes("da") ||
+        lowerMessage.includes("contact") ||
+        lowerMessage.includes("detalii")
+      ) {
+        response =
+          "Minunat! Poți să ne contactezi la +40722222222 sau să vizitezi pagina noastră de <a href='contact.html' style='color: var(--color-primary); text-decoration: underline;'>Contact</a>. Suntem aici pentru tine!";
+      }
+
+      addBotMessage(response);
+    }, 1500);
+  }
+
+  // Send button click
+  if (aiSendBtn) {
+    aiSendBtn.addEventListener("click", sendMessage);
+  }
+
+  // Enter key to send
+  if (aiInput) {
+    aiInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
+  }
 });

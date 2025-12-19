@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <h2 class="mb-4">Your Custom AI Invitation</h2>
+
+        <div class="card shadow-lg">
+            <div class="card-body p-0">
+                {% if invitation.final_image %}
+                <img src="{{ invitation.final_image.url }}" class="img-fluid" alt="Generated Invitation">
+                {% else %}
+                <div class="alert alert-warning m-3">
+                    Image generation failed or is in progress.
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-white">
+                {% if invitation.final_image %}
+                <a href="{{ invitation.final_image.url }}" download class="btn btn-primary btn-lg">Download Image</a>
+                {% endif %}
+                <a href="{% url 'event_list' %}" class="btn btn-secondary btn-lg">Back to Events</a>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h4>Details</h4>
+            <p><strong>Tone:</strong> {{ invitation.tone }}</p>
+            <p><strong>Generated at:</strong> {{ invitation.created_at }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

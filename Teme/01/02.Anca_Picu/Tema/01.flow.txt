@@ -1,0 +1,73 @@
+# High Level Flow - Site prezentare psiholog
+
+Acesta este un flux propus pentru aplicatie, bazat pe cerintele tale.
+
+1. Administrare & Acces (Faza 1: Simplificat)
+# Login: Adminul (psihologul sau developerul) se autentifică în aplicație (/admin sau /login). 
+R: Da, pentru început folosesc createsuperuser din Django. Vizitatorii nu au nevoie de cont.
+
+# Dashboard: Odată autentificat, adminul vede lista de servicii, testimoniale și mesaje de contact. 
+R: Da, doar pentru administrare. Vizitatorii văd un landing page public cu informațiile psihologului
+
+2. Creare & Editare Conținut (Dashboard)
+# Adminul poate crea sau edita secțiuni ale site-ului.
+
+## Informații Generale:
+Nume, Titlu/Functie (Psiholog/Psihoterapeut).
+Upload Poză Profil.
+Bio/Descriere scurtă. 
+R: Da.
+
+## Servicii:
+Adăugare servicii (ex: Terapie individuală, de cuplu, familie, online).
+Fiecare serviciu are titlu + descriere. 
+R: Da.
+
+## Testimoniale:
+Adăugare recenzii clienți (manual, din admin). 
+R: Da.
+
+## Design & Personalizare:
+Alegere temă (culori pastel, calm).
+Alegere fonturi.
+Layout simplu, profesional. 
+R: Da, folosesc Tailwind pentru UI.
+
+## Setări Site:
+Definire slug pentru pagină (ex: site.com/nume-psiholog).
+
+3. Vizualizare Publică (Frontend – Django Templates)
+# Accesare: Vizitatorul accesează site.com/nume-psiholog.
+
+#Afisare Profil:
+## Se randează pagina cu design-ul ales.
+## Se afișează informațiile generale, lista de servicii, testimoniale și date de contact.
+
+#Tracking Vizualizări: La încărcarea paginii, se incrementează contorul de vizualizări. 
+R: Da.
+
+4. Interacțiunea cu Contactul (Analytics)
+# Vizitatorul dă click pe un buton de contact (ex: Email sau Telefon).
+
+# Link-ul este de forma site.com/track/contact-id-123.
+## Server-side:
+## Identifică link-ul original (email/telefon).
+## Incrementează contorul de click-uri.
+
+# Face HTTP 302 Redirect către acțiunea finală (ex: deschidere client email). 
+R: Da.
+
+5. Vizualizare Analytics (Dashboard)
+# Adminul vede în dashboard:
+# Total vizualizări site.
+# Total click-uri pe butoanele de contact. 
+R: Da.
+
+6. Campuri Custom: Vrei ca adminul să poată adăuga câmpuri arbitrare (ex: „Motto”, „Locație”) sau doar o listă predefinită (ex: Telefon, Email, Adresă)? 
+R: Să existe o listă predefinită, dar și posibilitatea de a adăuga câmpuri proprii.
+
+7. Redirect: Ești de acord ca link-urile de contact să fie de forma site.com/track/... pentru a garanta tracking-ul? 
+R: Da.
+
+8.Landing Page: Vrei o pagină de prezentare generală (Home Page) pentru vizitatori neautentificați, pe lângă paginile de profil și contact? 
+R: Da, pentru moment.

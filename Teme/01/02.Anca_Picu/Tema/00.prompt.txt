@@ -1,0 +1,37 @@
+As vrea sa creez un site de prezentare pentru un psiholog. Vreau sa fie un site elegant, cald si modern, orientat spre incredere si confort emotional. 
+
+Te rog sa imi pui o serie de intrebari astfel incat sa definesc structura, fucntionalitatea si continutul site-ului.
+
+Din punct de vedere al backend-ului, as vrea sa folosesc Python si Django.
+
+### Intrebari pentru clarificarea functionalitatii:
+
+1.**Utilizatori și Autentificare**: Vor exista mai mulți utilizatori (psihologi) sau doar unul singur?
+R: Doar un psiholog, deci nu e nevoie de autentificare pentru vizitatori. Doar admin pentru gestionarea conținutului.
+
+2.**Personalizare**: Vrei să existe posibilitatea de a schimba culorile, fonturile și tema site-ului?
+R: Da, dar doar la nivel de branding general (nu pentru vizitatori).
+
+3. **Informații Profil**: Ce informații trebuie să apară pe site?
+R: Nume, titlu/functie (Psiholog/Psihoterapeut), descriere scurtă, poză de profil, servicii oferite, testimoniale, date de contact.
+
+4. **Frontend**: Cum vrei să fie realizată partea vizuală?
+R: Da, prefer template-urile standard Django..
+
+5. **Servicii**: Vrei să existe o listă cu tipuri de terapie (individuală, de cuplu, familie, online)?
+R: Da, fiecare serviciu cu o descriere scurtă și eventual o pagină dedicată.
+
+6. **Testimoniale**: Vrei să incluzi recenzii de la clienți?
+R: Da, dar administrate manual (adăugate de mine din panoul de admin).
+
+7. **Blog/Resurse**: Vrei să existe o secțiune de articole (blog)?
+R: Da, dar doar într-o fază ulterioară. Momentan mă concentrez pe prezentare și contact.
+
+8. **Analitice**: Vrei să monitorizezi traficul și click-urile pe butoanele de contact?
+R: Da, vreau să pot vedea câți vizitatori accesează site-ul și câți dau click pe email/telefon.
+
+9. **Contact și Programări**: Vrei doar date de contact sau și un formular de contact?
+R: Da, un formular simplu cu nume, email, mesaj. Programările online vor fi adăugate ulterior.
+
+10. **Database**: Ce bază de date vrei să folosești?
+R: SQLite pentru început, ulterior PostgreSQL pentru scalabilitate.

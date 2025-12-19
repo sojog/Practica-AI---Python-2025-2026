@@ -1,0 +1,9 @@
+# Instructiuni de instalare:
+# Rulati comanda: pip install -r requirements.txt
+
+customtkinter
+python-pptx
+Pillow
+packaging
+pyinstaller
+google-generativeai

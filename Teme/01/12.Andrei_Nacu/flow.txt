@@ -1,0 +1,51 @@
+# Propunere Tehnica si Flow - Aplicatie Generator PPTX
+
+Pe baza raspunsurilor tale, am schitat urmatorul plan tehnic. Te rog sa il parcurgi si sa imi spui parerea ta sau sa raspunzi la intrebarile de la final.
+
+## 1. Stack Tehnologic
+*   **Limbaj:** Python
+*   **GUI (Interfata):** `tkinter` (standard) sau `customtkinter` (pentru un look mai modern, dark mode, etc. - Recomandat).
+R: customtkinter
+*   **Manipulare PPTX:** `python-pptx`.
+R: python-pptx
+
+## 2. Arhitectura Aplicatiei (MVC - Model View Controller)
+Vom separa logica de interfata pentru a mentine codul curat.
+R: MVC
+*   **Model:** Va tine datele prezentarii (titlu, setari de stil, lista de slide-uri si continutul lor).
+*   **View (GUI):** Ferestrele si butoanele. Va fi un "Wizard" (pasi secventiali) sau un Dashboard?
+R:Dashboard
+    *   *Propunere:* Un stil "Wizard" (Pas cu Pas) pare cel mai potrivit pentru creare:
+        1.  **Setup:** Alegere Template (Nou vs Existent) + Metadata (Titlu, Autor).
+        2.  **Stil:** Alegere Paleta Culori, Fonturi.
+        3.  **Editor:** Adaugare Slide-uri si Continut pe fiecare slide.
+        4.  **Export:** Generare fisier final.
+*   **Controller:** Leaga butoanele de logica de generare.
+R:Butoane, campuri de text, paleta de culori, fonturi, layout-uri, tipuri de tabele si elemente care sunt trimise catre back-end
+## 3. Detalii Implementare Functionalitati Complexe
+1.Adaugarea de imagini cu handler in cazul in care imaginea nu mai este disponibila;
+2.Handler pentru dimensiunea textului sa se incadreze in slide in functie de marimea textului, bold, italic, restul ementelor din slide si alinare;
+### A. Template & Stiluri
+*   **De la Zero:** Vom defini o clasa `ThemeManager` care aplica culori si fonturi pe Master Slide-uri.
+*   **Template Existent:** Vom incarca fisierul si vom citi layout-urile disponibile.
+
+### B. Continut (Imagini, Tabele, Grafice)
+Aici este cea mai mare provocare de UX (User Experience).
+*   **Imagini:** Buton "Upload Image" -> File Dialog -> Pozitionare (Stanga/Dreapta/Centru/Fundal).
+R:Exact
+*   **Tabele:** Trebuie sa intrebam utilizatorul cate randuri/coloane vrea si apoi sa ii dam un mini-grid sa completeze datele?
+R:Trebuie sa tinem cont sa spatiul alocat in slide;
+*   **Grafice:** `python-pptx` cere date pentru grafice. Vom avea nevoie de o interfata simpla de introducere date (ex: Label + Valoare) pentru a genera graficul.
+
+## 4. Intrebari Tehnice / Decizii
+
+1.  **Librarie GUI:** Esti de acord sa folosim `customtkinter` in loc de `tkinter` simplu? Arata mult mai bine si e mai usor de facut "modern".
+R:Da
+2.  **Input Date Grafice/Tabele:** Cat de complex vrei sa fie inputul?
+    *   *Varianta Simpla:* Userul da doar titlul graficului si noi generam date dummy (random) pe care le editeaza el in PowerPoint ulterior.
+    *   *Varianta Complexa:* Userul introduce manual valorile in aplicatia noastra (poate fi plictisitor daca sunt multe date).
+    R:Varianta 2
+3.  **Layout-uri:** Cand cream de la zero, ne limitam la cateva layout-uri standard (Titlu, Titlu+Continut, Doua Coloane, Poza+Text)?
+R:Da
+
+Astept feedback-ul tau pe aceste puncte in acest fisier sau in chat.
