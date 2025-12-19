@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+
+{% block title %}Compatibility Result - DateGenie{% endblock %}
+
+{% block extra_styles %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&display=swap');
+
+    .font-display {
+        font-family: 'Outfit', sans-serif;
+    }
+
+    .score-circle {
+        position: relative;
+        width: 150px;
+        height: 150px;
+    }
+
+    .score-circle svg {
+        width: 150px;
+        height: 150px;
+        transform: rotate(-90deg);
+    }
+
+    .score-circle circle {
+        fill: none;
+        stroke-width: 8;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 1.5s ease-out;
+    }
+
+    .score-bg {
+        stroke: #e5e7eb;
+    }
+
+    .score-fg {
+        stroke: url(#gradient);
+        stroke-dasharray: 440;
+        stroke-dashoffset: 440;
+    }
+
+    .fade-up {
+        animation: fadeUp 0.8s ease-out forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+
+        <!-- Header / Matchup -->
+        <div class="bg-slate-50 border-b border-slate-100 p-8 text-center">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                <div class="text-center">
+                    <div
+                        class="w-20 h-20 mx-auto bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-2xl font-bold mb-3">
+                        {{ person_a.initials }}
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">{{ person_a.full_name }}</h3>
+                    <p class="text-slate-500">{{ person_a.zodiac_sign }}</p>
+                </div>
+
+                <div class="hidden md:block text-slate-300 font-black text-2xl">VS</div>
+
+                <div class="text-center">
+                    <div
+                        class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-2xl font-bold mb-3">
+                        {{ person_b.initials }}
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">{{ person_b.full_name }}</h3>
+                    <p class="text-slate-500">{{ person_b.zodiac_sign }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Content -->
+        <div class="p-8 md:p-12 text-center" id="results-container">
+
+            <!-- Loading State -->
+            <div id="loading" class="py-12">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+                <p class="text-xl text-slate-600 font-medium animate-pulse">Consulting the stars...</p>
+            </div>
+
+            <!-- Content State (Hidden initially) -->
+            <div id="content" class="hidden">
+
+                <!-- Score & Verdict -->
+                <div class="flex flex-col items-center mb-10">
+                    <div class="score-circle mb-6">
+                        <svg>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#4F46E5" />
+                                    <stop offset="100%" stop-color="#9333EA" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="score-bg" cx="75" cy="75" r="70"></circle>
+                            <circle class="score-fg" cx="75" cy="75" r="70" id="score-ring"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center flex-col">
+                            <span class="text-4xl font-black text-slate-900 font-display" id="score-text">0</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">%</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-4 font-display fade-up"
+                        style="animation-delay: 0.3s" id="verdict-text">
+                        <!-- Verdict -->
+                    </h2>
+                </div>
+
+                <!-- Analysis Text -->
+                <div class="bg-indigo-50/50 rounded-2xl p-8 mb-10 text-left border border-indigo-50 fade-up"
+                    style="animation-delay: 0.5s">
+                    <h4
+                        class="text-sm font-bold text-indigo-900 uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                        </svg>
+                        Cosmic Analysis
+                    </h4>
+                    <p class="text-lg leading-relaxed text-slate-700" id="analysis-text">
+                        <!-- Analysis -->
+                    </p>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex justify-center gap-4 fade-up" style="animation-delay: 0.7s">
+                    <a href="{% url 'compatibility_dashboard' %}"
+                        class="px-6 py-3 bg-white border border-slate-200 text-slate-700 rounded-xl hover:bg-slate-50 font-medium transition-colors">
+                        Check Another Match
+                    </a>
+                    <button onclick="fetchCompatibility(true)"
+                        class="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 font-medium transition-colors shadow-lg shadow-indigo-200">
+                        Recalculate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="error" class="hidden py-8">
+                <p class="text-red-500 mb-4">The stars are misaligned. We couldn't calculate compatibility right now.
+                </p>
+                <button onclick="location.reload()" class="underline text-indigo-600">Try Again</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    const personA = "{{ person_a.pk }}";
+    const personB = "{{ person_b.pk }}";
+
+    async function fetchCompatibility(regenerate = false) {
+        const loading = document.getElementById('loading');
+        const content = document.getElementById('content');
+        const error = document.getElementById('error');
+
+        if (regenerate) {
+            loading.classList.remove('hidden');
+            content.classList.add('hidden');
+        }
+
+        try {
+            const url = `/ai/compatibility/api/?person_a=${personA}&person_b=${personB}${regenerate ? '&regenerate=true' : ''}`;
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.error) throw new Error(data.analysis);
+
+            // Hide loading
+            loading.classList.add('hidden');
+            content.classList.remove('hidden');
+
+            // Update text
+            document.getElementById('score-text').textContent = data.score;
+            document.getElementById('verdict-text').textContent = data.verdict;
+            document.getElementById('analysis-text').textContent = data.analysis;
+
+            // Animate Score Ring
+            const circle = document.getElementById('score-ring');
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            const offset = circumference - (data.score / 100) * circumference;
+            // Force redraw/reset before animating
+            circle.style.strokeDashoffset = circumference;
+            setTimeout(() => {
+                circle.style.strokeDashoffset = offset;
+            }, 100);
+
+        } catch (err) {
+            console.error(err);
+            loading.classList.add('hidden');
+            error.classList.remove('hidden');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => fetchCompatibility());
+</script>
+{% endblock %}

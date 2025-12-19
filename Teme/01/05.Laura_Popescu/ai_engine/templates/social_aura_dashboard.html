@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Social Aura - DateGenie{% endblock %}
+
+{% block content %}
+<div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-10">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">Social Aura</h1>
+        <p class="text-lg text-gray-600">Discover the unique social energy and vibe of your contacts</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for birthdate in birthdates %}
+        <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg transition-shadow group relative overflow-hidden">
+            <!-- Background gradient decoration -->
+            <div
+                class="absolute top-0 right-0 w-32 h-32 bg-purple-100 rounded-full -mr-16 -mt-16 opacity-50 group-hover:scale-110 transition-transform">
+            </div>
+
+            <div class="flex items-center gap-4 mb-4 relative z-10">
+                <div
+                    class="w-14 h-14 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-xl">
+                    {{ birthdate.initials }}
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-gray-900">{{ birthdate.full_name }}</h3>
+                    <p class="text-sm text-gray-500">{{ birthdate.zodiac_sign }}</p>
+                </div>
+            </div>
+
+            <a href="{% url 'social_aura_view' birthdate.pk %}"
+                class="block w-full bg-slate-900 hover:bg-purple-600 text-white text-center font-medium py-3 rounded-xl transition-all relative z-10 flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                </svg>
+                Analyze Aura
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center py-12">
+            <p class="text-gray-500 mb-4">No contacts yet</p>
+            <a href="{% url 'add_birthdate' %}"
+                class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg">Add Contact</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

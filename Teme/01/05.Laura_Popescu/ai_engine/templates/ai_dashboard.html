@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}AI Insights - DateGenie{% endblock %}
+
+{% block content %}
+<div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <div class="mb-10 text-center">
+        <h1
+            class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-2">
+            AI Insights Center</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Unlock the power of artificial intelligence to better
+            understand your connections and find the perfect moments to celebrate.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Feature 1: Smart Gifting -->
+        <div
+            class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 flex flex-col hover:shadow-2xl transition-shadow duration-300 group">
+            <div class="h-48 bg-gradient-to-br from-amber-400 to-orange-500 relative overflow-hidden">
+                <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                </div>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/20 rounded-full blur-2xl"></div>
+                <div class="flex items-center justify-center h-full">
+                    <svg class="w-20 h-20 text-white drop-shadow-md" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                    </svg>
+                </div>
+            </div>
+            <div class="p-8 flex-grow flex flex-col">
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Smart Gifting</h3>
+                <p class="text-gray-500 mb-6 flex-grow">Never struggle with gift ideas again. Our AI analyzes
+                    profiles to suggest personalized, localized presents for every contact.</p>
+                <a href="{% url 'smart_gifting' %}"
+                    class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200">
+                    Browse Contacts
+                </a>
+            </div>
+        </div>
+
+        <!-- Feature 2: Social Aura -->
+        <div
+            class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 flex flex-col hover:shadow-2xl transition-shadow duration-300 group">
+            <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 relative overflow-hidden">
+                <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                </div>
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/20 rounded-full blur-2xl"></div>
+                <div class="flex items-center justify-center h-full">
+                    <svg class="w-20 h-20 text-white drop-shadow-md" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+            </div>
+            <div class="p-8 flex-grow flex flex-col">
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Social Aura</h3>
+                <p class="text-gray-500 mb-6 flex-grow">Visualize your social circles. See who knows whom, identify
+                    key connectors, and analyze the overall "vibe" of your network.</p>
+                <a href="{% url 'social_aura_dashboard' %}"
+                    class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-purple-600 hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200">
+                    Analyze Vibe
+                </a>
+            </div>
+        </div>
+
+        <!-- Feature 3: Compatibility Check -->
+        <div
+            class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 flex flex-col hover:shadow-2xl transition-shadow duration-300 group">
+            <div class="h-48 bg-gradient-to-br from-blue-400 to-cyan-500 relative overflow-hidden">
+                <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                </div>
+                <div class="flex items-center justify-center h-full">
+                    <svg class="w-20 h-20 text-white drop-shadow-md" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                </div>
+            </div>
+            <div class="p-8 flex-grow flex flex-col">
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Compatibility Check</h3>
+                <p class="text-gray-500 mb-6 flex-grow">Discover hidden synergies between your friends. Who would
+                    get along best? Who shares the same zodiac energy?</p>
+                <a href="{% url 'compatibility_dashboard' %}"
+                    class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-cyan-600 hover:bg-cyan-700 transition-colors shadow-lg shadow-cyan-200">
+                    Find Matches
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
