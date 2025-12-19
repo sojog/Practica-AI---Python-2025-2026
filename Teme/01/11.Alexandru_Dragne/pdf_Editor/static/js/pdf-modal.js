@@ -102,10 +102,31 @@ class PDFPreviewModal {
     }
     
     async open(pdfUrl) {
+        // Check if PDF.js is loaded
+        if (typeof pdfjsLib === 'undefined') {
+            console.error('PDF.js not loaded yet');
+            alert('PDF viewer is still loading. Please try again in a moment.');
+            return;
+        }
+        
+        // Normalize URL - ensure it starts from root
+        if (pdfUrl.startsWith('/') && !pdfUrl.startsWith('//')) {
+            // It's already an absolute path from root, construct full URL
+            pdfUrl = window.location.origin + pdfUrl;
+        }
+        
+        console.log('Loading PDF from:', pdfUrl);
+        
         try {
             // Load PDF
-            const loadingTask = pdfjsLib.getDocument(pdfUrl);
+            const loadingTask = pdfjsLib.getDocument({
+                url: pdfUrl,
+                withCredentials: false
+            });
+
+            
             this.pdfDoc = await loadingTask.promise;
+            console.log('PDF loaded successfully, pages:', this.pdfDoc.numPages);
             
             // Reset state
             this.pageNum = 1;
@@ -124,7 +145,7 @@ class PDFPreviewModal {
             
         } catch (error) {
             console.error('Error loading PDF:', error);
-            alert('Error loading PDF preview');
+            alert('Error loading PDF preview: ' + error.message);
         }
     }
     
@@ -184,12 +205,26 @@ class PDFPreviewModal {
 // Initialize modal on page load
 let pdfModal;
 document.addEventListener('DOMContentLoaded', () => {
-    // Load PDF.js
+    // Load PDF.js from unpkg (more reliable CDN)
     const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    script.src = 'https://unpkg.com/pdfjs-dist@4.0.379/build/pdf.min.mjs';
+    script.type = 'module';
+    
+    // For module scripts, we need a different approach
+    // Use legacy build instead for better compatibility
+    script.src = 'https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.min.js';
+    script.type = 'text/javascript';
+    
     script.onload = () => {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        console.log('PDF.js loaded');
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
         pdfModal = new PDFPreviewModal();
+        console.log('PDF Modal initialized');
     };
+    
+    script.onerror = (e) => {
+        console.error('Failed to load PDF.js:', e);
+    };
+    
     document.head.appendChild(script);
 });

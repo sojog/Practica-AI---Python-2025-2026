@@ -939,5 +939,235 @@ def delete_pdf_view(request, pdf_id):
     return redirect('dashboard')
 
 
+# ==========================================
+# AI Rephrase Views
+# ==========================================
+
+def rephrase_view(request):
+    """View for AI-powered text rephrasing in PDF."""
+    from .forms import RephraseForm
+    from .ollama_service import get_available_models, check_ollama_connection, rephrase_text
+    
+    # Get uploaded PDFs
+    uploaded_pdfs = get_uploaded_pdfs(request)
+    
+    if not uploaded_pdfs:
+        messages.error(request, 'No PDF found. Please upload a PDF first.')
+        return redirect('dashboard')
+    
+    # Get PDF ID from query params or use first/only PDF
+    pdf_id = request.GET.get('pdf')
+    if pdf_id:
+        selected_pdf = get_pdf_by_id(request, pdf_id)
+        if not selected_pdf:
+            messages.error(request, 'Selected PDF not found.')
+            return redirect('dashboard')
+    else:
+        selected_pdf = uploaded_pdfs[0]
+    
+    pdf_path = selected_pdf['path']
+    pdf_name = selected_pdf['name']
+    
+    # Check Ollama connection
+    ollama_connected, ollama_message = check_ollama_connection()
+    
+    # Get available models
+    available_models = get_available_models() if ollama_connected else []
+    
+    if request.method == 'POST':
+        # Get form data
+        selected_text = request.POST.get('selected_text', '').strip()
+        rephrase_style = request.POST.get('rephrase_style', 'formal')
+        model = request.POST.get('ai_model') or (available_models[0] if available_models else None)
+        
+        # Get coordinates from PDF.js selection
+        page_number = request.POST.get('page_number', '')
+        bbox_x0 = request.POST.get('bbox_x0', '')
+        bbox_y0 = request.POST.get('bbox_y0', '')
+        bbox_x1 = request.POST.get('bbox_x1', '')
+        bbox_y1 = request.POST.get('bbox_y1', '')
+        
+        if not selected_text:
+            messages.error(request, 'Please select text from the PDF first.')
+        elif not all([page_number, bbox_x0, bbox_y0, bbox_x1, bbox_y1]):
+            messages.error(request, 'Missing selection coordinates. Please capture the selection again.')
+        elif not ollama_connected:
+            messages.error(request, f'Cannot connect to Ollama: {ollama_message}')
+        else:
+            try:
+                # Get rephrased text from Ollama
+                rephrased_text, success, error_message = rephrase_text(
+                    text=selected_text,
+                    style=rephrase_style,
+                    model=model
+                )
+                
+                if not success:
+                    messages.error(request, f'AI Error: {error_message}')
+                else:
+                    # Import coordinate-based rephrase function
+                    from .pdf_processor import rephrase_with_coordinates
+                    
+                    # Build bounding box
+                    bounding_box = {
+                        'x0': float(bbox_x0),
+                        'y0': float(bbox_y0),
+                        'x1': float(bbox_x1),
+                        'y1': float(bbox_y1)
+                    }
+                    
+                    # Apply replacement using exact coordinates
+                    output_path, replacement_count, warnings = rephrase_with_coordinates(
+                        pdf_path=pdf_path,
+                        page_number=int(page_number),
+                        bounding_box=bounding_box,
+                        replace_text=rephrased_text,
+                        original_text=selected_text
+                    )
+                    
+                    # Store result in session
+                    request.session['rephrased_pdf_path'] = output_path
+                    request.session['rephrase_original_text'] = selected_text
+                    request.session['rephrase_new_text'] = rephrased_text
+                    request.session['rephrase_count'] = replacement_count
+                    request.session['rephrase_warnings'] = warnings
+                    request.session['rephrase_style'] = rephrase_style
+                    request.session['rephrase_model'] = model
+                    
+                    return redirect('rephrase_result')
+                    
+            except ValueError as e:
+                messages.error(request, f'Error: {str(e)}')
+            except Exception as e:
+                messages.error(request, f'Error processing PDF: {str(e)}')
+    
+    context = {
+        'pdf_name': pdf_name,
+        'pdf_path_relative': os.path.relpath(pdf_path, settings.MEDIA_ROOT),
+        'uploaded_pdfs': uploaded_pdfs,
+        'selected_pdf': selected_pdf,
+        'ollama_connected': ollama_connected,
+        'ollama_message': ollama_message,
+        'ollama_models': available_models
+    }
+
+    return render(request, 'pdfeditor/rephrase.html', context)
 
 
+def rephrase_preview_ajax(request):
+    """AJAX endpoint for previewing rephrased text without applying to PDF."""
+    import json
+    from .ollama_service import rephrase_text, check_ollama_connection, get_available_models
+    
+    if request.method != 'POST':
+        return HttpResponse(
+            json.dumps({'success': False, 'error': 'Only POST allowed'}),
+            content_type='application/json'
+        )
+    
+    try:
+        # Get data from form submission (x-www-form-urlencoded)
+        text = request.POST.get('text', '').strip()
+        style = request.POST.get('style', 'formal')
+        model = request.POST.get('model', '')
+        
+        if not text:
+            return HttpResponse(
+                json.dumps({'success': False, 'error': 'No text provided'}),
+                content_type='application/json'
+            )
+
+        
+        # Check connection
+        connected, message = check_ollama_connection()
+        if not connected:
+            return HttpResponse(
+                json.dumps({'success': False, 'error': message}),
+                content_type='application/json'
+            )
+        
+        # Get default model if not specified
+        if not model:
+            models = get_available_models()
+            model = models[0] if models else None
+        
+        if not model:
+            return HttpResponse(
+                json.dumps({'success': False, 'error': 'No AI model available'}),
+                content_type='application/json'
+            )
+        
+        # Get rephrased text
+        rephrased, success, error = rephrase_text(text, style, model)
+        
+        if success:
+            return HttpResponse(
+                json.dumps({
+                    'success': True,
+                    'original_text': text,
+                    'rephrased_text': rephrased,
+                    'model': model,
+                    'style': style
+                }),
+                content_type='application/json'
+            )
+
+        else:
+            return HttpResponse(
+                json.dumps({'success': False, 'error': error}),
+                content_type='application/json'
+            )
+            
+    except Exception as e:
+        return HttpResponse(
+            json.dumps({'success': False, 'error': str(e)}),
+            content_type='application/json'
+        )
+
+
+def rephrase_result_view(request):
+    """View for displaying rephrase result."""
+    rephrased_path = request.session.get('rephrased_pdf_path')
+    original_text = request.session.get('rephrase_original_text', '')
+    new_text = request.session.get('rephrase_new_text', '')
+    replacement_count = request.session.get('rephrase_count', 0)
+    warnings = request.session.get('rephrase_warnings', [])
+    style = request.session.get('rephrase_style', '')
+    model = request.session.get('rephrase_model', '')
+    
+    if not rephrased_path or not os.path.exists(rephrased_path):
+        messages.error(request, 'Rephrased PDF not found.')
+        return redirect('dashboard')
+    
+    context = {
+        'rephrased_filename': os.path.basename(rephrased_path),
+        'rephrased_size': os.path.getsize(rephrased_path),
+        'original_text': original_text,
+        'new_text': new_text,
+        'replacement_count': replacement_count,
+        'warnings': warnings,
+        'has_warnings': len(warnings) > 0,
+        'style': style,
+        'model': model,
+        'pdf_path_relative': os.path.relpath(rephrased_path, settings.MEDIA_ROOT)
+    }
+    return render(request, 'pdfeditor/rephrase_result.html', context)
+
+
+def download_rephrased_view(request):
+    """Download the rephrased PDF file."""
+    rephrased_path = request.session.get('rephrased_pdf_path')
+    
+    if not rephrased_path or not os.path.exists(rephrased_path):
+        messages.error(request, 'File not found.')
+        return redirect('dashboard')
+    
+    try:
+        return FileResponse(
+            open(rephrased_path, 'rb'),
+            as_attachment=True,
+            filename=os.path.basename(rephrased_path)
+        )
+    except Exception as e:
+        messages.error(request, f'Error downloading file: {str(e)}')
+        return redirect('dashboard')

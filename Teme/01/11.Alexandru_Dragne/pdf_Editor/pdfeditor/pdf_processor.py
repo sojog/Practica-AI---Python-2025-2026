@@ -889,9 +889,10 @@ def map_font_name(original_font):
         elif is_bold:
             return 'tibo'  # Times Bold
         elif is_italic:
-            return 'tiri'  # Times Italic
+            return 'tiit'  # Times Italic
         else:
-            return 'times'  # Times Roman
+            return 'tiro'  # Times Roman
+
     
     elif any(x in clean_font for x in ['helvetica', 'arial']):
         if is_bold and is_italic:
@@ -990,6 +991,437 @@ def reflow_single_line(page, line_info, modified_text):
         
     except Exception as e:
         return False
+
+
+def rephrase_with_coordinates(
+    pdf_path: str,
+    page_number: int,
+    bounding_box: dict,
+    replace_text: str,
+    original_text: str = ""
+) -> Tuple[str, int, List[str]]:
+    """
+    Înlocuiește text în PDF folosind coordonate exacte din selecția PDF.js.
+    Mută conținutul de sub selecție mai jos dacă textul nou e mai lung.
+    
+    Args:
+        pdf_path: Calea către PDF-ul original
+        page_number: Numărul paginii (0-indexed)
+        bounding_box: Dict cu coordonatele {"x0": ..., "y0": ..., "x1": ..., "y1": ...}
+        replace_text: Textul de înlocuire (reformulat de AI)
+        original_text: Textul original (pentru a estima dimensiunea fontului)
+        
+    Returns:
+        Tuple (output_path: str, replacement_count: int, warnings: List[str])
+    """
+    warnings = []
+    
+    try:
+        doc = fitz.open(pdf_path)
+        
+        if page_number < 0 or page_number >= len(doc):
+            doc.close()
+            raise ValueError(f"Invalid page number: {page_number}")
+        
+        page = doc[page_number]
+        page_width = page.rect.width
+        page_height = page.rect.height
+        
+        # Create rectangle from bounding box
+        rect = fitz.Rect(
+            bounding_box['x0'],
+            bounding_box['y0'],
+            bounding_box['x1'],
+            bounding_box['y1']
+        )
+        
+        # Extract ALL text blocks from the page with positions
+        text_dict = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
+        all_blocks = []
+        
+        for block in text_dict.get("blocks", []):
+            if block.get("type") == 0:  # Text block
+                for line in block.get("lines", []):
+                    for span in line.get("spans", []):
+                        span_rect = fitz.Rect(span["bbox"])
+                        span_text = span["text"]
+                        if span_text.strip():
+                            all_blocks.append({
+                                "text": span_text,
+                                "rect": span_rect,
+                                "font": span.get("font", "helv"),
+                                "size": span.get("size", 11),
+                                "color": span.get("color", 0),
+                                "flags": span.get("flags", 0)
+                            })
+        
+        # Determine font for replacement text
+        fontname = 'helv'
+        fontsize = 11
+        fontcolor = (0, 0, 0)
+        
+        # Find spans in or near the selection area to get font info
+        for blk in all_blocks:
+            if blk["rect"].intersects(rect):
+                # Map font to PyMuPDF builtin
+                fname = blk["font"].lower()
+                if 'times' in fname or 'roman' in fname or 'serif' in fname:
+                    fontname = 'tiro'
+                elif 'courier' in fname or 'mono' in fname:
+                    fontname = 'cour'
+                elif 'bold' in fname:
+                    fontname = 'hebo'
+                else:
+                    fontname = 'helv'
+                fontsize = blk["size"]
+                
+                # Convert color
+                color_int = blk["color"]
+                if isinstance(color_int, int):
+                    r = ((color_int >> 16) & 0xFF) / 255.0
+                    g = ((color_int >> 8) & 0xFF) / 255.0
+                    b = (color_int & 0xFF) / 255.0
+                    fontcolor = (r, g, b)
+                break
+        
+        # Calculate original height of selection
+        original_height = rect.height
+        original_width = rect.width
+        
+        # Calculate how much space the new text needs
+        line_height = fontsize * 1.3
+        char_width = fitz.get_text_length("x", fontname=fontname, fontsize=fontsize)
+        chars_per_line = int(original_width / char_width) if char_width > 0 else 60
+        
+        # Word wrap replacement text
+        words = replace_text.split()
+        wrapped_lines = []
+        current_line = []
+        current_length = 0
+        
+        for word in words:
+            word_len = len(word)
+            if current_length + word_len + 1 <= chars_per_line:
+                current_line.append(word)
+                current_length += word_len + 1
+            else:
+                if current_line:
+                    wrapped_lines.append(' '.join(current_line))
+                current_line = [word]
+                current_length = word_len
+        
+        if current_line:
+            wrapped_lines.append(' '.join(current_line))
+        
+        # Calculate new text height
+        new_text_height = len(wrapped_lines) * line_height
+        
+        # Calculate extra space needed
+        extra_space = max(0, new_text_height - original_height)
+        
+        if extra_space > 0:
+            warnings.append(f"Content below selection shifted down by {extra_space:.0f}pt")
+        
+        # Separate blocks into: above selection, in selection, below selection
+        blocks_above = []
+        blocks_below = []
+        
+        selection_bottom = rect.y1
+        
+        for blk in all_blocks:
+            blk_center_y = (blk["rect"].y0 + blk["rect"].y1) / 2
+            
+            if blk["rect"].intersects(rect):
+                # Skip blocks in selection area - they will be replaced
+                continue
+            elif blk_center_y < rect.y0:
+                # Above selection - keep as is
+                blocks_above.append(blk)
+            else:
+                # Below selection - needs to be shifted down
+                blocks_below.append(blk)
+        
+        # Clear the entire page
+        page.add_redact_annot(page.rect, fill=(1, 1, 1))
+        page.apply_redactions()
+        
+        # Re-insert blocks ABOVE selection (unchanged positions)
+        for blk in blocks_above:
+            # Map font for insertion
+            fname = blk["font"].lower()
+            if 'times' in fname or 'roman' in fname:
+                insert_font = 'tiro'
+            elif 'courier' in fname or 'mono' in fname:
+                insert_font = 'cour'
+            elif 'bold' in fname and 'italic' in fname:
+                insert_font = 'hebi'
+            elif 'bold' in fname:
+                insert_font = 'hebo'
+            elif 'italic' in fname:
+                insert_font = 'heit'
+            else:
+                insert_font = 'helv'
+            
+            # Convert color
+            color = (0, 0, 0)
+            if isinstance(blk["color"], int):
+                color_int = blk["color"]
+                r = ((color_int >> 16) & 0xFF) / 255.0
+                g = ((color_int >> 8) & 0xFF) / 255.0
+                b = (color_int & 0xFF) / 255.0
+                color = (r, g, b)
+            
+            page.insert_text(
+                (blk["rect"].x0, blk["rect"].y1),  # baseline position
+                blk["text"],
+                fontname=insert_font,
+                fontsize=blk["size"],
+                color=color
+            )
+        
+        # Insert NEW replacement text
+        y_pos = rect.y0 + fontsize
+        x_pos = rect.x0
+        
+        for line in wrapped_lines:
+            page.insert_text(
+                (x_pos, y_pos),
+                line,
+                fontname=fontname,
+                fontsize=fontsize,
+                color=fontcolor
+            )
+            y_pos += line_height
+        
+        # Re-insert blocks BELOW selection (shifted down by extra_space)
+        for blk in blocks_below:
+            fname = blk["font"].lower()
+            if 'times' in fname or 'roman' in fname:
+                insert_font = 'tiro'
+            elif 'courier' in fname or 'mono' in fname:
+                insert_font = 'cour'
+            elif 'bold' in fname and 'italic' in fname:
+                insert_font = 'hebi'
+            elif 'bold' in fname:
+                insert_font = 'hebo'
+            elif 'italic' in fname:
+                insert_font = 'heit'
+            else:
+                insert_font = 'helv'
+            
+            color = (0, 0, 0)
+            if isinstance(blk["color"], int):
+                color_int = blk["color"]
+                r = ((color_int >> 16) & 0xFF) / 255.0
+                g = ((color_int >> 8) & 0xFF) / 255.0
+                b = (color_int & 0xFF) / 255.0
+                color = (r, g, b)
+            
+            # Shift Y position down
+            new_y = blk["rect"].y1 + extra_space
+            
+            # Check if it would overflow the page
+            if new_y > page_height - 20:
+                warnings.append("Some content may overflow the page")
+            
+            page.insert_text(
+                (blk["rect"].x0, new_y),
+                blk["text"],
+                fontname=insert_font,
+                fontsize=blk["size"],
+                color=color
+            )
+        
+        # Generate output path
+        base_name = os.path.basename(pdf_path)
+        name_without_ext = os.path.splitext(base_name)[0]
+        
+        if '/media/uploads' in pdf_path:
+            base_media = pdf_path.split('/media/uploads')[0]
+            processed_dir = os.path.join(base_media, 'media', 'processed')
+        else:
+            processed_dir = os.path.join(os.path.dirname(pdf_path), 'processed')
+        
+        os.makedirs(processed_dir, exist_ok=True)
+        output_path = os.path.join(processed_dir, f"{name_without_ext}_rephrased.pdf")
+        
+        doc.save(output_path, garbage=4, deflate=True, clean=True)
+        doc.close()
+        
+        return output_path, 1, warnings
+        
+    except Exception as e:
+        raise Exception(f"Error processing PDF: {str(e)}")
+
+
+
+
+def rephrase_text_in_pdf(
+    pdf_path: str,
+    search_text: str,
+    replace_text: str,
+    case_sensitive: bool = True,
+    page_range: Optional[str] = None
+) -> Tuple[str, int, List[str]]:
+    """
+    Caută și înlocuiește text în PDF, gestionând text pe mai multe linii.
+    Folosește PyMuPDF search pentru a găsi textul exact.
+    """
+    import re
+    warnings = []
+    replacement_count = 0
+    
+    def normalize_whitespace(text):
+        """Normalizează toate tipurile de whitespace la spații simple."""
+        return ' '.join(text.split())
+    
+    try:
+        doc = fitz.open(pdf_path)
+        total_pages = len(doc)
+        
+        if page_range:
+            try:
+                pages_to_process = parse_page_range(page_range, total_pages)
+            except ValueError as e:
+                doc.close()
+                raise ValueError(f"Invalid page range: {str(e)}")
+        else:
+            pages_to_process = list(range(total_pages))
+        
+        # Normalize search text
+        normalized_search = normalize_whitespace(search_text)
+        words = normalized_search.split()
+        
+        if len(words) < 2:
+            # For very short text, use regular find_and_replace
+            doc.close()
+            return find_and_replace_text(pdf_path, search_text, replace_text, case_sensitive, page_range)
+        
+        # Get first few words and last few words for searching
+        first_words = ' '.join(words[:min(4, len(words))])
+        last_words = ' '.join(words[-min(4, len(words)):])
+        
+        for page_num in pages_to_process:
+            page = doc[page_num]
+            
+            # Verify text exists in page (normalized)
+            page_text = page.get_text()
+            normalized_page = normalize_whitespace(page_text)
+            
+            if case_sensitive:
+                if normalized_search not in normalized_page:
+                    continue
+            else:
+                if normalized_search.lower() not in normalized_page.lower():
+                    continue
+            
+            # Search for first and last parts of the text
+            first_rects = page.search_for(first_words)
+            last_rects = page.search_for(last_words)
+            
+            if not first_rects or not last_rects:
+                # Try with just first 2 words
+                first_words = ' '.join(words[:2])
+                last_words = ' '.join(words[-2:])
+                first_rects = page.search_for(first_words)
+                last_rects = page.search_for(last_words)
+            
+            if not first_rects or not last_rects:
+                warnings.append(f"Could not locate text boundaries on page {page_num + 1}")
+                continue
+            
+            # Use first occurrence of first_words and appropriate last_words
+            first_rect = first_rects[0]
+            
+            # Find the last_rect that comes AFTER first_rect
+            last_rect = None
+            for lr in last_rects:
+                if lr.y0 >= first_rect.y0 - 5:  # Same line or below
+                    last_rect = lr
+                    break
+            
+            if not last_rect:
+                last_rect = last_rects[0]
+            
+            # Calculate combined bounding box
+            combined_rect = fitz.Rect(
+                min(first_rect.x0, last_rect.x0) - 2,
+                first_rect.y0 - 2,
+                max(first_rect.x1, last_rect.x1) + 2,
+                last_rect.y1 + 2
+            )
+            
+            # Get font info from this area
+            font_info = extract_font_info_at_position(page, first_rect)
+            if font_info['fontname'] not in ['helv', 'hebo', 'times', 'tibo', 'cour', 'cobo']:
+                font_info['fontname'] = 'helv'
+            
+            # Redact (clear) the old text area
+            page.add_redact_annot(combined_rect, fill=(1, 1, 1))
+            page.apply_redactions()
+            
+            # Calculate text layout
+            available_width = combined_rect.width
+            char_width = fitz.get_text_length("x", fontname=font_info['fontname'], fontsize=font_info['fontsize'])
+            chars_per_line = int(available_width / char_width) if char_width > 0 else 80
+            
+            # Word wrap replacement text
+            rep_words = replace_text.split()
+            lines = []
+            current_line = []
+            current_length = 0
+            
+            for word in rep_words:
+                word_len = len(word)
+                if current_length + word_len + 1 <= chars_per_line:
+                    current_line.append(word)
+                    current_length += word_len + 1
+                else:
+                    if current_line:
+                        lines.append(' '.join(current_line))
+                    current_line = [word]
+                    current_length = word_len
+            
+            if current_line:
+                lines.append(' '.join(current_line))
+            
+            # Insert new text
+            line_height = font_info['fontsize'] * 1.2
+            y_pos = combined_rect.y0 + font_info['fontsize']
+            x_pos = combined_rect.x0
+            
+            for line in lines:
+                page.insert_text(
+                    (x_pos, y_pos),
+                    line,
+                    fontname=font_info['fontname'],
+                    fontsize=font_info['fontsize'],
+                    color=font_info['color']
+                )
+                y_pos += line_height
+            
+            replacement_count += 1
+        
+        # Save output
+        base_name = os.path.basename(pdf_path)
+        name_without_ext = os.path.splitext(base_name)[0]
+        
+        if '/media/uploads' in pdf_path:
+            base_media = pdf_path.split('/media/uploads')[0]
+            processed_dir = os.path.join(base_media, 'media', 'processed')
+        else:
+            processed_dir = os.path.join(os.path.dirname(pdf_path), 'processed')
+        
+        os.makedirs(processed_dir, exist_ok=True)
+        output_path = os.path.join(processed_dir, f"{name_without_ext}_modified.pdf")
+        
+        doc.save(output_path, garbage=4, deflate=True, clean=True)
+        doc.close()
+        
+        return output_path, replacement_count, warnings
+        
+    except Exception as e:
+        raise Exception(f"Error processing PDF: {str(e)}")
 
 
 def find_and_replace_text(

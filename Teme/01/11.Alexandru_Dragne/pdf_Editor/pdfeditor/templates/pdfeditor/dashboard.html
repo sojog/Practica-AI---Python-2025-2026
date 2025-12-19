@@ -28,9 +28,12 @@
         
         <div class="operation-card" data-feature="edit">
             <div class="card-icon">✏️</div>
-            <h3>Edit Text</h3>
-            <p>Find and replace text while preserving formatting</p>
-            <a href="{% url 'edit' %}" class="btn btn-secondary">Get Started</a>
+            <h3>Edit & Rephrase</h3>
+            <p>Find/replace text or use AI to rephrase content</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <a href="{% url 'edit' %}" class="btn btn-secondary" style="flex: 1;">Find & Replace</a>
+                <a href="{% url 'rephrase' %}" class="btn" style="flex: 1; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white;">🤖 AI Rephrase</a>
+            </div>
         </div>
 
         <div class="operation-card" data-feature="split">

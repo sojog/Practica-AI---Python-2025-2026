@@ -1,0 +1,653 @@
+{% extends 'pdfeditor/base.html' %}
+
+{% block title %}AI Text Rephrase{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/pdfjs-dist@3.4.120/web/pdf_viewer.css">
+<style>
+
+.rephrase-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+}
+
+.pdf-viewer-section {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.pdf-viewer-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pdf-viewer-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.pdf-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.pdf-controls button {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.pdf-controls button:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.pdf-controls span {
+    font-size: 0.9rem;
+    min-width: 80px;
+    text-align: center;
+}
+
+#pdf-viewer-container {
+    height: 600px;
+    overflow: auto;
+    background: #525659;
+    position: relative;
+}
+
+#pdf-canvas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.pdf-page-wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.pdf-page-wrapper canvas {
+    display: block;
+}
+
+/* textLayer styles come from pdf_viewer.css CDN */
+
+.selection-info {
+
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.selection-info.empty {
+    background: #fef3c7;
+    border-color: #fcd34d;
+}
+
+.form-section {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    height: fit-content;
+}
+
+.form-section h3 {
+    margin: 0 0 1.5rem 0;
+    color: #1f2937;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ollama-status {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.ollama-status.connected {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.ollama-status.disconnected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #374151;
+}
+
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group textarea:read-only {
+    background: #f9fafb;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.btn-capture {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.btn-group .btn {
+    flex: 1;
+}
+
+.preview-result {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.preview-result h4 {
+    margin: 0 0 0.5rem 0;
+    color: #0369a1;
+    font-size: 0.9rem;
+}
+
+.preview-result p {
+    margin: 0;
+    color: #1e40af;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.hidden {
+    display: none;
+}
+
+.pdf-selector {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.pdf-selector label {
+    color: white;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.pdf-selector select {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-size: 1rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="rephrase-container">
+    <!-- PDF Viewer Section -->
+    <div class="pdf-viewer-section">
+        <div class="pdf-viewer-header">
+            <h3>📄 {{ pdf_name }}</h3>
+            <div class="pdf-controls">
+                <button onclick="prevPage()">◀ Prev</button>
+                <span id="page-info">Page 1 of ?</span>
+                <button onclick="nextPage()">Next ▶</button>
+                <button onclick="zoomOut()">−</button>
+                <span id="zoom-info">100%</span>
+                <button onclick="zoomIn()">+</button>
+            </div>
+        </div>
+        <div id="pdf-viewer-container">
+            <div id="pdf-canvas-container"></div>
+        </div>
+        <div style="padding: 1rem;">
+            <button class="btn btn-capture" onclick="clearSelection()">
+                🗑️ Clear Selection
+            </button>
+            <div id="selection-info" class="selection-info empty">
+                <strong>💡 Instructions:</strong> Click on text lines to select them. Click again to deselect.
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Form Section -->
+    <div class="form-section">
+        <h3>🤖 AI Text Rephrase</h3>
+        
+        {% if ollama_connected %}
+        <div class="ollama-status connected">
+            ✅ Ollama connected! {{ ollama_models|length }} models available.
+        </div>
+        {% else %}
+        <div class="ollama-status disconnected">
+            ❌ Ollama not available. Please start Ollama server.
+        </div>
+        {% endif %}
+        
+        {% if uploaded_pdfs|length > 1 %}
+        <div class="pdf-selector">
+            <label>📂 Select PDF:</label>
+            <select onchange="window.location.href='{% url 'rephrase' %}?pdf=' + this.value">
+                {% for pdf in uploaded_pdfs %}
+                <option value="{{ pdf.id }}" {% if pdf.id == selected_pdf.id %}selected{% endif %}>
+                    {{ pdf.name }} • {{ pdf.size|filesizeformat }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        
+        <form method="post" id="rephrase-form">
+            {% csrf_token %}
+            
+            <!-- Hidden fields for coordinates -->
+            <input type="hidden" name="page_number" id="page_number" value="">
+            <input type="hidden" name="bbox_x0" id="bbox_x0" value="">
+            <input type="hidden" name="bbox_y0" id="bbox_y0" value="">
+            <input type="hidden" name="bbox_x1" id="bbox_x1" value="">
+            <input type="hidden" name="bbox_y1" id="bbox_y1" value="">
+            
+            <div class="form-group">
+                <label>Selected Text</label>
+                <textarea name="selected_text" id="selected_text" readonly placeholder="Select text from PDF viewer..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="rephrase_style">Rephrase Style</label>
+                <select name="rephrase_style" id="rephrase_style">
+                    <option value="formal">Formal/Professional</option>
+                    <option value="casual">Casual/Friendly</option>
+                    <option value="simplified">Simplified</option>
+                    <option value="concise">Concise/Shorter</option>
+                    <option value="expanded">Expanded/Detailed</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="ai_model">AI Model</label>
+                <select name="ai_model" id="ai_model">
+                    {% for model in ollama_models %}
+                    <option value="{{ model }}">{{ model }}</option>
+                    {% empty %}
+                    <option value="">No models available</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary" onclick="previewRephrase()">
+                    👁️ Preview
+                </button>
+                <button type="submit" class="btn btn-primary" id="apply-btn" disabled>
+                    ✨ Apply Changes
+                </button>
+            </div>
+            
+            <div id="preview-result" class="preview-result hidden">
+                <h4>✅ Rephrased Text:</h4>
+                <p id="preview-text"></p>
+            </div>
+        </form>
+        
+        <div style="margin-top: 1.5rem;">
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary" style="display: inline-block; text-decoration: none;">
+                ← Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.min.js"></script>
+<script>
+// PDF.js setup
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
+
+let pdfDoc = null;
+let currentPage = 1;
+let scale = 1.5;
+let textBlocks = [];  // Store text blocks with positions
+let selectedBlockIndices = new Set();  // Track selected blocks
+
+const pdfUrl = '/media/{{ pdf_path_relative }}';
+const container = document.getElementById('pdf-canvas-container');
+
+// Load PDF
+async function loadPDF() {
+    try {
+        pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+        document.getElementById('page-info').textContent = `Page ${currentPage} of ${pdfDoc.numPages}`;
+        renderPage(currentPage);
+    } catch (error) {
+        console.error('Error loading PDF:', error);
+        container.innerHTML = '<p style="color: white; padding: 2rem;">Error loading PDF</p>';
+    }
+}
+
+// Render a page with clickable text blocks
+async function renderPage(pageNum) {
+    const page = await pdfDoc.getPage(pageNum);
+    const viewport = page.getViewport({ scale: scale });
+    
+    // Clear state
+    container.innerHTML = '';
+    textBlocks = [];
+    selectedBlockIndices.clear();
+    updateSelectionUI();
+    
+    // Create wrapper
+    const wrapper = document.createElement('div');
+    wrapper.className = 'pdf-page-wrapper';
+    wrapper.style.width = viewport.width + 'px';
+    wrapper.style.height = viewport.height + 'px';
+    wrapper.style.position = 'relative';
+    
+    // Create canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    wrapper.appendChild(canvas);
+    
+    container.appendChild(wrapper);
+    
+    // Render PDF page
+    const context = canvas.getContext('2d');
+    await page.render({
+        canvasContext: context,
+        viewport: viewport
+    }).promise;
+    
+    // Get text content and create clickable overlays
+    const textContent = await page.getTextContent();
+    
+    // Group items by approximate Y position (same line)
+    const lines = [];
+    let currentLine = [];
+    let lastY = null;
+    
+    for (const item of textContent.items) {
+        if (!item.str.trim()) continue;
+        
+        const tx = pdfjsLib.Util.transform(viewport.transform, item.transform);
+        const x = tx[4];
+        const y = tx[5] - item.height;
+        
+        // If Y changed significantly, start new line
+        if (lastY !== null && Math.abs(y - lastY) > item.height * 0.5) {
+            if (currentLine.length > 0) {
+                lines.push(currentLine);
+            }
+            currentLine = [];
+        }
+        
+        currentLine.push({
+            str: item.str,
+            x: x,
+            y: y,
+            width: item.width * scale,
+            height: item.height * scale
+        });
+        lastY = y;
+    }
+    if (currentLine.length > 0) {
+        lines.push(currentLine);
+    }
+    
+    // Create clickable block for each line
+    lines.forEach((line, index) => {
+        const minX = Math.min(...line.map(i => i.x));
+        const maxX = Math.max(...line.map(i => i.x + i.width));
+        const minY = Math.min(...line.map(i => i.y));
+        const maxY = Math.max(...line.map(i => i.y + i.height));
+        
+        const text = line.map(i => i.str).join('');
+        
+        const block = document.createElement('div');
+        block.className = 'text-block';
+        block.style.cssText = `
+            position: absolute;
+            left: ${minX}px;
+            top: ${minY}px;
+            width: ${maxX - minX}px;
+            height: ${maxY - minY}px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 3px;
+            transition: all 0.15s;
+            box-sizing: border-box;
+        `;
+        block.dataset.index = index;
+        
+        block.addEventListener('click', () => toggleBlock(index));
+        block.addEventListener('mouseenter', () => {
+            if (!selectedBlockIndices.has(index)) {
+                block.style.background = 'rgba(102, 126, 234, 0.15)';
+                block.style.borderColor = 'rgba(102, 126, 234, 0.4)';
+            }
+        });
+        block.addEventListener('mouseleave', () => {
+            if (!selectedBlockIndices.has(index)) {
+                block.style.background = 'transparent';
+                block.style.borderColor = 'transparent';
+            }
+        });
+        
+        wrapper.appendChild(block);
+        
+        textBlocks.push({
+            element: block,
+            text: text,
+            bbox: { x0: minX / scale, y0: minY / scale, x1: maxX / scale, y1: maxY / scale }
+        });
+    });
+    
+    document.getElementById('page-info').textContent = `Page ${currentPage} of ${pdfDoc.numPages}`;
+    document.getElementById('zoom-info').textContent = Math.round(scale * 100) + '%';
+}
+
+function toggleBlock(index) {
+    const block = textBlocks[index];
+    if (selectedBlockIndices.has(index)) {
+        selectedBlockIndices.delete(index);
+        block.element.style.background = 'transparent';
+        block.element.style.borderColor = 'transparent';
+    } else {
+        selectedBlockIndices.add(index);
+        block.element.style.background = 'rgba(16, 185, 129, 0.25)';
+        block.element.style.borderColor = '#10b981';
+    }
+    updateSelectionUI();
+}
+
+function updateSelectionUI() {
+    const selectedTexts = [];
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    
+    const sortedIndices = Array.from(selectedBlockIndices).sort((a, b) => a - b);
+    
+    for (const idx of sortedIndices) {
+        const block = textBlocks[idx];
+        selectedTexts.push(block.text);
+        minX = Math.min(minX, block.bbox.x0);
+        minY = Math.min(minY, block.bbox.y0);
+        maxX = Math.max(maxX, block.bbox.x1);
+        maxY = Math.max(maxY, block.bbox.y1);
+    }
+    
+    const combinedText = selectedTexts.join(' ');
+    
+    if (combinedText) {
+        document.getElementById('selected_text').value = combinedText;
+        document.getElementById('page_number').value = currentPage - 1;
+        document.getElementById('bbox_x0').value = minX;
+        document.getElementById('bbox_y0').value = minY;
+        document.getElementById('bbox_x1').value = maxX;
+        document.getElementById('bbox_y1').value = maxY;
+        
+        document.getElementById('selection-info').innerHTML = 
+            `<strong>✅ ${sortedIndices.length} line(s) selected</strong> - ${combinedText.length} characters`;
+        document.getElementById('selection-info').className = 'selection-info';
+        document.getElementById('apply-btn').disabled = false;
+    } else {
+        document.getElementById('selected_text').value = '';
+        document.getElementById('selection-info').innerHTML = 
+            '<strong>💡 Instructions:</strong> Click on text lines to select them. Click again to deselect.';
+        document.getElementById('selection-info').className = 'selection-info empty';
+        document.getElementById('apply-btn').disabled = true;
+    }
+}
+
+function clearSelection() {
+    for (const idx of selectedBlockIndices) {
+        textBlocks[idx].element.style.background = 'transparent';
+        textBlocks[idx].element.style.borderColor = 'transparent';
+    }
+    selectedBlockIndices.clear();
+    updateSelectionUI();
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        renderPage(currentPage);
+    }
+}
+
+function nextPage() {
+    if (pdfDoc && currentPage < pdfDoc.numPages) {
+        currentPage++;
+        renderPage(currentPage);
+    }
+}
+
+function zoomIn() {
+    scale += 0.25;
+    renderPage(currentPage);
+}
+
+function zoomOut() {
+    if (scale > 0.5) {
+        scale -= 0.25;
+        renderPage(currentPage);
+    }
+}
+
+// Preview rephrase
+async function previewRephrase() {
+    const selectedText = document.getElementById('selected_text').value;
+    if (!selectedText) {
+        alert('Please select text first by clicking on lines');
+        return;
+    }
+    
+    const style = document.getElementById('rephrase_style').value;
+    const model = document.getElementById('ai_model').value;
+    
+    document.getElementById('preview-result').classList.remove('hidden');
+    document.getElementById('preview-text').textContent = 'Generating...';
+    
+    try {
+        const response = await fetch('{% url "rephrase_preview" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: new URLSearchParams({
+                'text': selectedText,
+                'style': style,
+                'model': model
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            document.getElementById('preview-text').textContent = data.rephrased_text;
+        } else {
+            document.getElementById('preview-text').textContent = 'Error: ' + data.error;
+        }
+    } catch (error) {
+        document.getElementById('preview-text').textContent = 'Error: ' + error.message;
+    }
+}
+
+// Initialize
+loadPDF();
+</script>
+{% endblock %}
+

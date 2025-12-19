@@ -326,6 +326,67 @@ class PageNumbersForm(forms.Form):
     )
 
 
-
-
+class RephraseForm(forms.Form):
+    """Form for AI-powered text rephrasing in PDF."""
+    
+    STYLE_CHOICES = [
+        ('formal', 'Formal/Professional'),
+        ('casual', 'Casual/Conversational'),
+        ('simplified', 'Simplified'),
+        ('concise', 'Concise'),
+        ('expanded', 'Expanded/Detailed'),
+    ]
+    
+    search_text = forms.CharField(
+        max_length=2000,
+        required=True,
+        label="Text to Rephrase",
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Enter the text you want to find and rephrase...',
+            'class': 'form-input',
+            'rows': 4
+        })
+    )
+    
+    rephrase_style = forms.ChoiceField(
+        choices=STYLE_CHOICES,
+        initial='formal',
+        label='Rephrase Style',
+        widget=forms.Select(attrs={'class': 'form-input'})
+    )
+    
+    model = forms.ChoiceField(
+        choices=[],  # Dynamically populated
+        required=False,
+        label='AI Model',
+        widget=forms.Select(attrs={'class': 'form-input'})
+    )
+    
+    case_sensitive = forms.BooleanField(
+        required=False,
+        initial=False,
+        label='Case Sensitive Search',
+        widget=forms.CheckboxInput(attrs={'class': 'form-checkbox'})
+    )
+    
+    page_range = forms.CharField(
+        max_length=100,
+        required=False,
+        label='Page Range (Optional)',
+        help_text='e.g., 1-3,5,7-10 or leave blank for all pages',
+        widget=forms.TextInput(attrs={
+            'placeholder': '1-3,5',
+            'class': 'form-input'
+        })
+    )
+    
+    def __init__(self, *args, **kwargs):
+        model_choices = kwargs.pop('model_choices', None)
+        super().__init__(*args, **kwargs)
+        
+        if model_choices:
+            self.fields['model'].choices = model_choices
+        else:
+            # Default fallback
+            self.fields['model'].choices = [('', 'Default Model')]
 
