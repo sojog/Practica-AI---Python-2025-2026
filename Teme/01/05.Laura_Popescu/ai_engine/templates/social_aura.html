@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block title %}Social Aura: {{ birthdate.full_name }} - DateGenie{% endblock %}
+
+{% block extra_styles %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap');
+
+    h1,
+    h2,
+    h3 {
+        font-family: 'Outfit', sans-serif;
+    }
+
+    .aura-gradient {
+        background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    }
+
+    .shimmer {
+        background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: 200% 0;
+        }
+
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-12 relative overflow-hidden">
+
+    <!-- Background element -->
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] aura-gradient rounded-full pointer-events-none -z-10">
+    </div>
+
+    <!-- Header -->
+    <div class="text-center max-w-2xl mx-auto mb-16">
+        <div
+            class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-purple-100 text-purple-600 font-bold text-4xl mb-6 shadow-sm border-4 border-white">
+            {{ birthdate.initials }}
+        </div>
+        <h1 class="text-4xl font-bold text-slate-900 mb-2">Social Aura Analysis</h1>
+        <p class="text-lg text-slate-500">Reading the energy of {{ birthdate.full_name }}</p>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="max-w-md mx-auto text-center py-12">
+        <div class="relative w-24 h-24 mx-auto mb-8">
+            <div class="absolute inset-0 border-4 border-purple-200 rounded-full animate-ping opacity-25"></div>
+            <div
+                class="absolute inset-0 border-4 border-t-purple-600 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin">
+            </div>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800 mb-2">Analyzing Cosmic Vibes...</h3>
+        <p class="text-slate-500">Interpreting zodiac energy and personality traits.</p>
+    </div>
+
+    <!-- Results Area -->
+    <div id="results-area" class="hidden max-w-3xl mx-auto">
+
+        <!-- Main Aura Card -->
+        <div
+            class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border border-white/50 relative overflow-hidden fade-in">
+            <div class="absolute top-0 right-0 p-8 opacity-5">
+                <svg class="w-64 h-64" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z" />
+                </svg>
+            </div>
+
+            <div class="relative z-10 text-center">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">The Vibe</h2>
+                <p id="aura-description" class="text-xl leading-relaxed text-slate-600 mb-10 italic font-medium">
+                    <!-- Description will be injected here -->
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4" id="aura-keywords">
+                    <!-- Keywords injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-12 text-center flex flex-col md:flex-row gap-4 justify-center items-center opacity-0 fade-in"
+            style="animation-delay: 0.5s">
+            <button onclick="fetchAura(true)"
+                class="text-purple-600 hover:text-purple-800 font-medium px-6 py-3 rounded-xl hover:bg-purple-50 transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                    </path>
+                </svg>
+                Read Again
+            </button>
+            <a href="{% url 'social_aura_dashboard' %}"
+                class="bg-slate-900 text-white px-8 py-3 rounded-xl hover:bg-slate-800 transition-all font-medium">
+                Analyze Another Friend
+            </a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    const birthdateId = "{{ birthdate.pk }}";
+    const loadingState = document.getElementById('loading-state');
+    const resultsArea = document.getElementById('results-area');
+    const descriptionEl = document.getElementById('aura-description');
+    const keywordsEl = document.getElementById('aura-keywords');
+
+    async function fetchAura(regenerate = false) {
+        if (regenerate) {
+            loadingState.classList.remove('hidden');
+            resultsArea.classList.add('hidden');
+        }
+
+        try {
+            const url = `/ai/social-aura/api/${birthdateId}/${regenerate ? '?regenerate=true' : ''}`;
+            const response = await fetch(url);
+            const data = await response.json();
+
+            loadingState.classList.add('hidden');
+            resultsArea.classList.remove('hidden');
+
+            // Update content
+            descriptionEl.textContent = `"${data.description}"`;
+
+            // Clear and add keywords
+            keywordsEl.innerHTML = '';
+            const keywords = data.keywords.split(',').map(k => k.trim());
+            keywords.forEach((keyword, index) => {
+                const badge = document.createElement('span');
+                badge.className = 'px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-full text-sm font-bold shadow-md transform hover:scale-105 transition-transform';
+                badge.textContent = keyword;
+                badge.style.animationDelay = `${index * 0.1}s`;
+                badge.classList.add('fade-in');
+                keywordsEl.appendChild(badge);
+            });
+
+        } catch (error) {
+            console.error('Error:', error);
+            loadingState.innerHTML = '<p class="text-red-500">Something went wrong reading the aura.</p>';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => fetchAura());
+</script>
+{% endblock %}

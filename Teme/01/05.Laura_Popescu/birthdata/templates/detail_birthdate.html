@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ birthdate.full_name }} - DateGenie{% endblock %}
+
+{% block content %}
+<div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <div class="mb-8 flex items-center justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">{{ birthdate.full_name }}</h1>
+            <p class="mt-1 text-gray-500">Contact Details</p>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="{% url 'list_birthdates' %}" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Back
+                to List</a>
+            <a href="{% url 'edit_birthdate' birthdate.pk %}"
+                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Edit Contact
+            </a>
+        </div>
+    </div>
+
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-8 border border-slate-100">
+        <div class="px-4 py-5 sm:px-6 bg-gray-50 border-b border-gray-200">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Profile Information</h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and preferences.</p>
+        </div>
+        <div class="bg-white px-4 py-5">
+            <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500">Birthdate</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ birthdate.birthdate|date:"F j, Y" }}</dd>
+                </div>
+                <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500">Next Birthday</dt>
+                    <dd class="mt-1 text-sm text-gray-900 font-semibold text-indigo-600">
+                        {{ birthdate.next_birthday_date|date:"l, F j, Y" }}
+                    </dd>
+                </div>
+                <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500">Relationship</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ birthdate.relation|default:"Not specified" }}</dd>
+                </div>
+                <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500">Zodiac Sign</dt>
+                    <dd class="mt-1 text-sm text-gray-900 flex items-center gap-2">
+                        {{ birthdate.zodiac_sign }}
+                    </dd>
+                </div>
+                <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500">Age</dt>
+                    <dd class="mt-1 text-sm text-gray-900">Turning {{ birthdate.age|add:"1" }}</dd>
+                </div>
+                <div class="sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500">Notes</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ birthdate.notes|default:"No notes yet." }}</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    <!-- AI Suggestions -->
+    <div
+        class="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 rounded-2xl shadow-xl p-6 sm:p-8 text-white mb-8 border border-white/10">
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-white/10 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-60 h-60 rounded-full bg-purple-400/20 blur-3xl"></div>
+
+        <h3 class="relative text-xl font-bold mb-3 flex items-center gap-3">
+            <div class="p-2 bg-white/20 rounded-lg backdrop-blur-md">
+                <svg class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+            </div>
+            AI Gift Suggestions
+        </h3>
+
+        <div id="ai-content">
+            <p class="text-indigo-100 mb-6 text-lg">Click below to find the perfect gift for <strong>{{
+                    birthdate.first_name }}</strong>.</p>
+            <button onclick="loadSuggestions()"
+                class="bg-white text-indigo-600 font-bold py-3 px-6 rounded-full shadow-lg hover:bg-indigo-50 hover:scale-105 transition-all text-sm flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                    </path>
+                </svg>
+                Generate Ideas for {{ birthdate.first_name }}
+            </button>
+        </div>
+
+        <div id="ai-loading" class="hidden">
+            <div class="flex items-center gap-2 animate-pulse text-indigo-100">
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                    </circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                Thinking... (this might take a few seconds)
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function loadSuggestions() {
+        const contentDiv = document.getElementById('ai-content');
+        const loadingDiv = document.getElementById('ai-loading');
+        const contactId = "{{ birthdate.pk }}";
+
+        // Hide previous content and show loading
+        // contentDiv.classList.add('hidden'); // Don't fully hide, maybe just dim? Or replace is fine.
+        contentDiv.innerHTML = ''; // Clear previous results immediately
+        contentDiv.classList.add('hidden');
+        loadingDiv.classList.remove('hidden');
+
+        fetch(`/ai/suggestions/${contactId}/`)
+            .then(response => response.json())
+            .then(data => {
+                const suggestions = data.suggestions || [];
+
+                if (suggestions.length === 0) {
+                    contentDiv.innerHTML = `
+                        <p class="text-indigo-100 mb-4">No suggestions found. Try adding more notes to the contact.</p>
+                        <button onclick="loadSuggestions()" class="text-white underline text-sm">Try Again</button>
+                        `;
+                } else {
+                    let html = '<p class="text-indigo-100 mb-6 text-sm opacity-90">Based on interests, here are some hand-picked ideas powered by Gemini:</p>';
+
+                    html += '<div class="grid gap-3 mb-6">';
+                    suggestions.forEach(item => {
+                        const searchUrl = `https://www.emag.ro/search/${encodeURIComponent(item)}`;
+                        html += `
+                            <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white/15 transition-all group">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-8 w-8 rounded-full bg-indigo-400/30 flex items-center justify-center text-white">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                                    </div>
+                                    <span class="font-medium text-white text-lg tracking-tight">${item}</span>
+                                </div>
+                                <a href="${searchUrl}" target="_blank" class="bg-white text-indigo-700 px-4 py-2 rounded-lg font-bold text-sm shadow-lg hover:bg-indigo-50 hover:scale-105 transition-all flex items-center justify-center gap-2 whitespace-nowrap">
+                                    <span>Buy on eMAG</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>`;
+                    });
+                    html += '</div>';
+
+                    // Add Regenerate Button
+                    html += `
+                        <button 
+                            onclick="loadSuggestions()"
+                            class="w-full bg-black/20 hover:bg-black/30 text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2 transition-colors border border-white/10 text-sm backdrop-blur-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            Not quite right? Show me other ideas
+                        </button>
+                    `;
+
+                    contentDiv.innerHTML = html;
+                }
+
+                loadingDiv.classList.add('hidden');
+                contentDiv.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                contentDiv.innerHTML = `
+                    <p class="text-red-200 mb-2">Something went wrong.</p>
+                    <button onclick="loadSuggestions()" class="text-white underline text-sm">Try Again</button>
+                `;
+                loadingDiv.classList.add('hidden');
+                contentDiv.classList.remove('hidden');
+            });
+    }
+</script>
+{% endblock %}

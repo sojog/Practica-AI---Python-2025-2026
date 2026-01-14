@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{% url 'home_view' %}" class="flex-shrink-0 flex items-center gap-2">
+                        <div
+                            class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                            D</div>
+                        <span class="font-bold text-xl text-indigo-900">DateGenie</span>
+                    </a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{% url 'detail_birthdate' birthdate.pk %}"
+                        class="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors">
+                        &larr; Back to Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+
+        <!-- Hero Header -->
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <div
+                class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-indigo-100 text-indigo-600 font-bold text-3xl mb-6 shadow-sm border-4 border-white">
+                {{ birthdate.initials }}
+                <h1 class="text-4xl font-bold text-slate-900 mb-2">Gift Ideas for <span class="text-indigo-600">{{
+                        birthdate.full_name }}</span></h1>
+                <p class="text-lg text-slate-500"> Found the perfect personalized suggestions based on their profile.
+                </p>
+            </div>
+
+            <!-- Loading State (Shown by default while AI generates) -->
+            <div id="loading-state" class="max-w-md mx-auto text-center py-12">
+                <div class="relative w-24 h-24 mx-auto mb-8">
+                    <div class="absolute inset-0 border-4 border-indigo-200 rounded-full animate-ping opacity-25"></div>
+                    <div
+                        class="absolute inset-0 border-4 border-t-indigo-600 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin">
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Consulting the AI...</h3>
+                <p class="text-slate-500">Analysing interests, age, and zodiac sign for the perfect match.</p>
+            </div>
+
+            <!-- Results Grid -->
+            <div id="results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Content will be injected here via JS -->
+                <!-- Skeleton Loaders for initial render -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm shimmer h-64"></div>
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm shimmer h-64"></div>
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm shimmer h-64"></div>
+            </div>
+
+            <!-- Regenerate Action -->
+            <div id="action-area" class="text-center mt-16 hidden opacity-0 transition-opacity duration-700">
+                <p class="text-slate-500 mb-4">Not quite right? Let's try differently.</p>
+                <button onclick="fetchSuggestions()"
+                    class="bg-white text-indigo-600 font-bold py-3 px-8 rounded-full shadow-lg border border-slate-200 hover:bg-indigo-50 hover:scale-105 transition-all text-sm inline-flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                        </path>
+                    </svg>
+                    Generate New Ideas
+                </button>
+            </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-auto">
+        <div class="max-w-[95%] mx-auto py-8 px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-center text-sm text-slate-400">&copy; 2025 DateGenie, Inc.</p>
+            <div class="flex items-center gap-2 text-xs text-slate-400">
+                <span>Powered by Gemini AI</span>
+                <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                <span>eMAG Integration</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const birthdateId = "{{ birthdate.pk }}";
+        const loadingState = document.getElementById('loading-state');
+        const resultsContainer = document.getElementById('results-container');
+        const actionArea = document.getElementById('action-area');
+
+        function showLoading() {
+            resultsContainer.innerHTML = `
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm shimmer h-64"></div>
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm shimmer h-64"></div>
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm shimmer h-64"></div>
+            `;
+            actionArea.classList.add('hidden');
+        }
+
+        function hideLoading() {
+            loadingState.classList.add('hidden');
+            resultsContainer.classList.remove('hidden');
+        }
+
+        function createGiftCard(gift) {
+            return `
+                <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col fade-in group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <svg class="w-24 h-24 text-indigo-500 transform rotate-12" fill="currentColor" viewBox="0 0 24 24"><path d="M20 7h-3a4 4 0 1 0-8 0H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-9-3a2 2 0 1 1 4 0h-4V4zm-7 5h4v10H4V9zm16 10h-6V9h6v10z"/></svg>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-xs font-bold uppercase tracking-wide mb-3">Recommendation</span>
+                        <h3 class="text-xl font-bold text-slate-800 leading-tight mb-2 relative z-10">${gift.item}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed relative z-10">${gift.reason}</p>
+                    </div>
+
+                    <div class="mt-auto pt-6 relative z-10">
+                        <a href="https://www.emag.ro/search/${encodeURIComponent(gift.item)}" target="_blank" 
+                           class="block w-full bg-slate-900 hover:bg-indigo-600 text-white text-center font-bold py-3 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2">
+                           <span>Shop on eMAG</span>
+                           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function fetchSuggestions() {
+            showLoading();
+
+            try {
+                const response = await fetch(`/ai/suggestions/${birthdateId}/`);
+                const data = await response.json();
+
+                hideLoading();
+                resultsContainer.innerHTML = ''; // Clear skeletons
+
+                if (data.suggestions && data.suggestions.length > 0) {
+                    data.suggestions.forEach((gift, index) => {
+                        // Stagger animation
+                        setTimeout(() => {
+                            const tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = createGiftCard(gift);
+                            resultsContainer.appendChild(tempDiv.firstElementChild);
+                        }, index * 100);
+                    });
+
+                    // Show regenerate button
+                    actionArea.classList.remove('hidden');
+                    setTimeout(() => actionArea.classList.remove('opacity-0'), 500);
+                } else {
+                    resultsContainer.innerHTML = '<p class="text-center text-red-500 col-span-3">Oops, got no ideas. Try again?</p>';
+                    actionArea.classList.remove('hidden', 'opacity-0');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                hideLoading();
+                resultsContainer.innerHTML = '<p class="text-center text-red-500 col-span-3">Something went wrong connecting to the AI.</p>';
+            }
+        }
+
+        // Auto-load on page load
+        document.addEventListener('DOMContentLoaded', fetchSuggestions);
+    </script>
+
+</body>
+
+</html>
