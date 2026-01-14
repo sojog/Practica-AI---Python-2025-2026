@@ -232,3 +232,58 @@ msgstr "Mediu"
 
 msgid "Hard"
 msgstr "Dificil"
+
+msgid "Sign in to your account"
+msgstr "Conecteaza-te la contul tau"
+
+msgid "Don't have an account?"
+msgstr "Nu ai cont?"
+
+msgid "Create one"
+msgstr "Creeaza unul"
+
+msgid "Username"
+msgstr "Nume de utilizator"
+
+msgid "Password"
+msgstr "Parola"
+
+msgid "Sign In"
+msgstr "Conectare"
+
+# Virtual Assistant translations
+msgid "Virtual Assistant"
+msgstr "Asistent Virtual"
+
+msgid "Ask by Voice"
+msgstr "Întreabă vocal"
+
+msgid "Ask the assistant for more details..."
+msgstr "Întreabă asistentul pentru mai multe detalii..."
+
+msgid "Listening..."
+msgstr "Ascult..."
+
+msgid "Thinking..."
+msgstr "Gândesc..."
+
+msgid "Error:"
+msgstr "Eroare:"
+
+msgid "Sorry, I couldn't process that."
+msgstr "Îmi pare rău, nu am putut procesa asta."
+
+msgid "An error occurred. Please try again."
+msgstr "A apărut o eroare. Te rog încearcă din nou."
+
+# Progress indicators
+msgid "Question %(index)s of %(total)s"
+msgstr "Întrebarea %(index)s din %(total)s"
+
+msgid "%(percent)s%% Complete"
+msgstr "%(percent)s%% Complet"
+
+# Messages
+msgid "Quiz generated with %(count)d questions!"
+msgstr "Test generat cu %(count)d întrebări!"
+

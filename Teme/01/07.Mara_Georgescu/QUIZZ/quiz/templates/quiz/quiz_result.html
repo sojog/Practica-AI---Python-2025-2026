@@ -51,8 +51,7 @@
                             <span class="text-sm font-medium text-gray-500">{% blocktrans with num=forloop.counter %}Question {{ num }}{% endblocktrans %}</span>
                             <span
                                 class="px-2 py-1 text-xs rounded-full {% if item.answer.is_correct %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">
-                                {% if item.answer.is_correct %}✓ {% trans "Correct" %}{% else %}✗ {% trans "Incorrect"
-                                %}{% endif %}
+                                {% if item.answer.is_correct %}✓ {% trans "Correct" %}{% else %}✗ {% trans "Incorrect" %}{% endif %}
                             </span>
                         </div>
                         <p class="text-lg font-medium text-gray-900">{{ item.question.question_text }}</p>

@@ -2,11 +2,11 @@ import random
 import json
 import re
 import google.generativeai as genai
-try:
-    import ollama
-except ImportError:
-    ollama = None
+
 from django.conf import settings
+import requests
+
+
 
 # Translation dictionaries for multilingual support
 TRANSLATIONS = {
@@ -92,185 +92,68 @@ def t(key, language='en'):
 
 def generate_quiz_with_ai(text, question_count=10, question_type='mixed', difficulty='medium', language='en'):
     """
-    Generate quiz questions using AI (Gemini for generation, Ollama for translation if needed).
+    Generate quiz questions using AI (Gemini).
+    Falls back to intelligent mock generation if no API key is present.
     """
     api_key = getattr(settings, 'GEMINI_API_KEY', None)
     
-    # 1. Generate questions with Gemini (always in English first if we need translation, or directly in Romanian if no Ollama)
-    questions = []
+    # 1. Generate questions with Gemini
     if api_key:
         try:
-            # If we want Ollama to translate, we generate in English first
-            gen_lang = 'en' if (language == 'ro' and ollama) else language
-            questions = generate_quiz_with_gemini(text, question_count, question_type, difficulty, gen_lang)
-            
-            # 2. If language is Romanian and Ollama is available, translate the English questions
-            if language == 'ro' and gen_lang == 'en' and ollama:
-                try:
-                    questions = translate_questions_with_ollama(questions, 'ro')
-                except Exception as e:
-                    print(f"Ollama Translation Error: {e}")
-                    # If translation fails, we still have the English questions from Gemini
-            
+            # Generate directly in the requested language with Gemini
+            questions = generate_quiz_with_gemini(text, question_count, question_type, difficulty, language)
             return questions
         except Exception as e:
             print(f"Gemini AI Error: {e}")
     
-    # 3. Fallback to Ollama for generation if Gemini fails or is missing
-    if ollama:
-        try:
-            return generate_quiz_with_ollama(text, question_count, question_type, difficulty, language)
-        except Exception as e:
-            print(f"Ollama AI Error: {e}")
-    
-    # 4. Fallback to intelligent mock generation
+    # 2. Fallback to intelligent mock generation
     return intelligent_mock_generate_quiz(text, question_count, question_type, difficulty, language)
 
-def translate_questions_with_ollama(questions, target_language):
-    """
-    Translate a list of quiz questions using local Ollama AI.
-    """
-    if not ollama:
-        return questions
-        
-    model_name = getattr(settings, 'OLLAMA_MODEL', 'llama3')
-    lang_name = "Romanian" if target_language == 'ro' else "English"
-    
-    # We'll translate the entire JSON structure to maintain consistency
-    prompt = f"""
-    You are a professional translator specializing in educational content. 
-    Translate the following quiz questions from English into {lang_name}.
-    
-    CRITICAL RULES:
-    1. Maintain the EXACT same JSON structure.
-    2. Translate only the values for: 'question_text', 'correct_answer', 'options', and 'explanation'.
-    3. Do NOT translate 'question_type', 'order', or any JSON keys.
-    4. Ensure the translation is natural, grammatically correct, and uses appropriate academic terminology in {lang_name}.
-    5. For multiple choice options, ensure they remain consistent with the translated question and correct answer.
-    6. Return ONLY the translated JSON array, with no introductory or concluding text.
-    
-    JSON to translate:
-    {json.dumps(questions, indent=2)}
-    """
-    
-    response = ollama.chat(model=model_name, messages=[
-        {'role': 'user', 'content': prompt}
-    ])
-    
-    content = response['message']['content']
-    
-    # Extract JSON from response
-    start_idx = content.find('[')
-    end_idx = content.rfind(']') + 1
-    if start_idx != -1 and end_idx != 0:
-        content = content[start_idx:end_idx]
-        
-    try:
-        translated_questions = json.loads(content)
-        return translated_questions
-    except Exception as e:
-        print(f"Failed to parse Ollama translation: {e}")
-        return questions
-
-def generate_quiz_with_ollama(text, question_count, question_type, difficulty, language):
-    """
-    Generate quiz questions using local Ollama AI.
-    """
-    model_name = getattr(settings, 'OLLAMA_MODEL', 'llama3')
-    lang_name = "Romanian" if language == 'ro' else "English"
-    
-    prompt = f"""
-    Analyze the following text and generate {question_count} high-quality quiz questions in {lang_name}.
-    Question Type: {question_type}
-    Difficulty Level: {difficulty}
-    
-    Text:
-    {text[:5000]}
-    
-    Return ONLY a valid JSON array of objects with this structure:
-    [
-        {{
-            "question_text": "The question text in {lang_name}",
-            "question_type": "multiple_choice", "true_false", "fill_in_blank", or "short_answer",
-            "correct_answer": "The correct answer",
-            "options": ["option1", "option2", "option3", "option4"], // only for multiple_choice
-            "explanation": "Detailed explanation in {lang_name} referencing the text"
-        }}
-    ]
-    
-    Rules:
-    - For true_false, correct_answer must be "True" or "False".
-    - For multiple_choice, provide exactly 4 options.
-    - Ensure all content is in {lang_name}.
-    - Return ONLY the JSON array, no other text.
-    """
-    
-    response = ollama.chat(model=model_name, messages=[
-        {'role': 'user', 'content': prompt}
-    ])
-    
-    content = response['message']['content']
-    
-    # Extract JSON from response
-    if "```json" in content:
-        content = content.split("```json")[1].split("```")[0].strip()
-    elif "```" in content:
-        content = content.split("```")[1].split("```")[0].strip()
-    
-    # Clean up any potential non-JSON text before/after
-    start_idx = content.find('[')
-    end_idx = content.rfind(']') + 1
-    if start_idx != -1 and end_idx != 0:
-        content = content[start_idx:end_idx]
-        
-    questions = json.loads(content)
-    
-    for i, q in enumerate(questions):
-        q['order'] = i + 1
-        if question_type != 'mixed':
-            q['question_type'] = question_type
-            
-    return questions
 
 def generate_quiz_with_gemini(text, question_count, question_type, difficulty, language):
     """
     Generate quiz questions using Google Gemini AI.
     """
     genai.configure(api_key=settings.GEMINI_API_KEY)
+    # Use the generic latest flash alias which usually has better free tier availability
     model = genai.GenerativeModel('gemini-flash-latest')
     
     lang_name = "Romanian" if language == 'ro' else "English"
     
     prompt = f"""
-    Analyze the following text and generate {question_count} high-quality quiz questions in {lang_name}.
-    Question Type: {question_type}
-    Difficulty Level: {difficulty}
+    You are an expert educational content creator.
+    Analyze the following text and generate {question_count} high-quality, personalized quiz questions in {lang_name}.
     
-    Focus on:
-    1. Key concepts and definitions
-    2. Important relationships and connections
-    3. Main ideas and supporting details
-    4. Critical facts and information
+    Parameters:
+    - Type: {question_type}
+    - Difficulty: {difficulty}
+    - Target Language: {lang_name}
     
-    Text:
-    {text[:10000]}
+    CRITICAL INSTRUCTIONS FOR QUALITY:
+    1. STRICTLY PERSONALIZED: Questions must be derived ONLY from the provided text. Do not ask generic questions like "What is the main idea?" unless the text specifically argues for a main idea. Ask about specific details, names, figures, and concepts found IN THE TEXT.
+    2. ACCURATE TRANSLATION: If the source text is in English and target is Romanian (or vice versa), ensure the translation is natural, idiomatic, and academically precise. Avoid literal "machine translation" artifacts.
+    3. DEEP COMPREHENSION: Ask questions that require understanding relationships (X happened because of Y), implications, and specific definitions given in the text.
+    4. PLAUSIBLE DISTRACTORS: For multiple choice, wrong answers (distractors) should be plausible but incorrect based on the text.
+    5. DETAILED EXPLANATION: The explanation must cite the specific logic or sentence from the text that proves the answer.
     
+    Text to Analyze:
+    {text[:15000]}
+    
+    Output Format:
     Return ONLY a valid JSON array of objects with this structure:
     [
         {{
-            "question_text": "The question text in {lang_name}",
+            "question_text": "Question in {lang_name}",
             "question_type": "multiple_choice", "true_false", "fill_in_blank", or "short_answer",
-            "correct_answer": "The correct answer",
-            "options": ["option1", "option2", "option3", "option4"], // only for multiple_choice
-            "explanation": "Detailed explanation in {lang_name} referencing the text"
+            "correct_answer": "Complete correct answer",
+            "options": ["option1", "option2", "option3", "option4"], // required for multiple_choice, exactly 4
+            "explanation": "Explanation in {lang_name}"
         }}
     ]
     
-    Rules:
-    - For true_false, correct_answer must be "True" or "False".
-    - For multiple_choice, provide exactly 4 options.
-    - Ensure all content is in {lang_name}.
-    - Return ONLY the JSON array, no other text.
+    Rules for JSON:
+    - For true_false, correct_answer must be "True" or "False" (or translated equivalents if requested generally, but usually True/False strings are expected by the backend logic - check if backend needs "True"/"False" string or localized. WE WILL USE English "True"/"False" for the value key to be safe, but the text can be localized in UI). 
+    - Actually, keep correct_answer as "True"/"False" for boolean logic, but Question Text should be in {lang_name}.
     """
     
     response = model.generate_content(prompt)
@@ -283,6 +166,11 @@ def generate_quiz_with_gemini(text, question_count, question_type, difficulty, l
     elif "```" in content:
         content = content.split("```")[1].split("```")[0].strip()
     
+    # Sanitize JSON: remove trailing commas before closing brackets/braces
+    import re
+    content = re.sub(r',\s*]', ']', content)
+    content = re.sub(r',\s*}', '}', content)
+    
     questions = json.loads(content)
     
     # Add order and ensure types are correct
@@ -291,6 +179,17 @@ def generate_quiz_with_gemini(text, question_count, question_type, difficulty, l
         # Ensure question_type matches requested if it was specific
         if question_type != 'mixed':
             q['question_type'] = question_type
+        
+        # Sanitize question type to valid choices
+        valid_types = ['multiple_choice', 'true_false', 'fill_in_blank', 'short_answer']
+        if q.get('question_type') not in valid_types:
+            # Fallback based on content or random
+            if 'options' in q and len(q['options']) > 0:
+                q['question_type'] = 'multiple_choice'
+            elif q['question_text'].lower().startswith('true') or q['question_text'].lower().startswith('false') or 'true' in str(q.get('options', [])).lower():
+                q['question_type'] = 'true_false'
+            else:
+                q['question_type'] = 'short_answer'
             
     return questions
 
@@ -605,20 +504,32 @@ def generate_intelligent_tf(number, info, category, difficulty, language='en'):
         }
     
     # Fallback
-    if info['concepts']:
-        concept = random.choice(info['concepts'])
-        statement = f"{t('the_text_discusses', language)} {concept}."
-        is_true = True
-    else:
-        statement = "The text contains information about the topic."
-        is_true = True
+    if info['sentences']:
+        sentence = random.choice(info['sentences'])
+        is_true = random.choice([True, False])
+        if is_true:
+            statement = f"{t('according_to_text', language)}: {sentence}"
+        else:
+            statement = f"{t('the_text_states', language)} " + sentence[:50] + "..."
+            # Simple negation
+            negations = [" nu ", " ne-", " niciodată "] if language == 'ro' else [" not ", " never ", " un-"]
+            statement += random.choice(negations)
+        
+        return {
+            'question_text': statement,
+            'question_type': 'true_false',
+            'correct_answer': 'True' if is_true else 'False',
+            'options': [t('true', language), t('false', language)],
+            'explanation': f"{t('this_is', language)} {t('true_lower' if is_true else 'false_lower', language)} {t('based_on_text', language)}.",
+            'order': number
+        }
     
     return {
-        'question_text': statement,
+        'question_text': "The text provides information about the topic.",
         'question_type': 'true_false',
-        'correct_answer': 'True' if is_true else 'False',
+        'correct_answer': 'True',
         'options': [t('true', language), t('false', language)],
-        'explanation': f"{t('this_is', language)} {t('true_lower' if is_true else 'false_lower', language)} {t('according_to_material', language)}.",
+        'explanation': f"{t('this_is', language)} true {t('according_to_material', language)}.",
         'order': number
     }
 
@@ -757,4 +668,39 @@ def real_generate_quiz(text, question_count, question_type, difficulty):
     return questions
     """
     
-    raise NotImplementedError("Real AI generation requires API key configuration")
+def get_ai_explanation(question_text, correct_answer, user_query, language='en'):
+    """
+    Get an explanation for a quiz question using AI (Gemini).
+    """
+    api_key = getattr(settings, 'GEMINI_API_KEY', None)
+    lang_name = "Romanian" if language == 'ro' else "English"
+    
+    if not api_key:
+        return "I'm sorry, I cannot provide an explanation without an API key."
+
+    prompt = f"""
+    You are a helpful educational tutor.
+    The user is taking a quiz and needs help with a question.
+    
+    Use the following Context:
+    Question: {question_text}
+    Correct Answer: {correct_answer}
+    
+    User Query: {user_query}
+    
+    Task:
+    Provide a clear, encouraging, and pedagogically sound explanation in {lang_name}.
+    If the user is asking why the answer is correct, explain the logic.
+    If the user is confused, clarify the concept.
+    Keep the tone friendly and supportive.
+    """
+
+    try:
+        import google.generativeai as genai
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-flash-latest')
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        print(f"Gemini Explanation Error: {e}")
+        return f"I'm sorry, I encountered an error while generating the explanation. The correct answer is: {correct_answer}."

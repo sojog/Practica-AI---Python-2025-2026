@@ -5,7 +5,7 @@ from .views import take_quiz_view
 from .views import generate_quiz_view
 from .views import edit_note_text_view
 from .views import upload_note_view
-from .views import dashboard_view
+from .views import dashboard_view, assistant_chat_view
 
 urlpatterns = [
 	path("dashboard/", dashboard_view, name="dashboard"),
@@ -16,4 +16,5 @@ urlpatterns = [
 	path("quiz/<int:quiz_id>/next/", next_question_view, name="next_question"),
 	path("quiz/<int:quiz_id>/result/", quiz_result_view, name="quiz_result"),
 	path("recap/", recap_quiz_view, name="recap_quiz"),
+	path("assistant/chat/", assistant_chat_view, name="assistant_chat"),
 ]

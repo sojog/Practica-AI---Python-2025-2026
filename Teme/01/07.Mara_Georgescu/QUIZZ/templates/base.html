@@ -104,11 +104,9 @@
             </form>
             {% else %}
             <a href="{% url 'login' %}"
-                class="block w-full px-4 py-2 text-center text-sm text-white bg-primary hover:bg-indigo-700 rounded-lg transition-colors mb-2">{%
-                trans "Login" %}</a>
+                class="block w-full px-4 py-2 text-center text-sm text-white bg-primary hover:bg-indigo-700 rounded-lg transition-colors mb-2">{% trans "Login" %}</a>
             <a href="{% url 'register' %}"
-                class="block w-full px-4 py-2 text-center text-sm text-primary bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">{%
-                trans "Register" %}</a>
+                class="block w-full px-4 py-2 text-center text-sm text-primary bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">{% trans "Register" %}</a>
             {% endif %}
         </div>
     </aside>

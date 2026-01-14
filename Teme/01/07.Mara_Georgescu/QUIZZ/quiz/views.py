@@ -125,7 +125,8 @@ def generate_quiz_view(request, note_id):
                     order=q_data['order']
                 )
             
-            messages.success(request, f'Quiz generated with {question_count} questions!')
+            from django.utils.translation import gettext as _
+            messages.success(request, _('Quiz generated with %(count)d questions!') % {'count': question_count})
             return redirect('take_quiz', quiz_id=quiz.id)
     else:
         from .forms import QuizGenerationForm
@@ -175,7 +176,8 @@ def take_quiz_view(request, quiz_id):
         user_answer = request.POST.get('answer', '')
         
         # Check if correct
-        is_correct = user_answer == current_question.correct_answer
+        # Check if correct (ignoring case and whitespace)
+        is_correct = user_answer.strip().lower() == current_question.correct_answer.strip().lower()
         
         # Save answer
         Answer.objects.create(
@@ -314,4 +316,36 @@ def recap_quiz_view(request):
     
     messages.success(request, f'Recap quiz generated with {questions.count()} questions from your mistakes!')
     return redirect('take_quiz', quiz_id=quiz.id)
+
+
+@login_required
+def assistant_chat_view(request):
+    """Handle virtual assistant chat requests"""
+    if request.method == 'POST':
+        import json
+        from django.http import JsonResponse
+        from .ai_service import get_ai_explanation
+        from .models import Question
+        from django.utils import translation
+        
+        try:
+            data = json.loads(request.body)
+            question_id = data.get('question_id')
+            user_query = data.get('query')
+            
+            question = get_object_or_404(Question, id=question_id)
+            user_language = translation.get_language() or 'ro'
+            
+            explanation = get_ai_explanation(
+                question.question_text,
+                question.correct_answer,
+                user_query,
+                user_language
+            )
+            
+            return JsonResponse({'explanation': explanation})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+            
+    return redirect('dashboard')
 
