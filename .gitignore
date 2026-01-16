@@ -205,3 +205,47 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+# ======================
+# Python
+# ======================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# ======================
+# Django
+# ======================
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# ======================
+# Virtual environment
+# ======================
+venv/
+env/
+.venv/
+
+# ======================
+# macOS
+# ======================
+.DS_Store
+
+# ======================
+# Editor / IDE
+# ======================
+.vscode/
+.idea/
+
+# ======================
+# Jupyter / temp
+# ======================
+.ipynb_checkpoints/
+
+# ======================
+# Backup / extra
+# ======================
+Backup_git/
