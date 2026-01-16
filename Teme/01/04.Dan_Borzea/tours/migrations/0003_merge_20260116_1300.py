@@ -6,7 +6,6 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tours', '0002_conversation_chatmessage 2'),
         ('tours', '0002_conversation_chatmessage'),
     ]
 
