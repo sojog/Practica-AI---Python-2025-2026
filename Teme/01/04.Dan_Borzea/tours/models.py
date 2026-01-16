@@ -8,6 +8,15 @@ User = get_user_model()
 class Tour(models.Model):
     """Model pentru tururi turistice"""
     
+    CITY_CHOICES = [
+        ('bucuresti', 'București'),
+        ('cluj', 'Cluj-Napoca'),
+        ('brasov', 'Brașov'),
+        ('sibiu', 'Sibiu'),
+        ('timisoara', 'Timișoara'),
+        ('iasi', 'Iași'),
+    ]
+    
     CATEGORY_CHOICES = [
         ('istoric', 'Istoric'),
         ('cultural', 'Cultural'),
@@ -24,6 +33,7 @@ class Tour(models.Model):
     name = models.CharField(max_length=200, verbose_name='Nume')
     slug = models.SlugField(unique=True, blank=True, verbose_name='Slug URL')
     description = models.TextField(verbose_name='Descriere')
+    city = models.CharField(max_length=20, choices=CITY_CHOICES, default='bucuresti', verbose_name='Oraș')
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, verbose_name='Categorie')
     is_premium = models.BooleanField(default=False, verbose_name='Premium')
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0, verbose_name='Preț (RON)')

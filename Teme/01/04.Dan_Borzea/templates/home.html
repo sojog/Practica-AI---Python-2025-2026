@@ -71,8 +71,11 @@
                     </div>
 
                     <div style="margin-bottom: 0.75rem;">
+                        <span class="badge" style="background: #10b981; color: white;">📍 {{ tour.get_city_display
+                            }}</span>
                         <span class="badge badge-primary">{{ tour.get_category_display }}</span>
-                        <span class="badge" style="background: #6b7280; color: white;">{{ tour.get_difficulty_display }}</span>
+                        <span class="badge" style="background: #6b7280; color: white;">{{ tour.get_difficulty_display
+                            }}</span>
                     </div>
 
                     <p class="card-text">{{ tour.description|truncatewords:15 }}</p>
