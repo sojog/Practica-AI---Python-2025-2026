@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
+import json
 from .models import Event, Guest, Invitation, InvitationTemplate
 from django import forms
 from . import ai_service, ai_image_service, image_composer
@@ -132,3 +134,30 @@ def invitation_image_detail(request, invitation_id):
     """
     invitation = get_object_or_404(GeneratedInvitation, pk=invitation_id)
     return render(request, 'invitatii/invitation_image_detail.html', {'invitation': invitation})
+
+from . import chat_service
+
+def chat_page(request):
+    """
+    Renders the chatbot UI page.
+    """
+    return render(request, 'chatbot.html')
+
+def chatbot_response(request):
+    """
+    API endpoint for the chatbot.
+    """
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            message = data.get("message", "")
+            # Prefer answering using the latest created Event
+            event = Event.objects.order_by('-id').first()
+            
+            intent = chat_service.detect_intent(message)
+            reply = chat_service.build_response(intent, event)
+            
+            return JsonResponse({"reply": reply})
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON"}, status=400)
+    return JsonResponse({"error": "POST required"}, status=405)

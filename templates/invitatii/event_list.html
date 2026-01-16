@@ -3,7 +3,9 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Your Events</h2>
-    <a href="{% url 'event_create' %}" class="btn btn-primary">Create New Event</a>
+    <div>
+        <a href="{% url 'chat_page' %}" class="btn btn-primary me-2">Chatbot</a>
+    </div>
 </div>
 
 {% if events %}

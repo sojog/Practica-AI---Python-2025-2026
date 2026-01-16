@@ -21,11 +21,11 @@ git config --global user.email "tudoraseby@gmail.com"
 We will clone it into a temporary folder to avoid messing up your current workspace.
 ```bash
 # Go to the parent directory or a temp location
-cd ..
+cd "S:\PYTHON PROGRAM\Platforma invitatii de nunta\Practica-AI---Python-2025-2026\Teme\01\09.Sebastian_Tudora"
 
-# Clone the repository
 git clone https://github.com/sojog/Practica-AI---Python-2025-2026.git temp_upload_folder
 ```
+git commit -m "Proiect Django - Platforma invitatii de nunta (Sebastian Tudora)"
 
 ### 3. Copy Your Files
 Now, copy your project files into the correct folder structure.
@@ -48,7 +48,7 @@ cd temp_upload_folder
 git add .
 
 # Commit
-git commit -m "Tema 01: Platforma Invitatii Nunta - Sebastian Tudora"
+git commit -m "Tema 09: Platforma Invitatii Nunta - Sebastian Tudora"
 
 # Push
 git push origin main
