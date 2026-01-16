@@ -171,3 +171,46 @@ class OfflineContent(models.Model):
     
     def __str__(self):
         return f"{self.user.username} - {self.tour.name} (offline)"
+
+
+class Conversation(models.Model):
+    """Model pentru sesiuni de chat AI"""
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='conversations', verbose_name='Utilizator')
+    session_id = models.CharField(max_length=100, help_text='ID sesiune pentru utilizatori anonimi', verbose_name='ID Sesiune')
+    started_at = models.DateTimeField(auto_now_add=True, verbose_name='Început conversație')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Ultima actualizare')
+    preferences_extracted = models.JSONField(default=dict, blank=True, verbose_name='Preferințe extrase')
+    is_active = models.BooleanField(default=True, verbose_name='Activ')
+    
+    class Meta:
+        verbose_name = 'Conversație'
+        verbose_name_plural = 'Conversații'
+        ordering = ['-updated_at']
+    
+    def __str__(self):
+        user_display = self.user.username if self.user else f"Anonim ({self.session_id[:8]}...)"
+        return f"Chat {user_display} - {self.started_at.strftime('%d.%m.%Y %H:%M')}"
+
+
+class ChatMessage(models.Model):
+    """Model pentru mesajele individuale din chat"""
+    
+    ROLE_CHOICES = [
+        ('user', 'Utilizator'),
+        ('assistant', 'Asistent AI'),
+        ('system', 'System'),
+    ]
+    
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages', verbose_name='Conversație')
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, verbose_name='Rol')
+    content = models.TextField(verbose_name='Conținut')
+    timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Timestamp')
+    
+    class Meta:
+        verbose_name = 'Mesaj Chat'
+        verbose_name_plural = 'Mesaje Chat'
+        ordering = ['timestamp']
+    
+    def __str__(self):
+        return f"{self.get_role_display()}: {self.content[:50]}..."
