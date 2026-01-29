@@ -160,6 +160,27 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                // Handle Enter key to submit quiz answer
+                const answerFields = document.querySelectorAll('input[name="answer"], textarea[name="answer"]');
+                answerFields.forEach(field => {
+                    field.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter') {
+                            // For textarea, require Shift+Enter for newline, otherwise submit
+                            if (this.tagName.toLowerCase() === 'textarea') {
+                                if (!e.shiftKey) {
+                                    e.preventDefault();
+                                    this.form.submit();
+                                }
+                            } else {
+                                // For text input, Enter naturally submits, but ensuring it helper just in case
+                                // (though standard form behavior usually handles it)
+                                // We don't need to do anything special for inputs as they default to submit
+                                // unless we want to enforce it.
+                            }
+                        }
+                    });
+                });
+
                 console.log("Assistant script loaded and ready");
                 const startVoiceBtn = document.getElementById('start-voice');
                 const micIcon = document.getElementById('mic-icon');

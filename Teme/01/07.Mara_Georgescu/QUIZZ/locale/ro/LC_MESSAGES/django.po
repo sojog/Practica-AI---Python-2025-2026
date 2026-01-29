@@ -287,3 +287,21 @@ msgstr "%(percent)s%% Complet"
 msgid "Quiz generated with %(count)d questions!"
 msgstr "Test generat cu %(count)d întrebări!"
 
+msgid "Note \"%(title)s\" uploaded successfully!"
+msgstr "Notița \"%(title)s\" a fost încărcată cu succes!"
+
+msgid "Text updated successfully!"
+msgstr "Text actualizat cu succes!"
+
+msgid "This quiz has no questions."
+msgstr "Acest test nu are întrebări."
+
+msgid "You have no mistakes to review yet. Complete some quizzes first!"
+msgstr "Nu ai greșeli de revizuit încă. Completează câteva teste mai întâi!"
+
+msgid "No questions found for recap."
+msgstr "Nu s-au găsit întrebări pentru recapitulare."
+
+msgid "Recap quiz generated with %(count)d questions from your mistakes!"
+msgstr "Test recapitulativ generat cu %(count)d întrebări din greșelile tale!"
+

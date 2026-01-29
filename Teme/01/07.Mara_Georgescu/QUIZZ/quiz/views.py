@@ -4,6 +4,47 @@ from django.contrib import messages
 from .models import Note, Quiz
 from .forms import NoteUploadForm, NoteEditForm
 from .services import extract_text_from_file
+from django.utils.translation import gettext as _
+import unicodedata
+from difflib import SequenceMatcher
+
+def normalize_answer(text):
+    """
+    Normalize text to remove diacritics and convert to lowercase.
+    Example: 'Lăpușneanu' -> 'lapusneanu'
+    """
+    if not text:
+        return ""
+    # Normalize unicode characters to NFD (decomposed) form
+    text = unicodedata.normalize('NFD', str(text))
+    # Filter out non-spacing mark characters (diacritics)
+    text = "".join(c for c in text if unicodedata.category(c) != 'Mn')
+    return text.lower().strip()
+
+def convert_text_numbers(text):
+    """
+    Convert text numbers to digits for Romanian.
+    Example: 'trei secvente' -> '3 secvente'
+    """
+    if not text:
+        return ""
+        
+    mapping = {
+        'unu': '1', 'una': '1', 'un': '1',
+        'doi': '2', 'doua': '2',
+        'trei': '3',
+        'patru': '4',
+        'cinci': '5',
+        'sase': '6',
+        'sapte': '7',
+        'opt': '8',
+        'noua': '9',
+        'zece': '10'
+    }
+    
+    words = text.split()
+    new_words = [mapping.get(w, w) for w in words]
+    return " ".join(new_words)
 
 @login_required
 def dashboard_view(request):
@@ -44,7 +85,7 @@ def upload_note_view(request):
                 extracted_text=extract_text_from_file(uploaded_file)
             )
             
-            messages.success(request, f'Note "{note.title}" uploaded successfully!')
+            messages.success(request, _('Note "%(title)s" uploaded successfully!') % {'title': note.title})
             return redirect('edit_note_text', note_id=note.id)
     else:
         form = NoteUploadForm()
@@ -61,7 +102,7 @@ def edit_note_text_view(request, note_id):
         form = NoteEditForm(request.POST, instance=note)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Text updated successfully!')
+            messages.success(request, _('Text updated successfully!'))
             return redirect('generate_quiz', note_id=note.id)
     else:
         form = NoteEditForm(instance=note)
@@ -99,9 +140,14 @@ def generate_quiz_view(request, note_id):
                 instant_feedback=instant_feedback
             )
             
-            # Get user's language preference
-            from django.utils import translation
-            user_language = translation.get_language() or 'en'
+            # Get language based on mode
+            mode = form.cleaned_data.get('mode')
+            if mode == 'custom':
+                 user_language = form.cleaned_data.get('target_language', 'ro')
+            else:
+                # For standard mode, keep existing behavior (use interface language)
+                from django.utils import translation
+                user_language = translation.get_language() or 'en'
             
             # Generate questions using AI (mock)
             questions_data = generate_quiz_with_ai(
@@ -146,7 +192,7 @@ def take_quiz_view(request, quiz_id):
     questions = quiz.questions.all()
     
     if not questions:
-        messages.error(request, 'This quiz has no questions.')
+        messages.error(request, _('This quiz has no questions.'))
         return redirect('dashboard')
     
     # Get or set current question index in session
@@ -176,8 +222,39 @@ def take_quiz_view(request, quiz_id):
         user_answer = request.POST.get('answer', '')
         
         # Check if correct
-        # Check if correct (ignoring case and whitespace)
-        is_correct = user_answer.strip().lower() == current_question.correct_answer.strip().lower()
+        # Check if correct (ignoring case, whitespace, and diacritics)
+        user_norm = normalize_answer(user_answer)
+        correct_norm = normalize_answer(current_question.correct_answer)
+        
+        # 1. Exact match with simple normalization
+        is_correct = user_norm == correct_norm
+        
+        if not is_correct:
+             # 2. Normalize numbers (convert 'trei' to '3')
+            user_nums = convert_text_numbers(user_norm)
+            correct_nums = convert_text_numbers(correct_norm)
+            
+            if user_nums == correct_nums:
+                is_correct = True
+                
+            # 3. Token containment check
+            # If user answer is short (probably a number or key term) and is contained in the correct answer
+            # Split into tokens/words to avoid partial matches like "3" in "123"
+            if not is_correct:
+                user_tokens = set(user_nums.split())
+                correct_tokens = set(correct_nums.split())
+                
+                # If all user tokens are found in correct answer tokens
+                # This covers: User="3", Correct="3 sequences"
+                if user_tokens and user_tokens.issubset(correct_tokens):
+                    is_correct = True
+        
+        # 4. Fuzzy match if not correct yet (allow 85% similarity)
+        # Only apply fuzzy matching if the answer is long enough to avoid false positives on short words
+        if not is_correct and len(correct_norm) > 4:
+            similarity = SequenceMatcher(None, user_norm, correct_norm).ratio()
+            if similarity >= 0.85:
+                is_correct = True
         
         # Save answer
         Answer.objects.create(
@@ -276,14 +353,14 @@ def recap_quiz_view(request):
     ).values_list('question_id', flat=True).distinct()
     
     if not mistake_questions:
-        messages.info(request, 'You have no mistakes to review yet. Complete some quizzes first!')
+        messages.info(request, _('You have no mistakes to review yet. Complete some quizzes first!'))
         return redirect('dashboard')
     
     # Get the questions
     questions = Question.objects.filter(id__in=mistake_questions)
     
     if not questions.exists():
-        messages.info(request, 'No questions found for recap.')
+        messages.info(request, _('No questions found for recap.'))
         return redirect('dashboard')
     
     # Create a recap quiz
@@ -314,7 +391,7 @@ def recap_quiz_view(request):
             order=order
         )
     
-    messages.success(request, f'Recap quiz generated with {questions.count()} questions from your mistakes!')
+    messages.success(request, _('Recap quiz generated with %(count)d questions from your mistakes!') % {'count': questions.count()})
     return redirect('take_quiz', quiz_id=quiz.id)
 
 

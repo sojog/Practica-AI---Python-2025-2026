@@ -84,6 +84,19 @@ class QuizGenerationForm(forms.Form):
             'class': 'w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all'
         })
     )
+
+    TARGET_LANGUAGE_CHOICES = [
+        ('en', _('English')),
+        ('ro', _('Romanian')),
+    ]
+
+    target_language = forms.ChoiceField(
+        choices=TARGET_LANGUAGE_CHOICES,
+        initial='ro',
+        widget=forms.Select(attrs={
+            'class': 'w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all'
+        })
+    )
     
     instant_feedback = forms.ChoiceField(
         choices=FEEDBACK_CHOICES,
