@@ -12,4 +12,8 @@ urlpatterns = [
     path('favorite/toggle/<int:tour_id>/', views.toggle_favorite, name='toggle_favorite'),
     path('comment/add/<int:tour_id>/', views.add_comment, name='add_comment'),
     path('download/<int:tour_id>/', views.download_tour, name='download_tour'),
+    # Chat AI URLs
+    path('chat/send/', views.chat_send_message, name='chat_send'),
+    path('chat/history/', views.chat_get_history, name='chat_history'),
+    path('chat/reset/', views.chat_reset, name='chat_reset'),
 ]

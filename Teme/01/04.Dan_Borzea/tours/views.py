@@ -4,9 +4,13 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.db.models import Q, Avg
 from django.core.paginator import Paginator
-from .models import Tour, Location, Review, Favorite, Comment, OfflineContent
+from django.views.decorators.http import require_http_methods
+from .models import Tour, Location, Review, Favorite, Comment, OfflineContent, Conversation, ChatMessage
 from analytics.models import TourView
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def home(request):
@@ -268,3 +272,185 @@ def search_tours(request):
         'query': query,
     }
     return render(request, 'tours/search_results.html', context)
+
+
+# ==================== CHAT AI VIEWS ====================
+
+from .ai_service import OllamaService
+from .recommendation_engine import TourRecommendationEngine
+
+
+def get_or_create_conversation(request):
+    """Helper pentru a obține sau crea conversația curentă"""
+    # Creează session ID dacă nu există
+    if not request.session.session_key:
+        request.session.create()
+    session_id = request.session.session_key
+    
+    # Încearcă să găsești conversația activă
+    conversation = None
+    if request.user.is_authenticated:
+        conversation = Conversation.objects.filter(
+            user=request.user,
+            is_active=True
+        ).first()
+    else:
+        conversation = Conversation.objects.filter(
+            session_id=session_id,
+            is_active=True
+        ).first()
+    
+    # Creează conversație nouă dacă nu există
+    if not conversation:
+        conversation = Conversation.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            session_id=session_id
+        )
+    
+    return conversation
+
+
+@require_http_methods(["POST"])
+def chat_send_message(request):
+    """
+    Endpoint AJAX pentru trimitere mesaje la chat
+    POST: {message: "text mesaj"}
+    Returns: {success: bool, ai_response: str, tours: [], error: str}
+    """
+    try:
+        data = json.loads(request.body)
+        user_message = data.get('message', '').strip()
+        
+        if not user_message:
+            return JsonResponse({'success': False, 'error': 'Mesaj gol'})
+        
+        # Obține sau creează conversația
+        conversation = get_or_create_conversation(request)
+        
+        # Salvează mesajul utilizatorului
+        ChatMessage.objects.create(
+            conversation=conversation,
+            role='user',
+            content=user_message
+        )
+        
+        # Obține istoricul conversației pentru context
+        messages = list(conversation.messages.values('role', 'content'))
+        
+        # Inițializează serviciile
+        ollama = OllamaService()
+        recommender = TourRecommendationEngine()
+        
+        # Determină starea conversației
+        state = ollama.get_conversation_state(messages)
+        
+        # Generează răspuns AI
+        ai_response_text = ""
+        recommended_tours = []
+        
+        if state == 'ready_for_recommendations':
+            # Extrage preferințe
+            preferences = ollama.extract_preferences_from_conversation(messages)
+            conversation.preferences_extracted = preferences
+            conversation.save()
+            
+            # Găsește tururi potrivite
+            matched_tours = recommender.match_tours(preferences, limit=3)
+            
+            if matched_tours.exists():
+                # Formatează pentru AI
+                tours_data = recommender.format_tours_for_ai(matched_tours)
+                
+                # Construiește prompt pentru recomandări
+                recommendation_prompt = ollama.build_recommendation_prompt(
+                    preferences,
+                    tours_data
+                )
+                
+                # Adaugă prompt-ul la mesaje
+                messages_with_prompt = messages + [
+                    {'role': 'user', 'content': recommendation_prompt}
+                ]
+                
+                # Obține răspuns de la AI
+                ai_response = ollama.chat(messages_with_prompt)
+                if ai_response and 'message' in ai_response:
+                    ai_response_text = ai_response['message']['content']
+                else:
+                    ai_response_text = "Am găsit câteva tururi perfecte pentru tine! Uită-te mai jos:"
+                
+                # Formatează tururile pentru frontend
+                recommended_tours = recommender.format_tours_for_response(matched_tours)
+            else:
+                ai_response_text = "Din păcate nu am găsit tururi care să se potrivească exact cu preferințele tale. Poți să-mi spui mai multe detalii despre ce te interesează?"
+        else:
+            # Conversație normală fără recomandări
+            ai_response = ollama.chat(messages)
+            if ai_response and 'message' in ai_response:
+                ai_response_text = ai_response['message']['content']
+            else:
+                # Fallback dacă Ollama nu răspunde
+                if state == 'greeting':
+                    ai_response_text = "Bună! Sunt asistentul tău pentru tururi în România. Cum te pot ajuta astăzi?"
+                else:
+                    ai_response_text = "Спune-mi, ce tip de experiență cauți? Istoric, cultural, gastronomic sau viață de noapte?"
+        
+        # Salvează răspunsul AI
+        ChatMessage.objects.create(
+            conversation=conversation,
+            role='assistant',
+            content=ai_response_text
+        )
+        
+        return JsonResponse({
+            'success': True,
+            'ai_response': ai_response_text,
+            'tours': recommended_tours,
+            'conversation_id': conversation.id
+        })
+        
+    except Exception as e:
+        logger.error(f"Eroare în chat: {e}")
+        return JsonResponse({
+            'success': False,
+            'error': 'A apărut o eroare. Te rog încearcă din nou.',
+            'ai_response': 'Scuze, am întâmpinat o problemă tehnică. Te rog încearcă din nou.'
+        })
+
+
+def chat_get_history(request):
+    """
+    Obține istoricul conversației curente
+    GET
+    Returns: {success: bool, messages: [{role, content, timestamp}]}
+    """
+    try:
+        conversation = get_or_create_conversation(request)
+        messages = conversation.messages.values('role', 'content', 'timestamp')
+        
+        return JsonResponse({
+            'success': True,
+            'messages': list(messages),
+            'conversation_id': conversation.id
+        })
+    except Exception as e:
+        logger.error(f"Eroare obținere istoric: {e}")
+        return JsonResponse({'success': False, 'error': str(e)})
+
+
+@require_http_methods(["POST"])
+def chat_reset(request):
+    """
+    Resetează conversația curentă
+    POST
+    Returns: {success: bool}
+    """
+    try:
+        conversation = get_or_create_conversation(request)
+        conversation.is_active = False
+        conversation.save()
+        
+        return JsonResponse({'success': True})
+    except Exception as e:
+        logger.error(f"Eroare resetare chat: {e}")
+        return JsonResponse({'success': False, 'error': str(e)})
